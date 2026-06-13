@@ -1,14 +1,19 @@
 // ============================================================================
-// EDIT THESE VALUES — phone number, WhatsApp link and Google Maps link
+// EDIT THESE VALUES — contact person, phone, email, WhatsApp & Google Maps link
 // ============================================================================
 
-// Replace with your real phone number (digits only, with country code) for the "Call Now" buttons
-export const PHONE_DISPLAY = "+91 XXXXX XXXXX"
-export const PHONE_TEL = "+91XXXXXXXXXX" // used in tel: links, no spaces
+// Contact person
+export const OWNER_NAME = "D Kiran Kumar"
 
-// Replace with your real WhatsApp link.
-// Format: https://wa.me/91XXXXXXXXXX  (country code + number, no + or spaces)
-export const WHATSAPP_LINK = "https://wa.me/91XXXXXXXXXX"
+// Phone number for the "Call Now" buttons
+export const PHONE_DISPLAY = "+91 70939 45019"
+export const PHONE_TEL = "+917093945019" // used in tel: links, no spaces
+
+// Email address
+export const EMAIL = "princedeluxepg@gmail.com"
+
+// WhatsApp link. Format: https://wa.me/91XXXXXXXXXX  (country code + number, no + or spaces)
+export const WHATSAPP_LINK = "https://wa.me/917093945019"
 
 // Replace "#" with your Google Maps share link (e.g. https://maps.app.goo.gl/xxxx)
 export const GOOGLE_MAPS_LINK = "#"
