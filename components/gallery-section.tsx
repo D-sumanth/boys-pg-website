@@ -1,47 +1,38 @@
 import Image from "next/image"
-
-// Replace each `src` with your real photos. Keep the same file names or update paths here.
-const gallery = [
-  { src: "/images/hostel-exterior.png", title: "Building Exterior", span: "lg:col-span-2 lg:row-span-2" },
-  { src: "/images/room.png", title: "Rooms", span: "" },
-  { src: "/images/dining.png", title: "Dining Area", span: "" },
-  { src: "/images/washroom.png", title: "Washrooms", span: "" },
-  { src: "/images/facilities.png", title: "Facilities", span: "" },
-  { src: "/images/ambience.png", title: "Hostel Ambience", span: "lg:col-span-2" },
-]
+import { siteConfig } from "@/lib/site-config"
 
 export function GallerySection() {
   return (
-    <section id="gallery" className="bg-background py-14 md:py-20">
+    <section id="gallery" className="bg-background py-16 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
             Gallery
           </span>
-          <h2 className="mt-2 text-balance font-heading text-2xl font-bold text-primary sm:text-3xl">
+          <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
             Take a look around
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Photos coming soon — these placeholders can be replaced with actual
-            hostel images.
+            Current images are placeholders and can be replaced later with actual
+            room, dining, washroom and building photos.
           </p>
         </div>
 
-        <div className="mt-10 grid auto-rows-[180px] grid-cols-2 gap-4 sm:auto-rows-[200px] lg:grid-cols-4">
-          {gallery.map((item) => (
+        <div className="mt-10 grid auto-rows-[170px] grid-cols-2 gap-3 sm:auto-rows-[220px] sm:gap-4 lg:grid-cols-4">
+          {siteConfig.gallery.map((item) => (
             <figure
               key={item.title}
-              className={`group relative overflow-hidden rounded-xl border border-border ${item.span}`}
+              className={`group relative overflow-hidden rounded-2xl border border-border bg-muted shadow-sm ${item.span}`}
             >
               <Image
-                src={item.src || "/placeholder.svg"}
-                alt={`${item.title} at Prince Deluxe PG for Boys, Shamshabad`}
+                src={item.src}
+                alt={`${item.title} at ${siteConfig.name}, Shamshabad`}
                 fill
                 className="object-cover transition-transform duration-500 group-hover:scale-105"
                 sizes="(max-width: 768px) 50vw, 25vw"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent" />
-              <figcaption className="absolute bottom-3 left-3 text-sm font-semibold text-primary-foreground">
+              <div className="absolute inset-0 bg-gradient-to-t from-primary/80 via-primary/10 to-transparent" />
+              <figcaption className="absolute bottom-3 left-3 right-3 rounded-xl bg-background/90 px-3 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur">
                 {item.title}
               </figcaption>
             </figure>

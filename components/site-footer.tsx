@@ -1,25 +1,18 @@
-import { Phone, MapPin } from "lucide-react"
-import {
-  PHONE_DISPLAY,
-  PHONE_TEL,
-  ADDRESS_LINE_1,
-  ADDRESS_LINE_2,
-  ADDRESS_LINE_3,
-  ADDRESS_LANDMARK,
-} from "@/lib/site-config"
+import { Mail, MapPin, MessageCircle, Phone } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
 export function SiteFooter() {
   return (
-    <footer className="bg-primary text-primary-foreground">
+    <footer className="bg-primary pb-20 text-primary-foreground md:pb-0">
       <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
         <div>
-          <p className="font-heading text-xl font-bold">Prince Deluxe PG for Boys</p>
+          <p className="font-heading text-xl font-bold">{siteConfig.name}</p>
           <p className="mt-2 text-sm text-primary-foreground/70">
-            Boys PG Hostel in Shamshabad
+            {siteConfig.businessType} in {siteConfig.location}
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">
-            Safe, clean and homely PG accommodation for students and working
-            professionals near GMR Aviation College, Shamshabad.
+            {siteConfig.positioning} Suitable for students and working
+            professionals.
           </p>
         </div>
 
@@ -30,11 +23,11 @@ export function SiteFooter() {
           <div className="mt-3 flex items-start gap-2 text-sm text-primary-foreground/70">
             <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
             <address className="not-italic leading-relaxed">
-              {ADDRESS_LINE_1},<br />
-              {ADDRESS_LINE_2},<br />
-              {ADDRESS_LINE_3}
+              {siteConfig.address.line1},<br />
+              {siteConfig.address.line2},<br />
+              {siteConfig.address.line3}
               <br />
-              <span className="text-primary-foreground/60">{ADDRESS_LANDMARK}</span>
+              <span className="text-primary-foreground/60">{siteConfig.address.landmark}</span>
             </address>
           </div>
         </div>
@@ -43,20 +36,29 @@ export function SiteFooter() {
           <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-accent">
             Contact
           </h3>
-          <a
-            href={`tel:${PHONE_TEL}`}
-            className="mt-3 inline-flex items-center gap-2 text-sm text-primary-foreground/80 hover:text-accent"
-          >
-            <Phone className="size-4 text-accent" />
-            {PHONE_DISPLAY}
-          </a>
-          <p className="mt-3 text-sm font-medium text-accent">Opening from 1st July</p>
+          <div className="mt-3 flex flex-col gap-3 text-sm">
+            <a href={siteConfig.phoneLink} className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
+              <Phone className="size-4 text-accent" />
+              {siteConfig.phoneDisplay}
+            </a>
+            <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
+              <MessageCircle className="size-4 text-accent" />
+              WhatsApp Enquiry
+            </a>
+            <a href={siteConfig.emailLink} className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
+              <Mail className="size-4 text-accent" />
+              {siteConfig.email}
+            </a>
+          </div>
+          <p className="mt-4 text-sm font-medium text-accent">
+            Opening from {siteConfig.openingDate}
+          </p>
         </div>
       </div>
 
       <div className="border-t border-primary-foreground/15">
         <div className="mx-auto max-w-7xl px-4 py-5 text-center text-xs text-primary-foreground/60 sm:px-6 lg:px-8">
-          © {new Date().getFullYear()} Prince Deluxe PG for Boys. All rights reserved.
+          © {new Date().getFullYear()} {siteConfig.name}. All rights reserved.
         </div>
       </div>
     </footer>

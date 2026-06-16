@@ -49,30 +49,30 @@
 }
 
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.21 0.05 256);
+  --background: oklch(0.99 0.006 92);
+  --foreground: oklch(0.2 0.055 256);
   --card: oklch(1 0 0);
-  --card-foreground: oklch(0.21 0.05 256);
+  --card-foreground: oklch(0.2 0.055 256);
   --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.21 0.05 256);
-  --primary: oklch(0.39 0.13 258);
+  --popover-foreground: oklch(0.2 0.055 256);
+  --primary: oklch(0.31 0.115 258);
   --primary-foreground: oklch(0.99 0 0);
-  --secondary: oklch(0.96 0.02 250);
-  --secondary-foreground: oklch(0.39 0.13 258);
-  --muted: oklch(0.97 0.01 250);
+  --secondary: oklch(0.965 0.018 252);
+  --secondary-foreground: oklch(0.31 0.115 258);
+  --muted: oklch(0.965 0.01 250);
   --muted-foreground: oklch(0.5 0.03 256);
-  --accent: oklch(0.72 0.16 55);
+  --accent: oklch(0.72 0.15 63);
   --accent-foreground: oklch(0.99 0 0);
   --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.92 0.01 256);
-  --input: oklch(0.92 0.01 256);
-  --ring: oklch(0.39 0.13 258);
-  --chart-1: oklch(0.39 0.13 258);
-  --chart-2: oklch(0.72 0.16 55);
+  --border: oklch(0.9 0.014 256);
+  --input: oklch(0.9 0.014 256);
+  --ring: oklch(0.31 0.115 258);
+  --chart-1: oklch(0.31 0.115 258);
+  --chart-2: oklch(0.72 0.15 63);
   --chart-3: oklch(0.55 0.1 256);
   --chart-4: oklch(0.65 0.14 50);
   --chart-5: oklch(0.3 0.08 258);
-  --radius: 0.75rem;
+  --radius: 0.85rem;
   --sidebar: oklch(0.985 0 0);
   --sidebar-foreground: oklch(0.21 0.05 256);
   --sidebar-primary: oklch(0.39 0.13 258);
@@ -126,6 +126,7 @@
   }
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
   }
 }
 
@@ -143,17 +144,17 @@
   .bg-brand-gradient {
     background-image: linear-gradient(
       135deg,
-      oklch(0.32 0.12 262) 0%,
-      oklch(0.39 0.13 258) 45%,
-      oklch(0.46 0.12 252) 100%
+      oklch(0.23 0.09 258) 0%,
+      oklch(0.31 0.12 258) 48%,
+      oklch(0.42 0.12 246) 100%
     );
   }
 
   .text-gradient-accent {
     background-image: linear-gradient(
       90deg,
-      oklch(0.72 0.16 55),
-      oklch(0.66 0.16 45)
+      oklch(0.82 0.14 72),
+      oklch(0.68 0.15 58)
     );
     -webkit-background-clip: text;
     background-clip: text;

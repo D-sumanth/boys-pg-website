@@ -1,9 +1,9 @@
 "use client"
 
 import { useState } from "react"
-import { Phone, MessageCircle, Menu, X } from "lucide-react"
+import { Mail, MessageCircle, Menu, Phone, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
-import { PHONE_TEL, WHATSAPP_LINK } from "@/lib/site-config"
+import { siteConfig } from "@/lib/site-config"
 
 const navLinks = [
   { label: "Home", href: "#home" },
@@ -22,7 +22,7 @@ export function SiteHeader() {
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <a href="#home" className="flex flex-col leading-tight">
           <span className="font-heading text-lg font-bold text-primary sm:text-xl">
-            Prince Deluxe PG
+            {siteConfig.shortName}
           </span>
           <span className="text-[11px] font-medium uppercase tracking-wide text-accent">
             for Boys
@@ -42,12 +42,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button render={<a href={`tel:${PHONE_TEL}`} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
+          <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
             <Phone className="size-4" />
             Call Now
           </Button>
           <Button
-            render={<a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" />}
+            render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
             nativeButton={false}
             size="sm"
             className="gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
@@ -81,19 +81,23 @@ export function SiteHeader() {
                 {link.label}
               </a>
             ))}
-            <div className="mt-2 flex gap-2">
-              <Button render={<a href={`tel:${PHONE_TEL}`} />} nativeButton={false} variant="outline" size="sm" className="flex-1 gap-2">
+            <div className="mt-2 grid grid-cols-3 gap-2">
+              <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
                 <Phone className="size-4" />
                 Call
               </Button>
               <Button
-                render={<a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer" />}
+                render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
                 size="sm"
-                className="flex-1 gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
+                className="gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
               >
                 <MessageCircle className="size-4" />
                 WhatsApp
+              </Button>
+              <Button render={<a href={siteConfig.emailLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
+                <Mail className="size-4" />
+                Email
               </Button>
             </div>
           </nav>
