@@ -26,8 +26,12 @@ export function SiteFooter() {
               {siteConfig.address.line1},<br />
               {siteConfig.address.line2},<br />
               {siteConfig.address.line3}
-              <br />
-              <span className="text-primary-foreground/60">{siteConfig.address.landmark}</span>
+              {siteConfig.address.landmark && (
+                <>
+                  <br />
+                  <span className="text-primary-foreground/60">{siteConfig.address.landmark}</span>
+                </>
+              )}
             </address>
           </div>
         </div>

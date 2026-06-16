@@ -10,15 +10,15 @@ export function GallerySection() {
             Gallery
           </span>
           <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
-            Take a look around
+            Actual building photos
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Current images are placeholders and can be replaced later with actual
-            room, dining, washroom and building photos.
+            These are real exterior photos of Prince Deluxe PG for Boys. More
+            room and facility photos can be added later.
           </p>
         </div>
 
-        <div className="mt-10 grid auto-rows-[170px] grid-cols-2 gap-3 sm:auto-rows-[220px] sm:gap-4 lg:grid-cols-4">
+        <div className="mt-10 grid auto-rows-[240px] grid-cols-1 gap-4 sm:auto-rows-[320px] lg:grid-cols-4">
           {siteConfig.gallery.map((item) => (
             <figure
               key={item.title}

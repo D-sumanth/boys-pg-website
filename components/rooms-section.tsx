@@ -4,13 +4,12 @@ import { siteConfig } from "@/lib/site-config"
 
 const includes = [
   "Homely food: breakfast, lunch and dinner",
-  "South Indian and North Indian food",
   "Veg and non-veg meals",
   "Attached washrooms",
   "High-speed Wi-Fi",
   "CCTV camera security",
-  "Housekeeping",
   "Mineral water, hot water and 24-hour water facility",
+  "No brokerage",
 ]
 
 export function RoomsSection() {

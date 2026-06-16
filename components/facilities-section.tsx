@@ -3,32 +3,22 @@ import {
   Clock,
   Droplets,
   Flame,
-  Home,
-  Refrigerator,
   ShieldCheck,
   ShowerHead,
-  Sparkles,
   UtensilsCrossed,
-  WashingMachine,
   Wifi,
 } from "lucide-react"
 
 const facilities = [
-  { icon: Home, label: "Homely Food" },
+  { icon: UtensilsCrossed, label: "Homely Food" },
   { icon: UtensilsCrossed, label: "Breakfast, Lunch & Dinner" },
-  { icon: UtensilsCrossed, label: "South Indian & North Indian Food" },
   { icon: Beef, label: "Veg & Non-Veg Food" },
-  { icon: UtensilsCrossed, label: "Clean Dining Area" },
   { icon: ShowerHead, label: "Attached Washrooms" },
   { icon: ShieldCheck, label: "CCTV Camera Security" },
   { icon: Wifi, label: "High-Speed Wi-Fi" },
   { icon: Droplets, label: "Mineral Water" },
   { icon: Clock, label: "24-Hour Water Facility" },
   { icon: Flame, label: "Hot Water" },
-  { icon: Sparkles, label: "Housekeeping" },
-  { icon: WashingMachine, label: "Washing Machine" },
-  { icon: Refrigerator, label: "Refrigerator" },
-  { icon: Home, label: "Family-Managed Hostel" },
   { icon: ShieldCheck, label: "Safe & Disciplined Environment" },
 ]
 
@@ -44,15 +34,14 @@ export function FacilitiesSection() {
             Facilities
           </span>
           <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
-            Everything needed for comfortable daily living
+            Essential facilities for comfortable daily living
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Food, safety, water, Wi-Fi and daily essentials are all planned for a
-            simple hostel experience.
+            Simple, practical facilities for students and working professionals.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
           {facilities.map((item) => (
             <div
               key={item.label}

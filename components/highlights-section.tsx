@@ -19,7 +19,7 @@ const highlights = [
   {
     icon: ShieldCheck,
     title: "Safe & Disciplined",
-    text: "CCTV camera security, family management and a clean hostel environment.",
+    text: "CCTV camera security and a safe, disciplined hostel environment.",
   },
 ]
 

@@ -2,10 +2,10 @@ import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
 
 const points = [
-  "Family-managed hostel",
   "No brokerage",
   "Safe and disciplined environment",
   "Hygienic homely food",
+  "Suitable for students and employees",
 ]
 
 export function AboutSection() {
@@ -16,8 +16,8 @@ export function AboutSection() {
           <div className="absolute -inset-3 rounded-3xl bg-gradient-to-br from-primary/12 to-accent/12 blur-xl" aria-hidden="true" />
           <div className="relative overflow-hidden rounded-3xl border border-border bg-card shadow-xl">
             <Image
-              src="/images/room.png"
-              alt="Clean 4-sharing room at Prince Deluxe PG for Boys"
+              src={siteConfig.images.buildingDay}
+              alt="Prince Deluxe PG for Boys building exterior in daylight"
               width={640}
               height={460}
               className="aspect-[4/3] h-full w-full object-cover"
@@ -35,9 +35,9 @@ export function AboutSection() {
           <p className="text-pretty leading-relaxed text-muted-foreground">
             {siteConfig.name} is a boys PG and hostel accommodation in
             Shamshabad, Hyderabad, designed for {siteConfig.audience}. Located
-            near Commissioner of Police, Shamshabad Zone, the hostel offers
-            4-sharing rooms with food, Wi-Fi, CCTV, housekeeping and essential
-            daily facilities.
+            in Brindavan Colony, Ranga Reddy Nagar, the hostel offers
+            4-sharing rooms with homely food, Wi-Fi, CCTV and essential daily
+            facilities.
           </p>
           <p className="text-pretty leading-relaxed text-muted-foreground">
             With {siteConfig.roomPlan.rooms} rooms and capacity for{" "}

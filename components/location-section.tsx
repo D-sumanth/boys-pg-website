@@ -14,7 +14,7 @@ export function LocationSection() {
             Easy to find in Shamshabad
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Located near Commissioner of Police, Shamshabad Zone, with convenient
+            Located in Brindavan Colony, Ranga Reddy Nagar, with convenient
             access for students and nearby working employees.
           </p>
         </div>
@@ -34,9 +34,11 @@ export function LocationSection() {
                   {siteConfig.address.line2},<br />
                   {siteConfig.address.line3}
                 </address>
-                <p className="mt-2 text-sm font-semibold text-accent">
-                  {siteConfig.address.landmark}
-                </p>
+                {siteConfig.address.landmark && (
+                  <p className="mt-2 text-sm font-semibold text-accent">
+                    {siteConfig.address.landmark}
+                  </p>
+                )}
               </div>
             </div>
 

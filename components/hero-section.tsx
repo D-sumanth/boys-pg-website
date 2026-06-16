@@ -6,7 +6,6 @@ import {
   MessageCircle,
   Phone,
   ShieldCheck,
-  Sparkles,
   UtensilsCrossed,
   Wifi,
 } from "lucide-react"
@@ -67,7 +66,7 @@ export function HeroSection() {
 
           <div className="flex items-start gap-2 text-sm font-medium text-primary-foreground/90">
             <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-            <span>{siteConfig.address.landmark}, {siteConfig.location}</span>
+            <span>{siteConfig.address.line2}, {siteConfig.location}</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -106,7 +105,7 @@ export function HeroSection() {
           <div className="absolute -inset-3 rounded-[2rem] bg-primary-foreground/10 blur-xl" aria-hidden="true" />
           <div className="relative overflow-hidden rounded-[1.75rem] border border-primary-foreground/20 bg-primary-foreground/10 shadow-2xl ring-1 ring-primary-foreground/10">
             <Image
-              src="/images/hostel-exterior.png"
+              src={siteConfig.images.buildingNight}
               alt="Prince Deluxe PG for Boys hostel building exterior in Shamshabad"
               width={720}
               height={560}
@@ -116,7 +115,7 @@ export function HeroSection() {
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-5">
               <p className="font-heading text-lg font-bold">4-sharing rooms only</p>
-              <p className="text-sm text-primary-foreground/78">Food, Wi-Fi, CCTV and daily essentials included</p>
+              <p className="text-sm text-primary-foreground/78">Homely food, Wi-Fi, CCTV and daily essentials included</p>
             </div>
           </div>
 
@@ -131,9 +130,9 @@ export function HeroSection() {
           </div>
 
           <div className="absolute -right-1 -top-4 flex items-center gap-2 rounded-2xl border border-border bg-background px-3.5 py-2.5 shadow-xl sm:-right-4">
-            <Sparkles className="size-5 text-accent" />
+            <ShieldCheck className="size-5 text-accent" />
             <div className="leading-tight">
-              <p className="font-heading text-sm font-bold text-foreground">Family Managed</p>
+              <p className="font-heading text-sm font-bold text-foreground">Safe Living</p>
               <p className="text-[11px] text-muted-foreground">Safe and disciplined</p>
             </div>
           </div>

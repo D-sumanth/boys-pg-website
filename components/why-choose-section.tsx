@@ -1,9 +1,9 @@
-import { ShieldCheck, GraduationCap, Briefcase, Sparkles, Home, BadgeIndianRupee } from "lucide-react"
+import { ShieldCheck, GraduationCap, Briefcase, Sparkles, BadgeIndianRupee } from "lucide-react"
 
 const reasons = [
   {
     icon: ShieldCheck,
-    text: "Safe location near Commissioner of Police, Shamshabad Zone",
+    text: "Safe location in Brindavan Colony, Ranga Reddy Nagar",
   },
   {
     icon: GraduationCap,
@@ -18,8 +18,8 @@ const reasons = [
     text: "Clean rooms and hygienic food",
   },
   {
-    icon: Home,
-    text: "Family-managed and disciplined environment",
+    icon: ShieldCheck,
+    text: "Safe and disciplined environment",
   },
   {
     icon: BadgeIndianRupee,

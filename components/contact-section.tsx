@@ -66,8 +66,12 @@ export function ContactSection() {
                 {siteConfig.address.line1},<br />
                 {siteConfig.address.line2},<br />
                 {siteConfig.address.line3}
-                <br />
-                <span className="font-medium text-accent">{siteConfig.address.landmark}</span>
+                {siteConfig.address.landmark && (
+                  <>
+                    <br />
+                    <span className="font-medium text-accent">{siteConfig.address.landmark}</span>
+                  </>
+                )}
               </address>
             </div>
 
