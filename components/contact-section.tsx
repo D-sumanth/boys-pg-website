@@ -111,7 +111,7 @@ export function ContactSection() {
                   </div>
                 </div>
 
-                <div className="grid gap-4 sm:grid-cols-2">
+                <div className="grid gap-4 sm:grid-cols-3">
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="type">I am a</Label>
                     <select
@@ -137,7 +137,24 @@ export function ContactSection() {
                       required
                       className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
-                      <option value="4-sharing">4 Sharing Room - ₹8,000/month</option>
+                      {siteConfig.roomCategories.map((room) => (
+                        <option key={room.name} value={room.shortName}>
+                          {room.shortName}
+                        </option>
+                      ))}
+                    </select>
+                  </div>
+                  <div className="flex flex-col gap-2">
+                    <Label htmlFor="ac-option">Room Option</Label>
+                    <select
+                      id="ac-option"
+                      name="ac-option"
+                      defaultValue="non-ac"
+                      required
+                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                    >
+                      <option value="non-ac">Non-AC</option>
+                      <option value="ac-option">AC Option</option>
                     </select>
                   </div>
                 </div>

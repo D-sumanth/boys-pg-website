@@ -14,7 +14,7 @@ export function LocationSection() {
             Easy to find in Shamshabad
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Located in Brindavan Colony, Ranga Reddy Nagar, with convenient
+            Located in Rangareddy Nagar, Brindavan Colony, with convenient
             access for students and nearby working employees.
           </p>
         </div>

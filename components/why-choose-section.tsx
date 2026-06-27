@@ -3,27 +3,27 @@ import { ShieldCheck, GraduationCap, Briefcase, Sparkles, BadgeIndianRupee } fro
 const reasons = [
   {
     icon: ShieldCheck,
-    text: "Safe location in Brindavan Colony, Ranga Reddy Nagar",
+    text: "Clean and spacious boys PG accommodation in Shamshabad",
   },
   {
     icon: GraduationCap,
-    text: "Suitable for GMR Aviation College students",
+    text: "Suitable for students and working professionals",
   },
   {
     icon: Briefcase,
-    text: "Suitable for working employees near Shamshabad and airport area",
+    text: "Premium rooms with extra usable entrance space",
   },
   {
     icon: Sparkles,
-    text: "Clean rooms and hygienic food",
+    text: "Personal locker, almirah storage and attached washrooms",
   },
   {
     icon: ShieldCheck,
-    text: "Safe and disciplined environment",
+    text: "CCTV security, fire extinguisher and lift access",
   },
   {
     icon: BadgeIndianRupee,
-    text: "Transparent pricing with no brokerage",
+    text: "Transparent Non-AC and AC-option pricing",
   },
 ]
 

@@ -1,25 +1,32 @@
 import {
-  Beef,
-  Clock,
+  ArrowUpDown,
+  Camera,
+  CircleDollarSign,
   Droplets,
   Flame,
+  FlameKindling,
+  KeyRound,
   ShieldCheck,
   ShowerHead,
+  Sparkles,
   UtensilsCrossed,
+  WashingMachine,
   Wifi,
 } from "lucide-react"
 
 const facilities = [
-  { icon: UtensilsCrossed, label: "Homely Food" },
-  { icon: UtensilsCrossed, label: "Breakfast, Lunch & Dinner" },
-  { icon: Beef, label: "Veg & Non-Veg Food" },
-  { icon: ShowerHead, label: "Attached Washrooms" },
-  { icon: ShieldCheck, label: "CCTV Camera Security" },
+  { icon: UtensilsCrossed, label: "Food Included" },
   { icon: Wifi, label: "High-Speed Wi-Fi" },
-  { icon: Droplets, label: "Mineral Water" },
-  { icon: Clock, label: "24-Hour Water Facility" },
-  { icon: Flame, label: "Hot Water" },
-  { icon: ShieldCheck, label: "Safe & Disciplined Environment" },
+  { icon: Camera, label: "CCTV Security" },
+  { icon: FlameKindling, label: "Fire Extinguisher" },
+  { icon: ArrowUpDown, label: "Lift Access" },
+  { icon: Flame, label: "Hot Water / Geyser" },
+  { icon: ShowerHead, label: "Attached Washrooms" },
+  { icon: Droplets, label: "Water Filters on Each Floor" },
+  { icon: WashingMachine, label: "Common Washing Machine" },
+  { icon: KeyRound, label: "Personal Storage" },
+  { icon: Sparkles, label: "Cleaning Support" },
+  { icon: CircleDollarSign, label: "No Brokerage" },
 ]
 
 export function FacilitiesSection() {
@@ -34,14 +41,15 @@ export function FacilitiesSection() {
             Facilities
           </span>
           <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
-            Essential facilities for comfortable daily living
+            Daily essentials for a comfortable stay
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Simple, practical facilities for students and working professionals.
+            Food, Wi-Fi, storage, safety and water facilities are planned for
+            practical long-term living.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-5">
+        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {facilities.map((item) => (
             <div
               key={item.label}

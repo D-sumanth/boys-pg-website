@@ -42,31 +42,33 @@ export function HeroSection() {
               Boys PG in Shamshabad
             </p>
             <h1 className="max-w-3xl text-balance font-heading text-4xl font-bold leading-[1.05] sm:text-5xl lg:text-6xl">
-              {siteConfig.name}
+              {siteConfig.name} in Shamshabad
             </h1>
             <p className="max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/82 sm:text-lg">
-              {siteConfig.positioning} Built for {siteConfig.audience}.
+              A clean, safe and well-managed boys PG offering spacious rooms,
+              homely food, attached washrooms, personal storage, lift access,
+              CCTV security and essential daily facilities.
             </p>
           </div>
 
           <div className="grid w-full gap-3 sm:grid-cols-3">
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/8 p-4 backdrop-blur">
               <p className="font-heading text-2xl font-bold">{roomPlan.rooms}</p>
-              <p className="text-xs text-primary-foreground/70">4-sharing rooms</p>
+              <p className="text-xs text-primary-foreground/70">total rooms</p>
             </div>
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/8 p-4 backdrop-blur">
               <p className="font-heading text-2xl font-bold">{roomPlan.capacity}</p>
               <p className="text-xs text-primary-foreground/70">resident capacity</p>
             </div>
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/8 p-4 backdrop-blur">
-              <p className="font-heading text-2xl font-bold">{roomPlan.price}</p>
-              <p className="text-xs text-primary-foreground/70">per month</p>
+              <p className="font-heading text-2xl font-bold">3</p>
+              <p className="text-xs text-primary-foreground/70">room options</p>
             </div>
           </div>
 
           <div className="flex items-start gap-2 text-sm font-medium text-primary-foreground/90">
             <MapPin className="mt-0.5 size-4 shrink-0 text-accent" />
-            <span>{siteConfig.address.line2}, {siteConfig.location}</span>
+            <span>{siteConfig.address.landmark}</span>
           </div>
 
           <div className="flex flex-wrap items-center gap-2">
@@ -98,6 +100,10 @@ export function HeroSection() {
               <ArrowDown className="size-5" />
               View Rooms
             </Button>
+            <Button render={<a href="#location" />} nativeButton={false} size="lg" variant="ghost" className="h-12 gap-2 px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
+              <MapPin className="size-5" />
+              View Location
+            </Button>
           </div>
         </div>
 
@@ -114,8 +120,8 @@ export function HeroSection() {
               className="aspect-[4/3] h-full w-full object-cover"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-5">
-              <p className="font-heading text-lg font-bold">4-sharing rooms only</p>
-              <p className="text-sm text-primary-foreground/78">Homely food, Wi-Fi, CCTV and daily essentials included</p>
+              <p className="font-heading text-lg font-bold">4-sharing and partitioned room options</p>
+              <p className="text-sm text-primary-foreground/78">Food, storage, Wi-Fi, CCTV and daily essentials included</p>
             </div>
           </div>
 
@@ -124,8 +130,8 @@ export function HeroSection() {
               <span className="font-heading text-lg font-bold">{roomPlan.rooms}</span>
             </span>
             <div>
-              <p className="font-heading text-sm font-bold text-foreground">Rooms Available</p>
-              <p className="text-xs text-muted-foreground">4-sharing, {roomPlan.capacity} total capacity</p>
+              <p className="font-heading text-sm font-bold text-foreground">23 Rooms Available</p>
+              <p className="text-xs text-muted-foreground">90 total resident capacity</p>
             </div>
           </div>
 

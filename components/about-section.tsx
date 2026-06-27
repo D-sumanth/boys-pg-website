@@ -2,10 +2,10 @@ import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
 
 const points = [
-  "No brokerage",
-  "Safe and disciplined environment",
-  "Hygienic homely food",
-  "Suitable for students and employees",
+  "Personal locker for each bed",
+  "4-door almirah storage",
+  "Lift access",
+  "Water filters on each floor",
 ]
 
 export function AboutSection() {
@@ -33,16 +33,16 @@ export function AboutSection() {
             A safe, clean and homely boys hostel in Shamshabad
           </h2>
           <p className="text-pretty leading-relaxed text-muted-foreground">
-            {siteConfig.name} is a boys PG and hostel accommodation in
-            Shamshabad, Hyderabad, designed for {siteConfig.audience}. Located
-            in Brindavan Colony, Ranga Reddy Nagar, the hostel offers
-            4-sharing rooms with homely food, Wi-Fi, CCTV and essential daily
-            facilities.
+            {siteConfig.name} is a boys PG hostel located in Shamshabad,
+            Hyderabad. The property is designed for residents looking for a
+            clean, secure and comfortable stay with food, personal storage and
+            essential daily facilities.
           </p>
           <p className="text-pretty leading-relaxed text-muted-foreground">
-            With {siteConfig.roomPlan.rooms} rooms and capacity for{" "}
-            {siteConfig.roomPlan.capacity} residents, the hostel is planned for
-            safe, disciplined and practical living from {siteConfig.openingDate}.
+            The hostel provides spacious 4-sharing rooms, attached washrooms,
+            locker facility for each bed, 4-door almirah storage, lift access,
+            CCTV security, fire extinguisher, hot water support, water filters
+            on each floor and common washing machine access.
           </p>
           <ul className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
             {points.map((item) => (

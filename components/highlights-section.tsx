@@ -1,15 +1,15 @@
-import { BedDouble, GraduationCap, ShieldCheck, UtensilsCrossed } from "lucide-react"
+import { ArrowUpDown, BedDouble, ShieldCheck, UtensilsCrossed } from "lucide-react"
 
 const highlights = [
   {
-    icon: GraduationCap,
-    title: "Near GMR Aviation College",
-    text: "Convenient for students and close to Shamshabad airport-area workplaces.",
+    icon: BedDouble,
+    title: "23 Rooms",
+    text: "Premium, standard and special partitioned room options available.",
   },
   {
     icon: BedDouble,
-    title: "4-Sharing Rooms Only",
-    text: "24 rooms with attached washrooms and a total capacity of 96 residents.",
+    title: "90 Resident Capacity",
+    text: "A 23-room structure planned for up to 90 residents.",
   },
   {
     icon: UtensilsCrossed,
@@ -17,9 +17,14 @@ const highlights = [
     text: "Homely breakfast, lunch and dinner with veg and non-veg options.",
   },
   {
+    icon: ArrowUpDown,
+    title: "Lift & Water Filters",
+    text: "Lift access, water filters on each floor and daily essentials.",
+  },
+  {
     icon: ShieldCheck,
-    title: "Safe & Disciplined",
-    text: "CCTV camera security and a safe, disciplined hostel environment.",
+    title: "CCTV Security",
+    text: "CCTV coverage and fire extinguisher for resident confidence.",
   },
 ]
 
@@ -27,7 +32,7 @@ export function HighlightsSection() {
   return (
     <section className="bg-background py-12 md:py-16">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-5">
           {highlights.map((item) => (
             <div
               key={item.title}
