@@ -1,3 +1,5 @@
+import Image from "next/image"
+import type { LucideIcon } from "lucide-react"
 import {
   ArrowUpDown,
   Camera,
@@ -5,6 +7,7 @@ import {
   Droplets,
   Flame,
   FlameKindling,
+  Home,
   KeyRound,
   ShieldCheck,
   ShowerHead,
@@ -13,21 +16,29 @@ import {
   WashingMachine,
   Wifi,
 } from "lucide-react"
+import { siteConfig } from "@/lib/site-config"
 
-const facilities = [
-  { icon: UtensilsCrossed, label: "Food Included" },
-  { icon: Wifi, label: "High-Speed Wi-Fi" },
-  { icon: Camera, label: "CCTV Security" },
-  { icon: FlameKindling, label: "Fire Extinguisher" },
-  { icon: ArrowUpDown, label: "Lift Access" },
-  { icon: Flame, label: "Hot Water / Geyser" },
-  { icon: ShowerHead, label: "Attached Washrooms" },
-  { icon: Droplets, label: "Water Filters on Each Floor" },
-  { icon: WashingMachine, label: "Common Washing Machine" },
-  { icon: KeyRound, label: "Personal Storage" },
-  { icon: Sparkles, label: "Cleaning Support" },
-  { icon: CircleDollarSign, label: "No Brokerage" },
-]
+const facilityIcons: Record<string, LucideIcon> = {
+  "Homely food": UtensilsCrossed,
+  "Breakfast, lunch and dinner": UtensilsCrossed,
+  "Veg and non-veg food": UtensilsCrossed,
+  "Clean dining/common area": Home,
+  "Attached washrooms": ShowerHead,
+  "Hot water / geyser": Flame,
+  "High-speed Wi-Fi": Wifi,
+  "CCTV camera security": Camera,
+  "Fire extinguisher": FlameKindling,
+  "Lift access": ArrowUpDown,
+  "24-hour water facility": Droplets,
+  "Water filters": Droplets,
+  "Common washing machine": WashingMachine,
+  "Personal locker": KeyRound,
+  "4-door almirah storage": KeyRound,
+  "Housekeeping / cleaning support": Sparkles,
+  "No brokerage": CircleDollarSign,
+  "Family-managed environment": ShieldCheck,
+  "Disciplined and clean premises": ShieldCheck,
+}
 
 export function FacilitiesSection() {
   return (
@@ -41,26 +52,45 @@ export function FacilitiesSection() {
             Facilities
           </span>
           <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
-            Daily essentials for a comfortable stay
+            Practical facilities for everyday hostel life
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Food, Wi-Fi, storage, safety and water facilities are planned for
-            practical long-term living.
+            Food, safety, storage, water, lift access and clean shared spaces
+            are available for students and working professionals.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
-          {facilities.map((item) => (
-            <div
-              key={item.label}
-              className="group flex min-h-32 flex-col items-center justify-center gap-3 rounded-2xl border border-border bg-card/95 p-4 text-center shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg sm:p-5"
-            >
-              <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                <item.icon className="size-6" />
-              </span>
-              <span className="text-sm font-semibold leading-snug text-foreground">{item.label}</span>
-            </div>
-          ))}
+        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+          {siteConfig.facilities.map((item) => {
+            const Icon = facilityIcons[item.label] ?? Sparkles
+            const image = "image" in item ? item.image : undefined
+
+            return (
+              <div
+                key={item.label}
+                className="group overflow-hidden rounded-2xl border border-border bg-card/95 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
+              >
+                {image ? (
+                  <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                    <Image
+                      src={image}
+                      alt={`${item.label} at ${siteConfig.name}`}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary/55 to-transparent" />
+                  </div>
+                ) : null}
+                <div className="flex min-h-24 items-center gap-3 p-4">
+                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                    <Icon className="size-5" />
+                  </span>
+                  <span className="text-sm font-semibold leading-snug text-foreground">{item.label}</span>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </div>
     </section>

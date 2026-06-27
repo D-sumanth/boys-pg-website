@@ -23,7 +23,7 @@ const reasons = [
   },
   {
     icon: BadgeIndianRupee,
-    text: "Transparent Non-AC and AC-option pricing",
+    text: "Rooms starting from ₹8,500/month with final pricing confirmed by enquiry",
   },
 ]
 

@@ -1,5 +1,7 @@
 // Edit this file to update the hostel details across the website.
 
+const hostelImage = (fileName: string) => `/images/hostel/${fileName}`
+
 export const siteConfig = {
   name: "Prince Deluxe PG for Boys",
   shortName: "Prince Deluxe PG",
@@ -25,26 +27,40 @@ export const siteConfig = {
     line3: "Shamshabad, Hyderabad, Telangana 501218",
     landmark: "Near Commissioner of Police, Shamshabad Zone",
   },
+  pricingTeaser: "Rooms starting from ₹8,500/month",
+  pricingNote:
+    "Final pricing depends on room category, AC/non-AC preference and current availability.",
   images: {
-    buildingNight: "/images/building-night.png",
-    buildingDay: "/images/building-day.png",
+    hero: hostelImage("entrance-night-2.png"),
+    entranceNightAlt: hostelImage("entrance-night-1.png"),
+    buildingDay: hostelImage("hostel-board-day-1.png"),
+    dining: hostelImage("dining-3.png"),
+    diningAlt: hostelImage("dining-1.png"),
+    premiumRoom: hostelImage("extra-space-with-chairs.png"),
+    standardRoom: hostelImage("4-bed-standard-1.png"),
+    standardRoomAlt: hostelImage("4-bed-standard-2.png"),
+    partitionedRoom: hostelImage("2-bed-partition.png"),
+    bathroomWhite: hostelImage("bathroom-white-1.png"),
+    bathroomGray: hostelImage("bathroom-gray-1.png"),
+    lift: hostelImage("lift-1.png"),
+    waterFilter: hostelImage("water-filter.png"),
+    cctv: hostelImage("cc-camera-1.png"),
   },
   roomPlan: {
     rooms: 23,
     capacity: 90,
-    brokerage: "₹0",
+    brokerage: "No brokerage",
   },
   roomCategories: [
     {
-      name: "Premium 4-Sharing Room with Extra Space",
+      name: "Premium 4-Sharing Rooms",
       shortName: "Premium 4-Sharing",
       badge: "Premium Option",
       roomCount: 10,
       setup: "4 Sharing",
-      nonAcPrice: "₹8,500",
-      acPrice: "₹10,500",
+      image: hostelImage("extra-space-with-chairs.png"),
       description:
-        "Selected rooms include an additional usable entrance area, suitable as a small seating space, study nook or relaxation corner.",
+        "Spacious 4-sharing rooms with extra usable space for seating, study or daily comfort.",
       features: [
         "4-sharing setup",
         "Extra usable entrance space",
@@ -52,19 +68,17 @@ export const siteConfig = {
         "Personal locker for each bed",
         "4-door almirah storage",
         "Attached washroom",
-        "Lights and fan",
       ],
     },
     {
-      name: "Standard 4-Sharing Room",
+      name: "Standard 4-Sharing Rooms",
       shortName: "Standard 4-Sharing",
       badge: "Popular Choice",
       roomCount: 12,
       setup: "4 Sharing",
-      nonAcPrice: "₹8,000",
-      acPrice: "₹10,000",
+      image: hostelImage("4-bed-standard-1.png"),
       description:
-        "Comfortable 4-sharing rooms with individual beds, personal locker, almirah storage and attached washroom.",
+        "Comfortable 4-sharing rooms with individual beds, personal storage and attached washroom.",
       features: [
         "4-sharing setup",
         "Individual bed for each resident",
@@ -80,10 +94,9 @@ export const siteConfig = {
       badge: "Limited Room",
       roomCount: 1,
       setup: "2 Beds",
-      nonAcPrice: "₹9,000",
-      acPrice: "₹11,000",
+      image: hostelImage("2-bed-partition.png"),
       description:
-        "A special 2-bed partitioned room option for residents who prefer extra privacy and a quieter setup.",
+        "A limited partitioned room option for residents who prefer extra privacy and a quieter setup.",
       features: [
         "2-bed partitioned setup",
         "More privacy",
@@ -96,7 +109,7 @@ export const siteConfig = {
   seo: {
     title: "Prince Deluxe PG for Boys | Boys PG in Shamshabad",
     description:
-      "Prince Deluxe PG for Boys is a clean and well-managed boys PG hostel in Shamshabad, Hyderabad, offering spacious rooms, food, attached washrooms, personal lockers, almirah storage, Wi-Fi, CCTV security, lift access, water filters and common washing machine facilities.",
+      "Prince Deluxe PG for Boys is a clean boys PG hostel in Shamshabad, Hyderabad. Rooms starting from ₹8,500/month with food, Wi-Fi, attached washrooms, CCTV, lift access, water filters and essential facilities.",
     keywords: [
       "Boys PG in Shamshabad",
       "Boys hostel in Shamshabad",
@@ -111,30 +124,40 @@ export const siteConfig = {
     ],
   },
   facilities: [
-    "Food included",
-    "High-speed Wi-Fi",
-    "CCTV security",
-    "Fire extinguisher",
-    "Lift access",
-    "Hot water / geyser support",
-    "Attached washrooms",
-    "Water filters on each floor",
-    "Common washing machine",
-    "Personal locker and almirah storage",
-    "Housekeeping / cleaning support",
-    "No brokerage",
+    { label: "Homely food", image: hostelImage("dining-3.png") },
+    { label: "Breakfast, lunch and dinner", image: hostelImage("dining-1.png") },
+    { label: "Veg and non-veg food", image: hostelImage("dining-2.png") },
+    { label: "Clean dining/common area", image: hostelImage("dining-3.png") },
+    { label: "Attached washrooms", image: hostelImage("bathroom-white-1.png") },
+    { label: "Hot water / geyser", image: hostelImage("bathroom-gray-1.png") },
+    { label: "High-speed Wi-Fi" },
+    { label: "CCTV camera security", image: hostelImage("cc-camera-1.png") },
+    { label: "Fire extinguisher" },
+    { label: "Lift access", image: hostelImage("lift-1.png") },
+    { label: "24-hour water facility" },
+    { label: "Water filters", image: hostelImage("water-filter.png") },
+    { label: "Common washing machine" },
+    { label: "Personal locker" },
+    { label: "4-door almirah storage" },
+    { label: "Housekeeping / cleaning support" },
+    { label: "No brokerage" },
+    { label: "Family-managed environment" },
+    { label: "Disciplined and clean premises" },
   ],
   gallery: [
-    {
-      src: "/images/building-night.png",
-      title: "Building Exterior and Signage",
-      span: "lg:col-span-2",
-    },
-    {
-      src: "/images/building-day.png",
-      title: "Building Exterior in Daylight",
-      span: "lg:col-span-2",
-    },
+    { src: hostelImage("entrance-night-2.png"), title: "Entrance & Signage" },
+    { src: hostelImage("hostel-board-day-1.png"), title: "Daytime Hostel Board" },
+    { src: hostelImage("dining-3.png"), title: "Dining/Common Area" },
+    { src: hostelImage("dining-1.png"), title: "Dining Area View" },
+    { src: hostelImage("extra-space-with-chairs.png"), title: "Premium Room with Extra Space" },
+    { src: hostelImage("4-bed-standard-1.png"), title: "Standard 4-Sharing Room" },
+    { src: hostelImage("4-bed-standard-2.png"), title: "Standard Room View" },
+    { src: hostelImage("2-bed-partition.png"), title: "Special Partitioned Room" },
+    { src: hostelImage("bathroom-white-1.png"), title: "Attached Washroom with Geyser" },
+    { src: hostelImage("bathroom-gray-1.png"), title: "Modern Washroom" },
+    { src: hostelImage("lift-1.png"), title: "Lift Access" },
+    { src: hostelImage("water-filter.png"), title: "Water Filter" },
+    { src: hostelImage("cc-camera-1.png"), title: "CCTV Security" },
   ],
 } as const
 

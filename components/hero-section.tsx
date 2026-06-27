@@ -1,7 +1,6 @@
 import Image from "next/image"
 import {
   ArrowDown,
-  Mail,
   MapPin,
   MessageCircle,
   Phone,
@@ -49,6 +48,9 @@ export function HeroSection() {
               homely food, attached washrooms, personal storage, lift access,
               CCTV security and essential daily facilities.
             </p>
+            <p className="inline-flex rounded-2xl border border-accent/35 bg-accent/15 px-4 py-2 font-heading text-lg font-bold text-accent sm:text-xl">
+              {siteConfig.pricingTeaser}
+            </p>
           </div>
 
           <div className="grid w-full gap-3 sm:grid-cols-3">
@@ -61,8 +63,8 @@ export function HeroSection() {
               <p className="text-xs text-primary-foreground/70">resident capacity</p>
             </div>
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/8 p-4 backdrop-blur">
-              <p className="font-heading text-2xl font-bold">3</p>
-              <p className="text-xs text-primary-foreground/70">room options</p>
+              <p className="font-heading text-2xl font-bold">₹8,500+</p>
+              <p className="text-xs text-primary-foreground/70">starting monthly rooms</p>
             </div>
           </div>
 
@@ -92,10 +94,6 @@ export function HeroSection() {
               <MessageCircle className="size-5" />
               WhatsApp Enquiry
             </Button>
-            <Button render={<a href={siteConfig.emailLink} />} nativeButton={false} size="lg" variant="ghost" className="h-12 gap-2 px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-              <Mail className="size-5" />
-              Email Us
-            </Button>
             <Button render={<a href="#rooms" />} nativeButton={false} size="lg" variant="ghost" className="h-12 gap-2 px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
               <ArrowDown className="size-5" />
               View Rooms
@@ -111,16 +109,16 @@ export function HeroSection() {
           <div className="absolute -inset-3 rounded-[2rem] bg-primary-foreground/10 blur-xl" aria-hidden="true" />
           <div className="relative overflow-hidden rounded-[1.75rem] border border-primary-foreground/20 bg-primary-foreground/10 shadow-2xl ring-1 ring-primary-foreground/10">
             <Image
-              src={siteConfig.images.buildingNight}
+              src={siteConfig.images.hero}
               alt="Prince Deluxe PG for Boys hostel building exterior in Shamshabad"
               width={720}
               height={560}
               priority
               loading="eager"
-              className="aspect-[4/3] h-full w-full object-cover"
+              className="aspect-[4/3] h-full w-full object-cover object-[50%_72%] sm:object-center"
             />
             <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-5">
-              <p className="font-heading text-lg font-bold">4-sharing and partitioned room options</p>
+              <p className="font-heading text-lg font-bold">{siteConfig.pricingTeaser}</p>
               <p className="text-sm text-primary-foreground/78">Food, storage, Wi-Fi, CCTV and daily essentials included</p>
             </div>
           </div>

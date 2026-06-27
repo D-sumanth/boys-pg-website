@@ -5,7 +5,7 @@ const points = [
   "Personal locker for each bed",
   "4-door almirah storage",
   "Lift access",
-  "Water filters on each floor",
+  "Water filters and common washing machine",
 ]
 
 export function AboutSection() {
@@ -42,7 +42,8 @@ export function AboutSection() {
             The hostel provides spacious 4-sharing rooms, attached washrooms,
             locker facility for each bed, 4-door almirah storage, lift access,
             CCTV security, fire extinguisher, hot water support, water filters
-            on each floor and common washing machine access.
+            and common washing machine access. Rooms are available based on
+            category, AC/non-AC preference and current availability.
           </p>
           <ul className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
             {points.map((item) => (
