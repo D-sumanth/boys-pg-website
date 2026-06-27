@@ -98,10 +98,6 @@ export function HeroSection() {
               <ArrowDown className="size-5" />
               View Rooms
             </Button>
-            <Button render={<a href="#location" />} nativeButton={false} size="lg" variant="ghost" className="h-12 gap-2 px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
-              <MapPin className="size-5" />
-              View Location
-            </Button>
           </div>
         </div>
 
@@ -117,28 +113,6 @@ export function HeroSection() {
               loading="eager"
               className="aspect-[4/3] h-full w-full object-cover object-[50%_72%] sm:object-center"
             />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-primary/90 to-transparent p-5">
-              <p className="font-heading text-lg font-bold">{siteConfig.pricingTeaser}</p>
-              <p className="text-sm text-primary-foreground/78">Food, storage, Wi-Fi, CCTV and daily essentials included</p>
-            </div>
-          </div>
-
-          <div className="absolute -bottom-5 left-4 flex items-center gap-3 rounded-2xl border border-border bg-background px-4 py-3 shadow-xl sm:left-6">
-            <span className="inline-flex size-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
-              <span className="font-heading text-lg font-bold">{roomPlan.rooms}</span>
-            </span>
-            <div>
-              <p className="font-heading text-sm font-bold text-foreground">23 Rooms Available</p>
-              <p className="text-xs text-muted-foreground">90 total resident capacity</p>
-            </div>
-          </div>
-
-          <div className="absolute -right-1 -top-4 flex items-center gap-2 rounded-2xl border border-border bg-background px-3.5 py-2.5 shadow-xl sm:-right-4">
-            <ShieldCheck className="size-5 text-accent" />
-            <div className="leading-tight">
-              <p className="font-heading text-sm font-bold text-foreground">Safe Living</p>
-              <p className="text-[11px] text-muted-foreground">Safe and disciplined</p>
-            </div>
           </div>
         </div>
       </div>

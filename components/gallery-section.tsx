@@ -1,6 +1,22 @@
 import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
 
+const aspectClasses = [
+  "aspect-[4/5]",
+  "aspect-[4/3]",
+  "aspect-[3/4]",
+  "aspect-[5/4]",
+  "aspect-[4/3]",
+  "aspect-[3/4]",
+  "aspect-square",
+  "aspect-[4/5]",
+  "aspect-[3/4]",
+  "aspect-[4/3]",
+  "aspect-[4/5]",
+  "aspect-square",
+  "aspect-[5/4]",
+]
+
 export function GallerySection() {
   return (
     <section id="gallery" className="bg-background py-16 md:py-24">
@@ -10,34 +26,30 @@ export function GallerySection() {
             Gallery
           </span>
           <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
-            Real photos from Prince Deluxe PG
+            Explore Prince Deluxe PG
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Exterior, room, dining, washroom, lift and facility photos are shown
-            here so students and parents can quickly understand the property.
+            Take a quick look at our entrance, rooms, dining area, washrooms,
+            lift access and daily facilities.
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {siteConfig.gallery.map((item) => (
+        <div className="mt-10 columns-1 gap-3 min-[520px]:columns-2 lg:columns-3">
+          {siteConfig.gallery.map((item, index) => (
             <figure
               key={item.title}
-              className="group relative overflow-hidden rounded-2xl border border-border bg-muted shadow-sm"
+              className="mb-3 break-inside-avoid overflow-hidden rounded-2xl bg-muted shadow-sm ring-1 ring-border"
             >
-              <div className="relative aspect-[4/3]">
+              <div className={`relative ${aspectClasses[index % aspectClasses.length]}`}>
                 <Image
                   src={item.src}
                   alt={`${item.title} at ${siteConfig.name}, Shamshabad`}
                   fill
                   loading="lazy"
-                  className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  className="object-cover"
+                  sizes="(max-width: 520px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/75 via-primary/10 to-transparent" />
               </div>
-              <figcaption className="absolute bottom-3 left-3 right-3 rounded-xl bg-background/92 px-3 py-2 text-sm font-semibold text-foreground shadow-sm backdrop-blur">
-                {item.title}
-              </figcaption>
             </figure>
           ))}
         </div>

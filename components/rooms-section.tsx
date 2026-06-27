@@ -1,17 +1,9 @@
 import Image from "next/image"
-import { BedDouble, Check, MessageCircle, Phone } from "lucide-react"
+import { BedDouble, MessageCircle, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-config"
 
 export function RoomsSection() {
-  const { roomPlan } = siteConfig
-  const stats = [
-    { value: String(roomPlan.rooms), label: "Total rooms" },
-    { value: "3", label: "Room categories" },
-    { value: String(roomPlan.capacity), label: "Resident capacity" },
-    { value: roomPlan.brokerage, label: "Brokerage" },
-  ]
-
   return (
     <section id="rooms" className="relative overflow-hidden bg-background py-16 md:py-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-secondary to-transparent" aria-hidden="true" />
@@ -67,31 +59,9 @@ export function RoomsSection() {
                   </p>
                 </div>
 
-                <div className="mt-5 grid grid-cols-2 gap-3 rounded-2xl border border-border p-4 text-sm">
-                  <div>
-                    <p className="font-heading text-xl font-bold text-primary">{room.roomCount}</p>
-                    <p className="text-xs text-muted-foreground">rooms</p>
-                  </div>
-                  <div>
-                    <p className="font-heading text-xl font-bold text-primary">{room.setup}</p>
-                    <p className="text-xs text-muted-foreground">setup</p>
-                  </div>
-                </div>
-
-                <ul className="mt-5 grid gap-2.5">
-                  {room.features.map((feature) => (
-                    <li key={feature} className="flex items-start gap-2 text-sm text-foreground">
-                      <span className="mt-0.5 inline-flex size-5 shrink-0 items-center justify-center rounded-full bg-accent/15 text-accent">
-                        <Check className="size-3.5" />
-                      </span>
-                      {feature}
-                    </li>
-                  ))}
-                </ul>
-
                 <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} className="mt-6 h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
                   <MessageCircle className="size-5" />
-                  Enquire Now
+                  WhatsApp Enquiry
                 </Button>
               </div>
             </article>
@@ -117,14 +87,6 @@ export function RoomsSection() {
           </div>
         </div>
 
-        <div className="mx-auto mt-10 grid max-w-3xl grid-cols-2 gap-3 sm:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="rounded-2xl border border-border bg-card p-5 text-center shadow-sm">
-              <p className="font-heading text-2xl font-bold text-primary sm:text-3xl">{stat.value}</p>
-              <p className="mt-1 text-xs text-muted-foreground sm:text-sm">{stat.label}</p>
-            </div>
-          ))}
-        </div>
       </div>
     </section>
   )

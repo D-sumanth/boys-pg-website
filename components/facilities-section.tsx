@@ -1,4 +1,3 @@
-import Image from "next/image"
 import type { LucideIcon } from "lucide-react"
 import {
   ArrowUpDown,
@@ -24,15 +23,15 @@ const facilityIcons: Record<string, LucideIcon> = {
   "Veg and non-veg food": UtensilsCrossed,
   "Clean dining/common area": Home,
   "Attached washrooms": ShowerHead,
-  "Hot water / geyser": Flame,
+  "Hot water / geyser support": Flame,
   "High-speed Wi-Fi": Wifi,
-  "CCTV camera security": Camera,
+  "CCTV security": Camera,
   "Fire extinguisher": FlameKindling,
   "Lift access": ArrowUpDown,
-  "24-hour water facility": Droplets,
+  "24-hour water availability": Droplets,
   "Water filters": Droplets,
   "Common washing machine": WashingMachine,
-  "Personal locker": KeyRound,
+  "Personal locker for each bed": KeyRound,
   "4-door almirah storage": KeyRound,
   "Housekeeping / cleaning support": Sparkles,
   "No brokerage": CircleDollarSign,
@@ -60,34 +59,21 @@ export function FacilitiesSection() {
           </p>
         </div>
 
-        <div className="mt-10 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+        <div className="mt-10 grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:gap-4 lg:grid-cols-3 xl:grid-cols-4">
           {siteConfig.facilities.map((item) => {
             const Icon = facilityIcons[item.label] ?? Sparkles
-            const image = "image" in item ? item.image : undefined
 
             return (
               <div
                 key={item.label}
-                className="group overflow-hidden rounded-2xl border border-border bg-card/95 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
+                className="group flex min-h-28 items-center gap-3 rounded-2xl border border-border bg-card/95 p-4 shadow-sm transition-all hover:-translate-y-1 hover:border-accent/40 hover:shadow-lg"
               >
-                {image ? (
-                  <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-                    <Image
-                      src={image}
-                      alt={`${item.label} at ${siteConfig.name}`}
-                      fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
-                      sizes="(max-width: 768px) 100vw, (max-width: 1280px) 33vw, 25vw"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary/55 to-transparent" />
-                  </div>
-                ) : null}
-                <div className="flex min-h-24 items-center gap-3 p-4">
-                  <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
-                    <Icon className="size-5" />
-                  </span>
-                  <span className="text-sm font-semibold leading-snug text-foreground">{item.label}</span>
-                </div>
+                <span className="inline-flex size-11 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary transition-colors group-hover:bg-accent group-hover:text-accent-foreground">
+                  <Icon className="size-5" />
+                </span>
+                <span className="text-sm font-semibold leading-snug text-foreground">
+                  {item.label}
+                </span>
               </div>
             )
           })}
