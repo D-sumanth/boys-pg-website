@@ -1,6 +1,7 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import { Poppins, Inter } from "next/font/google"
+import Script from "next/script"
 import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
@@ -56,6 +57,17 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+      <head>
+        <Script async src="https://www.googletagmanager.com/gtag/js?id=G-RGY6GRM9ZY" />
+        <Script id="google-analytics">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-RGY6GRM9ZY');
+          `}
+        </Script>
+      </head>
       <body className="overflow-x-hidden bg-background font-sans antialiased">
         {children}
         {process.env.NODE_ENV === "production" && <Analytics />}
