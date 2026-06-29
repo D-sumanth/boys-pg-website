@@ -24,6 +24,12 @@ Open [http://localhost:3000](http://localhost:3000) with your browser to see the
 
 You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
+## Private Admin
+
+This project includes a private Supabase-backed admin MVP under `/admin`.
+See [ADMIN_SETUP.md](./ADMIN_SETUP.md) for database migrations, environment
+variables, first admin user setup, backups and privacy notes.
+
 ## Learn More
 
 To learn more, take a look at the following resources:
