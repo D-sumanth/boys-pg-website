@@ -13,8 +13,9 @@ export default async function ResidentsPage() {
     getActiveOccupancies(),
   ])
   const availableBeds = beds.filter((bed) => bed.status === "Available")
+  const availableRoomIds = new Set(availableBeds.map((bed) => bed.room_id))
+  const availableRooms = rooms.filter((room) => availableRoomIds.has(room.room_id) && room.status !== "Inactive")
   const roomById = new Map(rooms.map((room) => [room.room_id, room]))
-  const bedById = new Map(beds.map((bed) => [bed.bed_id, bed]))
   const occupancyByResident = new Map(occupancies.map((occupancy) => [occupancy.resident_id, occupancy]))
 
   return (
@@ -69,16 +70,9 @@ export default async function ResidentsPage() {
                   <option key={resident.resident_id} value={resident.resident_id}>{resident.full_name}</option>
                 ))}
               </SelectField>
-              <SelectField label="Available bed" name="bed_id">
-                <option value="">Select bed</option>
-                {availableBeds.map((bed) => {
-                  const room = roomById.get(bed.room_id)
-                  return <option key={bed.bed_id} value={bed.bed_id}>Room {room?.room_number ?? "-"} - {bed.bed_code}</option>
-                })}
-              </SelectField>
               <SelectField label="Room" name="room_id">
-                <option value="">Select same room</option>
-                {rooms.map((room) => <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>)}
+                <option value="">Select available room</option>
+                {availableRooms.map((room) => <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>)}
               </SelectField>
               <Field label="Joining date" name="joining_date" type="date" />
               <Field label="Agreed rent" name="agreed_monthly_rent" type="number" />
@@ -95,9 +89,8 @@ export default async function ResidentsPage() {
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {residents.map((resident) => {
             const occupancy = occupancyByResident.get(resident.resident_id)
-            const bed = occupancy ? bedById.get(occupancy.bed_id) : null
             const room = occupancy ? roomById.get(occupancy.room_id) : null
-            const bedText = room && bed ? `Room ${room.room_number}, ${bed.bed_label || bed.bed_code}` : "No bed assigned"
+            const roomText = room ? `Room ${room.room_number}` : "No room assigned"
 
             return (
               <details key={resident.resident_id} className="group rounded-2xl border border-border bg-card shadow-sm transition-shadow open:shadow-lg">
@@ -111,7 +104,7 @@ export default async function ResidentsPage() {
                   </div>
 
                   <div className="mt-4 grid gap-2 rounded-xl bg-secondary p-3 text-sm">
-                    <p className="font-semibold text-foreground">{bedText}</p>
+                    <p className="font-semibold text-foreground">{roomText}</p>
                     <p className="text-muted-foreground">{resident.resident_type}</p>
                   </div>
 

@@ -31,9 +31,9 @@ export default async function DashboardPage() {
         </section>
 
         <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
-          <AdminCard title="Total beds" value={data.metrics.totalBeds} note="Configured beds or planned capacity" />
-          <AdminCard title="Occupied beds" value={data.metrics.occupiedBeds} />
-          <AdminCard title="Available beds" value={data.metrics.availableBeds} />
+          <AdminCard title="Total capacity" value={data.metrics.totalBeds} note="Room slots available for residents" />
+          <AdminCard title="Occupied slots" value={data.metrics.occupiedBeds} />
+          <AdminCard title="Available slots" value={data.metrics.availableBeds} />
           <AdminCard title="Rent collected this month" value={`₹${data.metrics.rentCollected.toLocaleString("en-IN")}`} />
           <AdminCard title="Active residents" value={data.metrics.activeResidents} />
           <AdminCard title="New enquiries this month" value={data.metrics.newEnquiries} />

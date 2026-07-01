@@ -1,11 +1,9 @@
-import { createBedAction, createRoomAction, updateBedStatusAction, updateRoomAction } from "@/app/admin/actions"
+import { createRoomAction, updateRoomAction } from "@/app/admin/actions"
 import { EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { Field, SelectField, TextAreaField } from "@/components/admin/form-fields"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
 import { getBeds, getRooms, getRoomTypes } from "@/lib/admin/data"
-
-const bedStatuses = ["Available", "Occupied", "Reserved", "Maintenance", "Inactive"]
 
 export default async function RoomsPage() {
   const [rooms, beds, roomTypes] = await Promise.all([getRooms(), getBeds(), getRoomTypes()])
@@ -25,7 +23,7 @@ export default async function RoomsPage() {
           <p className="mt-1 text-sm text-muted-foreground">Add rooms once, then tap a room card whenever you need to update it.</p>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-2">
+        <div className="grid gap-4">
           <details open className="rounded-2xl border border-border bg-card shadow-sm">
             <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
               Add room
@@ -61,27 +59,6 @@ export default async function RoomsPage() {
             </form>
           </details>
 
-          <details className="rounded-2xl border border-border bg-card shadow-sm">
-            <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
-              Add bed
-            </summary>
-            <form action={createBedAction} className="grid gap-4 border-t border-border p-5 sm:grid-cols-2">
-              <SelectField label="Room" name="room_id">
-                <option value="">Select room</option>
-                {rooms.map((room) => (
-                  <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>
-                ))}
-              </SelectField>
-              <Field label="Bed code" name="bed_code" required placeholder="101-A" />
-              <Field label="Bed label" name="bed_label" placeholder="Bed A" />
-              <Field label="Non-AC price" name="default_price" type="number" />
-              <Field label="AC price" name="ac_price" type="number" />
-              <SelectField label="Status" name="status" defaultValue="Available">
-                {bedStatuses.map((status) => <option key={status}>{status}</option>)}
-              </SelectField>
-              <Button type="submit" className="h-12 sm:col-span-2">Add Bed</Button>
-            </form>
-          </details>
         </div>
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
@@ -124,7 +101,7 @@ export default async function RoomsPage() {
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to manage room and beds</p>
+                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to manage room</p>
                   <p className="mt-3 hidden text-xs font-semibold text-accent group-open:block">Room controls are open</p>
                 </summary>
 
@@ -145,27 +122,10 @@ export default async function RoomsPage() {
                     <Button type="submit" size="sm" className="h-10">Update Room</Button>
                   </form>
 
-                  <div className="mt-4 grid gap-3">
-                    {roomBeds.map((bed) => (
-                      <div key={bed.bed_id} className="rounded-xl bg-secondary p-3">
-                        <div className="flex items-center justify-between gap-2">
-                          <div>
-                            <p className="font-semibold text-foreground">{bed.bed_label || bed.bed_code}</p>
-                            <p className="text-xs text-muted-foreground">Rs. {Number(bed.default_price).toLocaleString("en-IN")} internal</p>
-                          </div>
-                          <StatusBadge status={bed.status} />
-                        </div>
-                        <form action={updateBedStatusAction} className="mt-3 grid grid-cols-[1fr_auto] gap-2">
-                          <input type="hidden" name="bed_id" value={bed.bed_id} />
-                          <select name="status" defaultValue={bed.status} className="h-10 min-w-0 rounded-lg border border-input bg-background px-2 text-xs">
-                            {bedStatuses.map((status) => <option key={status}>{status}</option>)}
-                          </select>
-                          <Button type="submit" size="sm">Save</Button>
-                        </form>
-                      </div>
-                    ))}
-                  </div>
-                  {roomBeds.length === 0 ? <div className="mt-4"><EmptyState title="No beds added" text="Add beds for this room using the form above." /></div> : null}
+                  <p className="mt-4 rounded-xl bg-secondary p-3 text-sm text-muted-foreground">
+                    Room capacity slots are created automatically. Admin users only need to manage the room.
+                  </p>
+                  {roomBeds.length === 0 ? <div className="mt-4"><EmptyState title="No room slots yet" text="Save this room once or run the seed/reset script to create room capacity slots automatically." /></div> : null}
                 </div>
               </details>
             )

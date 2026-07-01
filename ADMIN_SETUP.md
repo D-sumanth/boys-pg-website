@@ -48,7 +48,9 @@ It also enables RLS, adds admin policies, and seeds:
 - Special Partitioned 2-Bed Room
 - Expense categories
 
-Room numbers and beds are intentionally not seeded because the exact room/floor map is not finalized.
+Room numbers are seeded from `101-104` through `501-504` using `supabase/reset_admin_rooms_seed.sql`.
+Admin users do not enter bed codes. Room capacity slots are created automatically in the hidden `beds` table.
+The current reset script treats room `504` as the special partitioned 2-bed room; update that one row if the partition room changes.
 
 ## 3. Create First Admin User
 
@@ -101,5 +103,6 @@ http://localhost:3000/admin/login
 ## 7. Current MVP Limits
 
 - Rent invoice generation, deposits, expenses, reports and settings are protected placeholder pages.
-- Rooms and beds are added manually.
+- Rooms can be edited manually, but room slots are created automatically from capacity.
+- Residents are assigned to a room; the system uses the next available hidden room slot.
 - The admin uses Supabase REST/Auth directly because package installation was blocked by registry/TLS errors in the local environment. When registry access is healthy, you can add `@supabase/supabase-js`, `@supabase/ssr`, and `zod` for richer typed clients and validation.

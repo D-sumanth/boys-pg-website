@@ -73,6 +73,13 @@ export async function insertRow<T>(table: string, body: Record<string, unknown>)
   })
 }
 
+export async function insertRows<T>(table: string, body: Record<string, unknown>[]) {
+  return supabaseRequest<T[]>(`/rest/v1/${table}`, {
+    method: "POST",
+    body: JSON.stringify(body),
+  })
+}
+
 export async function updateRows<T>(table: string, filter: string, body: Record<string, unknown>) {
   return supabaseRequest<T[]>(`/rest/v1/${table}?${filter}`, {
     method: "PATCH",

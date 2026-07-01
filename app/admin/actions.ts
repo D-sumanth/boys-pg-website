@@ -4,7 +4,8 @@ import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { requireAdmin, signInWithPassword, signOutAdmin } from "@/lib/admin/auth"
 import { getHostel } from "@/lib/admin/data"
-import { insertRow, updateRows } from "@/lib/admin/supabase-rest"
+import { insertRow, selectRows, updateRows } from "@/lib/admin/supabase-rest"
+import type { Bed } from "@/lib/admin/types"
 
 function text(formData: FormData, key: string) {
   const value = formData.get(key)
@@ -101,32 +102,6 @@ export async function updateRoomAction(formData: FormData) {
   revalidatePath("/admin/rooms")
 }
 
-export async function createBedAction(formData: FormData) {
-  await requireAdmin()
-  const body = {
-    room_id: text(formData, "room_id"),
-    bed_code: text(formData, "bed_code"),
-    bed_label: optionalText(formData, "bed_label"),
-    default_price: numberValue(formData, "default_price"),
-    ac_price: numberValue(formData, "ac_price"),
-    status: text(formData, "status") || "Available",
-  }
-
-  const result = await insertRow<{ bed_id: string }>("beds", body)
-  await logActivity("beds", result.data?.[0]?.bed_id ?? null, "Create", body)
-  revalidatePath("/admin/rooms")
-  redirect("/admin/rooms")
-}
-
-export async function updateBedStatusAction(formData: FormData) {
-  await requireAdmin()
-  const bedId = text(formData, "bed_id")
-  const status = text(formData, "status")
-  await updateRows("beds", `bed_id=eq.${bedId}`, { status })
-  await logActivity("beds", bedId, "Update", { status })
-  revalidatePath("/admin/rooms")
-}
-
 export async function createResidentAction(formData: FormData) {
   await requireAdmin()
   const body = {
@@ -174,8 +149,20 @@ export async function updateResidentAction(formData: FormData) {
 export async function assignBedAction(formData: FormData) {
   await requireAdmin()
   const residentId = text(formData, "resident_id")
-  const bedId = text(formData, "bed_id")
   const roomId = text(formData, "room_id")
+  const availableBeds = await selectRows<Bed>("beds", {
+    select: "bed_id,room_id,bed_code,bed_label,default_price,ac_price,status",
+    room_id: `eq.${roomId}`,
+    status: "eq.Available",
+    order: "bed_code.asc",
+    limit: 1,
+  })
+  const bedId = availableBeds.data?.[0]?.bed_id
+
+  if (!bedId) {
+    redirect("/admin/residents?error=no-room-slot")
+  }
+
   const body = {
     resident_id: residentId,
     bed_id: bedId,
