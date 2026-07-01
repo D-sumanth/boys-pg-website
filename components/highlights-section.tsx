@@ -3,13 +3,13 @@ import { ArrowUpDown, BedDouble, ShieldCheck, UtensilsCrossed } from "lucide-rea
 const highlights = [
   {
     icon: BedDouble,
-    title: "23 Rooms",
+    title: "20 Rooms",
     text: "Premium, standard and special partitioned room options available.",
   },
   {
     icon: BedDouble,
-    title: "90 Resident Capacity",
-    text: "A 23-room structure planned for up to 90 residents.",
+    title: "78 Resident Capacity",
+    text: "A 20-room setup with one special partitioned 2-bed room.",
   },
   {
     icon: UtensilsCrossed,

@@ -45,8 +45,8 @@ export const siteConfig = {
     cctv: hostelImage("cc-camera-1.png"),
   },
   roomPlan: {
-    rooms: 23,
-    capacity: 90,
+    rooms: 20,
+    capacity: 78,
     brokerage: "No brokerage",
   },
   roomCategories: [
