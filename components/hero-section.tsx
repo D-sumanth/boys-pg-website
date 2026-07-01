@@ -33,7 +33,7 @@ export function HeroSection() {
               <span className="absolute inline-flex size-full animate-ping rounded-full bg-accent opacity-75" />
               <span className="relative inline-flex size-2 rounded-full bg-accent" />
             </span>
-            Opening from {siteConfig.openingDate} - limited rooms available
+            Now open in Shamshabad - rooms available
           </span>
 
           <div className="space-y-4">

@@ -54,9 +54,6 @@ export function SiteFooter() {
               {siteConfig.email}
             </a>
           </div>
-          <p className="mt-4 text-sm font-medium text-accent">
-            Opening from {siteConfig.openingDate}
-          </p>
         </div>
       </div>
 

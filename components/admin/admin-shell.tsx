@@ -18,9 +18,9 @@ import type { AdminUser } from "@/lib/admin/auth"
 
 const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
-  { href: "/admin/today", label: "Today", icon: CalendarDays },
   { href: "/admin/rooms", label: "Rooms", icon: BedDouble },
   { href: "/admin/residents", label: "Residents", icon: UserRound },
+  { href: "/admin/today", label: "Today", icon: CalendarDays },
   { href: "/admin/enquiries", label: "Enquiries", icon: Inbox },
   { href: "/admin/payments", label: "Payments", icon: CreditCard },
   { href: "/admin/rent", label: "Rent", icon: ReceiptIndianRupee },
@@ -29,6 +29,9 @@ const navItems = [
   { href: "/admin/reports", label: "Reports", icon: BarChart3 },
   { href: "/admin/settings", label: "Settings", icon: Settings },
 ]
+
+const primaryNavItems = navItems.slice(0, 3)
+const secondaryNavItems = navItems.slice(3)
 
 export function AdminShell({ admin, children }: { admin: AdminUser; children: React.ReactNode }) {
   return (
@@ -49,7 +52,11 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
             <a
               key={item.href}
               href={item.href}
-              className="flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium text-foreground/78 transition-colors hover:bg-secondary hover:text-primary"
+              className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors hover:bg-secondary hover:text-primary ${
+                primaryNavItems.some((primaryItem) => primaryItem.href === item.href)
+                  ? "bg-secondary text-primary"
+                  : "text-foreground/78"
+              }`}
             >
               <item.icon className="size-4 text-accent" />
               {item.label}
@@ -75,8 +82,21 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
             </form>
           </div>
 
-          <nav className="mt-3 flex gap-2 overflow-x-auto pb-1 lg:hidden" aria-label="Admin mobile navigation">
-            {navItems.map((item) => (
+          <nav className="mt-3 grid gap-2 lg:hidden" aria-label="Admin mobile navigation">
+            <div className="grid grid-cols-3 gap-2">
+              {primaryNavItems.map((item) => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-primary/10 bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm"
+                >
+                  <item.icon className="size-4 text-accent" />
+                  {item.label}
+                </a>
+              ))}
+            </div>
+            <div className="flex gap-2 overflow-x-auto pb-1">
+              {secondaryNavItems.map((item) => (
               <a
                 key={item.href}
                 href={item.href}
@@ -85,7 +105,8 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
                 <item.icon className="size-4 text-accent" />
                 {item.label}
               </a>
-            ))}
+              ))}
+            </div>
           </nav>
         </header>
 

@@ -23,118 +23,140 @@ export default async function ResidentsPage() {
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Residents</p>
           <h1 className="font-heading text-3xl font-bold text-primary">Resident register</h1>
+          <p className="mt-1 text-sm text-muted-foreground">Add residents, assign beds, and tap a resident card to update details.</p>
         </div>
 
-        <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-          <h2 className="font-heading text-xl font-bold text-primary">Add resident</h2>
-          <form action={createResidentAction} className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            <Field label="Resident code" name="resident_code" placeholder="PD-001" />
-            <Field label="Full name" name="full_name" required />
-            <Field label="Phone" name="phone" required />
-            <Field label="WhatsApp" name="whatsapp_number" />
-            <Field label="Email" name="email" type="email" />
-            <SelectField label="Resident type" name="resident_type" defaultValue="Student">
-              <option>Student</option>
-              <option>Working Professional</option>
-              <option>Other</option>
-            </SelectField>
-            <Field label="College / company" name="college_or_company" />
-            <Field label="Course / role" name="course_or_role" />
-            <Field label="Guardian name" name="guardian_name" />
-            <Field label="Guardian phone" name="guardian_phone" />
-            <Field label="ID proof type" name="id_proof_type" placeholder="Aadhaar / PAN" />
-            <Field label="Masked ID proof" name="id_proof_number_masked" placeholder="XXXX-XXXX-1234" />
-            <SelectField label="Status" name="status" defaultValue="Active">
-              <option>Active</option>
-              <option>Vacated</option>
-              <option>Blocked</option>
-              <option>Inactive</option>
-            </SelectField>
-            <Button type="submit" className="h-12 lg:col-span-3">Add Resident</Button>
-          </form>
-        </section>
+        <div className="grid gap-4 xl:grid-cols-2">
+          <details open className="rounded-2xl border border-border bg-card shadow-sm">
+            <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
+              Add resident
+            </summary>
+            <form action={createResidentAction} className="grid gap-4 border-t border-border p-5 sm:grid-cols-2">
+              <Field label="Resident code" name="resident_code" placeholder="PD-001" />
+              <Field label="Full name" name="full_name" required />
+              <Field label="Phone" name="phone" required />
+              <Field label="WhatsApp" name="whatsapp_number" />
+              <Field label="Email" name="email" type="email" />
+              <SelectField label="Resident type" name="resident_type" defaultValue="Student">
+                <option>Student</option>
+                <option>Working Professional</option>
+                <option>Other</option>
+              </SelectField>
+              <Field label="College / company" name="college_or_company" />
+              <Field label="Course / role" name="course_or_role" />
+              <Field label="Guardian name" name="guardian_name" />
+              <Field label="Guardian phone" name="guardian_phone" />
+              <Field label="ID proof type" name="id_proof_type" placeholder="Aadhaar / PAN" />
+              <Field label="Masked ID proof" name="id_proof_number_masked" placeholder="XXXX-XXXX-1234" />
+              <SelectField label="Status" name="status" defaultValue="Active">
+                <option>Active</option>
+                <option>Vacated</option>
+                <option>Blocked</option>
+                <option>Inactive</option>
+              </SelectField>
+              <Button type="submit" className="h-12 sm:col-span-2">Add Resident</Button>
+            </form>
+          </details>
 
-        <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-          <h2 className="font-heading text-xl font-bold text-primary">Assign bed</h2>
-          <form action={assignBedAction} className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            <SelectField label="Resident" name="resident_id">
-              <option value="">Select resident</option>
-              {residents.filter((resident) => resident.status === "Active").map((resident) => (
-                <option key={resident.resident_id} value={resident.resident_id}>{resident.full_name}</option>
-              ))}
-            </SelectField>
-            <SelectField label="Available bed" name="bed_id">
-              <option value="">Select bed</option>
-              {availableBeds.map((bed) => {
-                const room = roomById.get(bed.room_id)
-                return <option key={bed.bed_id} value={bed.bed_id}>Room {room?.room_number ?? "-"} • {bed.bed_code}</option>
-              })}
-            </SelectField>
-            <SelectField label="Room" name="room_id">
-              <option value="">Select same room</option>
-              {rooms.map((room) => <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>)}
-            </SelectField>
-            <Field label="Joining date" name="joining_date" type="date" />
-            <Field label="Agreed rent" name="agreed_monthly_rent" type="number" />
-            <Field label="Notice days" name="notice_period_days" type="number" defaultValue={30} />
-            <label className="flex items-center gap-2 rounded-xl bg-secondary px-3 py-3 text-sm font-medium">
-              <input type="checkbox" name="is_ac_selected" />
-              AC selected
-            </label>
-            <Button type="submit" className="h-12">Assign Bed</Button>
-          </form>
-        </section>
+          <details className="rounded-2xl border border-border bg-card shadow-sm">
+            <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
+              Assign bed
+            </summary>
+            <form action={assignBedAction} className="grid gap-4 border-t border-border p-5 sm:grid-cols-2">
+              <SelectField label="Resident" name="resident_id">
+                <option value="">Select resident</option>
+                {residents.filter((resident) => resident.status === "Active").map((resident) => (
+                  <option key={resident.resident_id} value={resident.resident_id}>{resident.full_name}</option>
+                ))}
+              </SelectField>
+              <SelectField label="Available bed" name="bed_id">
+                <option value="">Select bed</option>
+                {availableBeds.map((bed) => {
+                  const room = roomById.get(bed.room_id)
+                  return <option key={bed.bed_id} value={bed.bed_id}>Room {room?.room_number ?? "-"} - {bed.bed_code}</option>
+                })}
+              </SelectField>
+              <SelectField label="Room" name="room_id">
+                <option value="">Select same room</option>
+                {rooms.map((room) => <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>)}
+              </SelectField>
+              <Field label="Joining date" name="joining_date" type="date" />
+              <Field label="Agreed rent" name="agreed_monthly_rent" type="number" />
+              <Field label="Notice days" name="notice_period_days" type="number" defaultValue={30} />
+              <label className="flex min-h-12 items-center gap-2 rounded-xl bg-secondary px-3 py-3 text-sm font-medium">
+                <input type="checkbox" name="is_ac_selected" />
+                AC selected
+              </label>
+              <Button type="submit" className="h-12">Assign Bed</Button>
+            </form>
+          </details>
+        </div>
 
-        <section className="grid gap-3">
+        <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {residents.map((resident) => {
             const occupancy = occupancyByResident.get(resident.resident_id)
             const bed = occupancy ? bedById.get(occupancy.bed_id) : null
             const room = occupancy ? roomById.get(occupancy.room_id) : null
+            const bedText = room && bed ? `Room ${room.room_number}, ${bed.bed_label || bed.bed_code}` : "No bed assigned"
 
             return (
-              <article key={resident.resident_id} className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-                <div className="flex flex-wrap items-start justify-between gap-3">
-                  <div>
-                    <h2 className="font-heading text-xl font-bold text-primary">{resident.full_name}</h2>
-                    <p className="text-sm text-muted-foreground">{resident.phone} • {resident.resident_type}</p>
-                    <p className="mt-1 text-sm text-muted-foreground">
-                      {room && bed ? `Room ${room.room_number}, ${bed.bed_label || bed.bed_code}` : "No active bed assigned"}
-                    </p>
+              <details key={resident.resident_id} className="group rounded-2xl border border-border bg-card shadow-sm transition-shadow open:shadow-lg">
+                <summary className="cursor-pointer list-none p-4 marker:hidden [&::-webkit-details-marker]:hidden">
+                  <div className="flex items-start justify-between gap-3">
+                    <div className="min-w-0">
+                      <h2 className="truncate font-heading text-xl font-bold text-primary">{resident.full_name}</h2>
+                      <p className="mt-1 text-sm text-muted-foreground">{resident.phone}</p>
+                    </div>
+                    <StatusBadge status={resident.status} />
                   </div>
-                  <StatusBadge status={resident.status} />
-                </div>
-                <div className="mt-4 grid gap-2 text-sm text-muted-foreground sm:grid-cols-3">
-                  <p>Guardian: {resident.guardian_name || "Not set"}</p>
-                  <p>Company/College: {resident.college_or_company || "Not set"}</p>
-                  <p>ID: {resident.id_proof_number_masked || "Not set"}</p>
-                </div>
-                <form action={updateResidentAction} className="mt-4 grid gap-3 rounded-xl bg-secondary p-3 sm:grid-cols-2 lg:grid-cols-4">
-                  <input type="hidden" name="resident_id" value={resident.resident_id} />
-                  <Field label="Name" name="full_name" defaultValue={resident.full_name} />
-                  <Field label="Phone" name="phone" defaultValue={resident.phone} />
-                  <Field label="WhatsApp" name="whatsapp_number" defaultValue={resident.whatsapp_number || ""} />
-                  <Field label="Email" name="email" defaultValue={resident.email || ""} />
-                  <Field label="College / company" name="college_or_company" defaultValue={resident.college_or_company || ""} />
-                  <Field label="Guardian" name="guardian_name" defaultValue={resident.guardian_name || ""} />
-                  <Field label="Guardian phone" name="guardian_phone" defaultValue={resident.guardian_phone || ""} />
-                  <Field label="Masked ID" name="id_proof_number_masked" defaultValue={resident.id_proof_number_masked || ""} />
-                  <SelectField label="Status" name="status" defaultValue={resident.status}>
-                    <option>Active</option>
-                    <option>Vacated</option>
-                    <option>Blocked</option>
-                    <option>Inactive</option>
-                  </SelectField>
-                  <Button type="submit" size="sm" className="h-10 lg:col-span-3">Update Resident</Button>
-                </form>
-                {occupancy ? (
-                  <form action={vacateResidentAction} className="mt-4">
-                    <input type="hidden" name="occupancy_id" value={occupancy.occupancy_id} />
-                    <input type="hidden" name="bed_id" value={occupancy.bed_id} />
+
+                  <div className="mt-4 grid gap-2 rounded-xl bg-secondary p-3 text-sm">
+                    <p className="font-semibold text-foreground">{bedText}</p>
+                    <p className="text-muted-foreground">{resident.resident_type}</p>
+                  </div>
+
+                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to view and edit details</p>
+                  <p className="mt-3 hidden text-xs font-semibold text-accent group-open:block">Resident controls are open</p>
+                </summary>
+
+                <div className="border-t border-border p-4">
+                  <div className="grid gap-2 text-sm text-muted-foreground">
+                    <p>Guardian: {resident.guardian_name || "Not set"}</p>
+                    <p>College/Company: {resident.college_or_company || "Not set"}</p>
+                    <p>ID: {resident.id_proof_number_masked || "Not set"}</p>
+                  </div>
+
+                  <form action={updateResidentAction} className="mt-4 grid gap-3 rounded-xl bg-secondary p-3">
                     <input type="hidden" name="resident_id" value={resident.resident_id} />
-                    <Button type="submit" variant="outline" size="sm">Mark Vacated</Button>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      <Field label="Name" name="full_name" defaultValue={resident.full_name} />
+                      <Field label="Phone" name="phone" defaultValue={resident.phone} />
+                      <Field label="WhatsApp" name="whatsapp_number" defaultValue={resident.whatsapp_number || ""} />
+                      <Field label="Email" name="email" defaultValue={resident.email || ""} />
+                      <Field label="College / company" name="college_or_company" defaultValue={resident.college_or_company || ""} />
+                      <Field label="Guardian" name="guardian_name" defaultValue={resident.guardian_name || ""} />
+                      <Field label="Guardian phone" name="guardian_phone" defaultValue={resident.guardian_phone || ""} />
+                      <Field label="Masked ID" name="id_proof_number_masked" defaultValue={resident.id_proof_number_masked || ""} />
+                      <SelectField label="Status" name="status" defaultValue={resident.status}>
+                        <option>Active</option>
+                        <option>Vacated</option>
+                        <option>Blocked</option>
+                        <option>Inactive</option>
+                      </SelectField>
+                    </div>
+                    <Button type="submit" size="sm" className="h-10">Update Resident</Button>
                   </form>
-                ) : null}
-              </article>
+
+                  {occupancy ? (
+                    <form action={vacateResidentAction} className="mt-4">
+                      <input type="hidden" name="occupancy_id" value={occupancy.occupancy_id} />
+                      <input type="hidden" name="bed_id" value={occupancy.bed_id} />
+                      <input type="hidden" name="resident_id" value={resident.resident_id} />
+                      <Button type="submit" variant="outline" size="sm" className="h-10 w-full sm:w-auto">Mark Vacated</Button>
+                    </form>
+                  ) : null}
+                </div>
+              </details>
             )
           })}
           {residents.length === 0 ? <EmptyState title="No residents yet" text="Add your first resident above." /> : null}

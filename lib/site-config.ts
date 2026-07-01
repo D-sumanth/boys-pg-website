@@ -8,7 +8,6 @@ export const siteConfig = {
   businessType: "Boys PG hostel / paying guest accommodation",
   city: "Shamshabad, Hyderabad",
   location: "Shamshabad",
-  openingDate: "1st July",
   positioning: "Safe, clean and comfortable boys PG accommodation in Shamshabad.",
   tagline: "Safe • Clean • Comfortable • Like Home",
   audience: "students and working professionals",
@@ -19,8 +18,7 @@ export const siteConfig = {
   whatsappLink: "https://wa.me/917093945019",
   email: "princedeluxepg@gmail.com",
   emailLink: "mailto:princedeluxepg@gmail.com",
-  googleMapsLink:
-    "https://www.google.com/maps/search/?api=1&query=Plot%20No.%2080M%2C%20SY%20No.%20748%2C%20749%2C%20Rangareddy%20Nagar%2C%20Brindavan%20Colony%2C%20Shamshabad%2C%20Hyderabad%2C%20Telangana%20501218",
+  googleMapsLink: "https://maps.app.goo.gl/ECLgK4Q983rYKFPT9",
   address: {
     line1: "Plot No. 80M, SY No. 748, 749",
     line2: "Rangareddy Nagar, Brindavan Colony",

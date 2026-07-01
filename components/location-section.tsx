@@ -81,8 +81,8 @@ export function LocationSection() {
                   <p className="text-primary-foreground/70">rooms</p>
                 </div>
                 <div className="rounded-2xl bg-primary-foreground/10 p-4">
-                  <p className="font-heading text-2xl font-bold">{siteConfig.openingDate}</p>
-                  <p className="text-primary-foreground/70">opening date</p>
+                  <p className="font-heading text-2xl font-bold">Now open</p>
+                  <p className="text-primary-foreground/70">ready for visits</p>
                 </div>
               </div>
             </div>

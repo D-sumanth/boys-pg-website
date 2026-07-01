@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { CalendarDays, Check, Mail, MapPin, MessageCircle, Phone, User } from "lucide-react"
+import { Check, Mail, MapPin, MessageCircle, Phone, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -73,11 +73,6 @@ export function ContactSection() {
                   </>
                 )}
               </address>
-            </div>
-
-            <div className="flex items-center gap-3 rounded-3xl border border-border bg-card p-6 shadow-sm">
-              <CalendarDays className="size-5 shrink-0 text-accent" />
-              <p className="font-medium text-foreground">Opening from {siteConfig.openingDate}</p>
             </div>
           </div>
 
