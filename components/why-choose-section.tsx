@@ -1,29 +1,29 @@
-import { ShieldCheck, GraduationCap, Briefcase, Sparkles, BadgeIndianRupee } from "lucide-react"
+import { ArrowUpDown, BusFront, KeyRound, ShieldCheck, UtensilsCrossed, UserRoundCheck } from "lucide-react"
 
 const reasons = [
   {
     icon: ShieldCheck,
-    text: "Clean and spacious boys PG accommodation in Shamshabad",
+    text: "Clean and disciplined boys PG with CCTV security in key areas",
   },
   {
-    icon: GraduationCap,
-    text: "Suitable for students and working professionals",
+    icon: UtensilsCrossed,
+    text: "Homely food with breakfast, lunch and dinner included",
   },
   {
-    icon: Briefcase,
-    text: "Premium rooms with extra usable entrance space",
+    icon: KeyRound,
+    text: "Attached washrooms, personal lockers and almirah storage",
   },
   {
-    icon: Sparkles,
-    text: "Personal locker, almirah storage and attached washrooms",
+    icon: ArrowUpDown,
+    text: "Lift access, drinking water filters and hot water support",
   },
   {
-    icon: ShieldCheck,
-    text: "CCTV security, fire extinguisher and lift access",
+    icon: BusFront,
+    text: "Transport support available at reasonable prices",
   },
   {
-    icon: BadgeIndianRupee,
-    text: "Rooms starting from ₹8,500/month with final pricing confirmed by enquiry",
+    icon: UserRoundCheck,
+    text: "Managed by an on-site hostel in-charge for daily support",
   },
 ]
 
@@ -36,10 +36,10 @@ export function WhyChooseSection() {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-2xl text-center">
           <span className="text-sm font-semibold uppercase tracking-wide text-accent">
-            Why Choose Us
+            For Parents
           </span>
           <h2 className="mt-2 text-balance font-heading text-2xl font-bold sm:text-3xl">
-            A hostel parents trust and students love
+            Why parents prefer Prince Deluxe PG
           </h2>
         </div>
 

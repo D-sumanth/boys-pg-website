@@ -1,12 +1,12 @@
 import type { LucideIcon } from "lucide-react"
 import {
   ArrowUpDown,
+  BusFront,
   Camera,
   CircleDollarSign,
   Droplets,
   Flame,
   FlameKindling,
-  Home,
   KeyRound,
   ShieldCheck,
   ShowerHead,
@@ -21,7 +21,6 @@ const facilityIcons: Record<string, LucideIcon> = {
   "Homely food": UtensilsCrossed,
   "Breakfast, lunch and dinner": UtensilsCrossed,
   "Veg and non-veg food": UtensilsCrossed,
-  "Clean dining/common area": Home,
   "Attached washrooms": ShowerHead,
   "Hot water / geyser support": Flame,
   "High-speed Wi-Fi": Wifi,
@@ -34,8 +33,8 @@ const facilityIcons: Record<string, LucideIcon> = {
   "Personal locker for each bed": KeyRound,
   "4-door almirah storage": KeyRound,
   "Housekeeping / cleaning support": Sparkles,
+  "Transport at reasonable prices": BusFront,
   "No brokerage": CircleDollarSign,
-  "Family-managed environment": ShieldCheck,
   "Disciplined and clean premises": ShieldCheck,
 }
 
@@ -54,8 +53,8 @@ export function FacilitiesSection() {
             Practical facilities for everyday hostel life
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
-            Food, safety, storage, water, lift access and clean shared spaces
-            are available for students and working professionals.
+            Food, safety, storage, water, transport and practical daily support
+            for students, airport staff and working professionals.
           </p>
         </div>
 

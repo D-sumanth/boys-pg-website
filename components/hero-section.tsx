@@ -1,20 +1,26 @@
 import Image from "next/image"
 import {
   ArrowDown,
+  Bath,
+  BusFront,
+  GraduationCap,
   MapPin,
   MessageCircle,
   Phone,
+  Plane,
   ShieldCheck,
   UtensilsCrossed,
-  Wifi,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-config"
 
 const trustChips = [
   { icon: UtensilsCrossed, label: "Food Included" },
-  { icon: Wifi, label: "High-Speed Wi-Fi" },
-  { icon: ShieldCheck, label: "CCTV Secured" },
+  { icon: GraduationCap, label: "Student Offers" },
+  { icon: BusFront, label: "Transport Available" },
+  { icon: ShieldCheck, label: "CCTV Security" },
+  { icon: Bath, label: "Attached Washrooms" },
+  { icon: Plane, label: "Near Airport Area" },
 ]
 
 export function HeroSection() {
@@ -44,9 +50,9 @@ export function HeroSection() {
               {siteConfig.name} in Shamshabad
             </h1>
             <p className="max-w-2xl text-pretty text-base leading-relaxed text-primary-foreground/82 sm:text-lg">
-              A clean, safe and well-managed boys PG offering spacious rooms,
-              homely food, attached washrooms, personal storage, lift access,
-              CCTV security and essential daily facilities.
+              Safe, clean and comfortable boys PG with food, spacious rooms,
+              attached washrooms, personal storage, CCTV security and transport
+              available at reasonable prices.
             </p>
             <p className="inline-flex rounded-2xl border border-accent/35 bg-accent/15 px-4 py-2 font-heading text-lg font-bold text-accent sm:text-xl">
               {siteConfig.pricingTeaser}
@@ -63,9 +69,14 @@ export function HeroSection() {
               <p className="text-xs text-primary-foreground/70">resident capacity</p>
             </div>
             <div className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/8 p-4 backdrop-blur">
-              <p className="font-heading text-2xl font-bold">₹8,500+</p>
-              <p className="text-xs text-primary-foreground/70">starting monthly rooms</p>
+              <p className="font-heading text-2xl font-bold">₹7,500+</p>
+              <p className="text-xs text-primary-foreground/70">student monthly fee</p>
             </div>
+          </div>
+
+          <div className="inline-flex items-center gap-2 rounded-xl border border-primary-foreground/15 bg-primary-foreground/8 px-3 py-2 text-sm font-semibold text-primary-foreground/90">
+            <BusFront className="size-4 shrink-0 text-accent" />
+            {siteConfig.transportNote}
           </div>
 
           <div className="flex items-start gap-2 text-sm font-medium text-primary-foreground/90">
@@ -96,7 +107,7 @@ export function HeroSection() {
             </Button>
             <Button render={<a href="#rooms" />} nativeButton={false} size="lg" variant="ghost" className="h-12 gap-2 px-5 text-primary-foreground hover:bg-primary-foreground/10 hover:text-primary-foreground">
               <ArrowDown className="size-5" />
-              View Rooms
+              Check Room Availability
             </Button>
           </div>
         </div>

@@ -1,15 +1,10 @@
-import { ArrowUpDown, BedDouble, ShieldCheck, UtensilsCrossed } from "lucide-react"
+import { BadgeIndianRupee, BusFront, Plane, ShieldCheck, UtensilsCrossed } from "lucide-react"
 
 const highlights = [
   {
-    icon: BedDouble,
-    title: "20 Rooms",
-    text: "Premium, standard and special partitioned room options available.",
-  },
-  {
-    icon: BedDouble,
-    title: "78 Resident Capacity",
-    text: "A 20-room setup with one special partitioned 2-bed room.",
+    icon: BadgeIndianRupee,
+    title: "Student Pricing",
+    text: "Eligible students can choose rooms starting from ₹7,500 per month.",
   },
   {
     icon: UtensilsCrossed,
@@ -17,14 +12,19 @@ const highlights = [
     text: "Homely breakfast, lunch and dinner with veg and non-veg options.",
   },
   {
-    icon: ArrowUpDown,
-    title: "Lift & Water Filters",
-    text: "Lift access, water filters on each floor and daily essentials.",
+    icon: BusFront,
+    title: "Transport Available",
+    text: "Transport support can be arranged at reasonable prices.",
+  },
+  {
+    icon: Plane,
+    title: "7.2 km to Airport",
+    text: "Convenient for airport staff, trainees and frequent travellers.",
   },
   {
     icon: ShieldCheck,
     title: "CCTV Security",
-    text: "CCTV coverage and fire extinguisher for resident confidence.",
+    text: "CCTV coverage in key areas for resident and parent confidence.",
   },
 ]
 

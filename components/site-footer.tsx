@@ -11,8 +11,8 @@ export function SiteFooter() {
             {siteConfig.businessType} in {siteConfig.location}
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">
-            {siteConfig.positioning} Suitable for students and working
-            professionals.
+            {siteConfig.positioning} Student rooms start from ₹7,500 per month.
+            Transport support is available at reasonable prices.
           </p>
         </div>
 

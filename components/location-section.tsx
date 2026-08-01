@@ -1,4 +1,4 @@
-import { ExternalLink, Mail, MapPin, MessageCircle, Phone } from "lucide-react"
+import { BusFront, ExternalLink, GraduationCap, Mail, MapPin, MessageCircle, Phone, Plane } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-config"
 
@@ -15,7 +15,7 @@ export function LocationSection() {
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
             Located in Rangareddy Nagar, Brindavan Colony, with convenient
-            access for students and nearby working employees.
+            access to nearby colleges, the airport area and work locations.
           </p>
         </div>
 
@@ -68,21 +68,28 @@ export function LocationSection() {
               <div>
                 <MapPin className="size-10 text-accent" />
                 <h3 className="mt-5 font-heading text-2xl font-bold">
-                  Shamshabad, Hyderabad
+                  Well connected from Shamshabad
                 </h3>
                 <p className="mt-2 max-w-md text-sm leading-relaxed text-primary-foreground/78">
-                  Use the location button for directions. A live Google Maps embed
-                  can be added here after the final map share or embed URL is ready.
+                  Use the location button for directions. Transport support can
+                  be arranged for nearby routes at reasonable prices.
                 </p>
               </div>
-              <div className="mt-8 grid grid-cols-2 gap-3 text-sm">
+              <div className="mt-8 grid gap-3 text-sm sm:grid-cols-3">
                 <div className="rounded-2xl bg-primary-foreground/10 p-4">
-                  <p className="font-heading text-2xl font-bold">{siteConfig.roomPlan.rooms}</p>
-                  <p className="text-primary-foreground/70">rooms</p>
+                  <Plane className="size-5 text-accent" />
+                  <p className="mt-2 font-heading text-xl font-bold">7.2 km</p>
+                  <p className="text-primary-foreground/70">airport terminal</p>
                 </div>
                 <div className="rounded-2xl bg-primary-foreground/10 p-4">
-                  <p className="font-heading text-2xl font-bold">Now open</p>
-                  <p className="text-primary-foreground/70">ready for visits</p>
+                  <GraduationCap className="size-5 text-accent" />
+                  <p className="mt-2 font-heading text-xl font-bold">8.6-9 km</p>
+                  <p className="text-primary-foreground/70">nearby colleges</p>
+                </div>
+                <div className="rounded-2xl bg-primary-foreground/10 p-4">
+                  <BusFront className="size-5 text-accent" />
+                  <p className="mt-2 font-heading text-lg font-bold">Available</p>
+                  <p className="text-primary-foreground/70">transport support</p>
                 </div>
               </div>
             </div>

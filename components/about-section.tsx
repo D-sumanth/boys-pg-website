@@ -2,10 +2,10 @@ import Image from "next/image"
 import { siteConfig } from "@/lib/site-config"
 
 const points = [
-  "Personal locker for each bed",
-  "4-door almirah storage",
-  "Lift access",
-  "Water filters and common washing machine",
+  "Food included every day",
+  "Personal locker and almirah space",
+  "Transport support available",
+  "Managed by an on-site hostel in-charge",
 ]
 
 export function AboutSection() {
@@ -35,15 +35,15 @@ export function AboutSection() {
           <p className="text-pretty leading-relaxed text-muted-foreground">
             {siteConfig.name} is a boys PG hostel located in Shamshabad,
             Hyderabad. The property is designed for residents looking for a
-            clean, secure and comfortable stay with food, personal storage and
-            essential daily facilities.
+            clean, secure and comfortable stay with food, personal storage,
+            nearby transport support and essential daily facilities.
           </p>
           <p className="text-pretty leading-relaxed text-muted-foreground">
-            The hostel provides spacious 4-sharing rooms, attached washrooms,
-            locker facility for each bed, 4-door almirah storage, lift access,
-            CCTV security, fire extinguisher, hot water support, water filters
-            and common washing machine access. Rooms are available based on
-            category, AC/non-AC preference and current availability.
+            Student pricing is available for eligible students, while working
+            professionals and airport staff can choose a room based on their
+            space requirement. A 3-sharing arrangement may be available after
+            management confirmation. Call or WhatsApp before visiting to check
+            the latest availability.
           </p>
           <ul className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
             {points.map((item) => (

@@ -2,7 +2,7 @@
 
 import type React from "react"
 import { useState } from "react"
-import { Check, Mail, MapPin, MessageCircle, Phone, User } from "lucide-react"
+import { BusFront, Check, ExternalLink, Mail, MapPin, MessageCircle, Phone, User } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -29,7 +29,7 @@ export function ContactSection() {
           </h2>
           <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
             Contact {siteConfig.ownerName} directly for room availability,
-            pricing and visit details.
+            student offers, transport options and visit details.
           </p>
         </div>
 
@@ -49,6 +49,20 @@ export function ContactSection() {
                   <Mail className="size-5" />
                   Email Us
                 </Button>
+                <Button render={<a href={siteConfig.googleMapsLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 bg-card">
+                  <ExternalLink className="size-5" />
+                  View Location
+                </Button>
+              </div>
+            </div>
+
+            <div className="flex items-start gap-3 rounded-3xl border border-accent/30 bg-accent/10 p-6 shadow-sm">
+              <BusFront className="mt-0.5 size-5 shrink-0 text-accent" />
+              <div>
+                <p className="font-heading font-semibold text-foreground">Transport support</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                  Ask about available routes to colleges and nearby work locations at reasonable prices.
+                </p>
               </div>
             </div>
 
@@ -120,7 +134,10 @@ export function ContactSection() {
                         Select an option
                       </option>
                       <option value="student">Student</option>
+                      <option value="parent">Parent / Guardian</option>
                       <option value="working">Working Professional</option>
+                      <option value="airport-staff">Airport Staff</option>
+                      <option value="other">Other</option>
                     </select>
                   </div>
                   <div className="flex flex-col gap-2">
@@ -128,7 +145,7 @@ export function ContactSection() {
                     <select
                       id="room"
                       name="room"
-                      defaultValue="4-sharing"
+                      defaultValue="Standard 4-Sharing"
                       required
                       className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
@@ -140,16 +157,17 @@ export function ContactSection() {
                     </select>
                   </div>
                   <div className="flex flex-col gap-2">
-                    <Label htmlFor="ac-option">Room Option</Label>
+                    <Label htmlFor="transport">Transport Required?</Label>
                     <select
-                      id="ac-option"
-                      name="ac-option"
-                      defaultValue="non-ac"
+                      id="transport"
+                      name="transport"
+                      defaultValue="not-sure"
                       required
                       className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
                     >
-                      <option value="non-ac">Non-AC</option>
-                      <option value="ac-option">AC Option</option>
+                      <option value="yes">Yes</option>
+                      <option value="no">No</option>
+                      <option value="not-sure">Not sure yet</option>
                     </select>
                   </div>
                 </div>
@@ -160,7 +178,7 @@ export function ContactSection() {
                     id="message"
                     name="message"
                     rows={4}
-                    placeholder="Tell us about your requirement or preferred move-in date"
+                    placeholder="Tell us your college/company, preferred move-in date or transport route"
                   />
                 </div>
 

@@ -7,9 +7,10 @@ import { siteConfig } from "@/lib/site-config"
 
 const navLinks = [
   { label: "Home", href: "#home" },
-  { label: "Rooms", href: "#rooms" },
+  { label: "Fees", href: "#rooms" },
   { label: "Facilities", href: "#facilities" },
-  { label: "Gallery", href: "#gallery" },
+  { label: "Nearby", href: "#nearby" },
+  { label: "FAQ", href: "#faq" },
   { label: "Location", href: "#location" },
   { label: "Contact", href: "#contact" },
 ]
@@ -29,7 +30,7 @@ export function SiteHeader() {
           </span>
         </a>
 
-        <nav className="hidden items-center gap-7 lg:flex" aria-label="Primary">
+        <nav className="hidden items-center gap-5 xl:flex" aria-label="Primary">
           {navLinks.map((link) => (
             <a
               key={link.href}
@@ -59,7 +60,7 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-foreground lg:hidden"
+          className="inline-flex items-center justify-center rounded-md p-2 text-foreground xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
@@ -69,7 +70,7 @@ export function SiteHeader() {
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background lg:hidden">
+        <div className="border-t border-border bg-background xl:hidden">
           <nav className="flex flex-col px-4 py-3" aria-label="Mobile">
             {navLinks.map((link) => (
               <a
