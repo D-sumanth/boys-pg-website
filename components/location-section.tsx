@@ -4,23 +4,23 @@ import { siteConfig } from "@/lib/site-config"
 
 export function LocationSection() {
   return (
-    <section id="location" className="bg-secondary py-16 md:py-24">
+    <section id="location" className="scroll-mt-16 bg-secondary py-14 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+        <div className="max-w-2xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">
             Location
           </span>
-          <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
             Easy to find in Shamshabad
           </h2>
-          <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Located in Rangareddy Nagar, Brindavan Colony, with convenient
             access to nearby colleges, the airport area and work locations.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-[0.9fr_1.1fr]">
-          <div className="flex flex-col justify-center gap-5 rounded-3xl border border-border bg-card p-6 shadow-xl sm:p-8">
+        <div className="mt-8 grid gap-5 lg:grid-cols-[0.9fr_1.1fr] lg:gap-6">
+          <div className="flex flex-col justify-center gap-5 rounded-2xl border border-border bg-card p-5 shadow-xl sm:p-8">
             <div className="flex items-start gap-3">
               <span className="inline-flex size-12 shrink-0 items-center justify-center rounded-2xl bg-primary/10 text-primary">
                 <MapPin className="size-6" />
@@ -62,7 +62,7 @@ export function LocationSection() {
             </div>
           </div>
 
-          <div className="relative min-h-[300px] overflow-hidden rounded-3xl border border-border bg-brand-gradient p-6 text-primary-foreground shadow-xl">
+          <div className="relative min-h-[300px] overflow-hidden rounded-2xl border border-border bg-brand-gradient p-5 text-primary-foreground shadow-xl sm:p-6">
             <div className="pointer-events-none absolute inset-0 bg-dot-grid text-primary-foreground/10" aria-hidden="true" />
             <div className="relative flex h-full min-h-[260px] flex-col justify-between rounded-2xl border border-primary-foreground/15 bg-primary-foreground/10 p-6 backdrop-blur">
               <div>

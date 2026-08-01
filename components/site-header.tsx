@@ -6,8 +6,8 @@ import { Button } from "@/components/ui/button"
 import { siteConfig } from "@/lib/site-config"
 
 const navLinks = [
-  { label: "Home", href: "#home" },
   { label: "Fees", href: "#rooms" },
+  { label: "Photos", href: "#gallery" },
   { label: "Facilities", href: "#facilities" },
   { label: "Nearby", href: "#nearby" },
   { label: "FAQ", href: "#faq" },
@@ -21,7 +21,7 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <a href="#home" className="flex flex-col leading-tight">
+        <a href="#home" className="flex min-h-11 flex-col justify-center leading-tight focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary">
           <span className="font-heading text-lg font-bold text-primary sm:text-xl">
             {siteConfig.shortName}
           </span>
@@ -35,7 +35,7 @@ export function SiteHeader() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/80 transition-colors hover:text-primary"
+              className="rounded-md px-1 py-2 text-sm font-medium text-foreground/80 transition-colors hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
             >
               {link.label}
             </a>
@@ -60,30 +60,31 @@ export function SiteHeader() {
 
         <button
           type="button"
-          className="inline-flex items-center justify-center rounded-md p-2 text-foreground xl:hidden"
+          className="inline-flex size-11 items-center justify-center rounded-lg text-foreground transition-colors hover:bg-secondary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary xl:hidden"
           onClick={() => setOpen((v) => !v)}
           aria-label={open ? "Close menu" : "Open menu"}
           aria-expanded={open}
+          aria-controls="mobile-site-menu"
         >
           {open ? <X className="size-6" /> : <Menu className="size-6" />}
         </button>
       </div>
 
       {open && (
-        <div className="border-t border-border bg-background xl:hidden">
+        <div id="mobile-site-menu" className="border-t border-border bg-background shadow-lg xl:hidden">
           <nav className="flex flex-col px-4 py-3" aria-label="Mobile">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="rounded-md px-2 py-2.5 text-sm font-medium text-foreground/80 hover:bg-secondary hover:text-primary"
+                className="flex min-h-11 items-center rounded-lg px-3 py-2.5 text-sm font-semibold text-foreground/80 hover:bg-secondary hover:text-primary focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary"
               >
                 {link.label}
               </a>
             ))}
             <div className="mt-2 grid grid-cols-3 gap-2">
-              <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
+              <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="h-11 gap-2">
                 <Phone className="size-4" />
                 Call
               </Button>
@@ -91,12 +92,12 @@ export function SiteHeader() {
                 render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
                 size="sm"
-                className="gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
+                className="h-11 gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
               >
                 <MessageCircle className="size-4" />
                 WhatsApp
               </Button>
-              <Button render={<a href={siteConfig.emailLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
+              <Button render={<a href={siteConfig.emailLink} />} nativeButton={false} variant="outline" size="sm" className="h-11 gap-2">
                 <Mail className="size-4" />
                 Email
               </Button>

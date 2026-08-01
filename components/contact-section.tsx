@@ -14,28 +14,44 @@ export function ContactSection() {
 
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
+    const formData = new FormData(e.currentTarget)
+    const enquiryMessage = [
+      `Hello, I would like to enquire about a room at ${siteConfig.name}.`,
+      `Name: ${String(formData.get("name") || "")}`,
+      `Phone: ${String(formData.get("phone") || "")}`,
+      `Enquiring as: ${String(formData.get("type") || "")}`,
+      `Preferred room: ${String(formData.get("room") || "")}`,
+      `Transport required: ${String(formData.get("transport") || "")}`,
+      `Message: ${String(formData.get("message") || "Not provided")}`,
+    ].join("\n")
+
+    window.open(
+      `${siteConfig.whatsappLink}?text=${encodeURIComponent(enquiryMessage)}`,
+      "_blank",
+      "noopener,noreferrer",
+    )
     setSubmitted(true)
   }
 
   return (
-    <section id="contact" className="bg-background py-16 pb-28 md:py-24">
+    <section id="contact" className="scroll-mt-16 bg-background py-14 pb-28 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+        <div className="max-w-2xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">
             Contact
           </span>
-          <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
             Book your room or ask a question
           </h2>
-          <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Contact {siteConfig.ownerName} directly for room availability,
             student offers, transport options and visit details.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-6 lg:grid-cols-5">
+        <div className="mt-8 grid gap-5 lg:grid-cols-5 lg:gap-6">
           <div className="flex flex-col gap-4 lg:col-span-2">
-            <div className="rounded-3xl border border-border bg-secondary p-5 shadow-lg">
+            <div className="rounded-2xl border border-border bg-secondary p-5 shadow-lg">
               <div className="grid gap-3">
                 <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} size="lg" className="h-12 gap-2">
                   <Phone className="size-5" />
@@ -56,7 +72,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 rounded-3xl border border-accent/30 bg-accent/10 p-6 shadow-sm">
+            <div className="flex items-start gap-3 rounded-2xl border border-accent/30 bg-accent/10 p-5 shadow-sm sm:p-6">
               <BusFront className="mt-0.5 size-5 shrink-0 text-accent" />
               <div>
                 <p className="font-heading font-semibold text-foreground">Transport support</p>
@@ -66,7 +82,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 rounded-3xl border border-border bg-card p-6 shadow-sm">
+            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
               <User className="mt-0.5 size-5 shrink-0 text-accent" />
               <div>
                 <p className="text-sm text-muted-foreground">Contact person</p>
@@ -74,7 +90,7 @@ export function ContactSection() {
               </div>
             </div>
 
-            <div className="flex items-start gap-3 rounded-3xl border border-border bg-card p-6 shadow-sm">
+            <div className="flex items-start gap-3 rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
               <MapPin className="mt-0.5 size-5 shrink-0 text-accent" />
               <address className="not-italic leading-relaxed text-muted-foreground">
                 {siteConfig.address.line1},<br />
@@ -90,7 +106,7 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="rounded-3xl border border-border bg-card p-6 shadow-xl sm:p-8 lg:col-span-3">
+          <div className="rounded-2xl border border-border bg-card p-5 shadow-xl sm:p-8 lg:col-span-3">
             {submitted ? (
               <div className="flex h-full flex-col items-center justify-center gap-3 py-10 text-center">
                 <span className="inline-flex size-14 items-center justify-center rounded-full bg-accent/15 text-accent">
@@ -100,8 +116,8 @@ export function ContactSection() {
                   Thank you for your enquiry!
                 </h3>
                 <p className="max-w-sm text-sm text-muted-foreground">
-                  Your details are saved on this page for now. For the quickest
-                  response, please call or message on WhatsApp directly.
+                  WhatsApp has opened with your enquiry details. Review the
+                  message there and tap send to contact us.
                 </p>
                 <Button variant="outline" className="mt-2" onClick={() => setSubmitted(false)}>
                   Submit another enquiry
@@ -112,11 +128,11 @@ export function ContactSection() {
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="name">Name</Label>
-                    <Input id="name" name="name" placeholder="Your full name" required />
+                    <Input id="name" name="name" autoComplete="name" className="h-11" placeholder="Your full name" required />
                   </div>
                   <div className="flex flex-col gap-2">
                     <Label htmlFor="phone">Phone Number</Label>
-                    <Input id="phone" name="phone" type="tel" placeholder="Your phone number" required />
+                    <Input id="phone" name="phone" type="tel" inputMode="tel" autoComplete="tel" className="h-11" placeholder="Your phone number" required />
                   </div>
                 </div>
 
@@ -128,7 +144,7 @@ export function ContactSection() {
                       name="type"
                       defaultValue=""
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       <option value="" disabled>
                         Select an option
@@ -147,7 +163,7 @@ export function ContactSection() {
                       name="room"
                       defaultValue="Standard 4-Sharing"
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       {siteConfig.roomCategories.map((room) => (
                         <option key={room.name} value={room.shortName}>
@@ -163,7 +179,7 @@ export function ContactSection() {
                       name="transport"
                       defaultValue="not-sure"
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
+                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       <option value="yes">Yes</option>
                       <option value="no">No</option>
@@ -183,7 +199,7 @@ export function ContactSection() {
                 </div>
 
                 <Button type="submit" size="lg" className="mt-1 h-12 w-full">
-                  Send Enquiry
+                  Send via WhatsApp
                 </Button>
               </form>
             )}

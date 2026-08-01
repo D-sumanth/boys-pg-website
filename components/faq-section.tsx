@@ -4,19 +4,19 @@ import { siteConfig } from "@/lib/site-config"
 
 export function FaqSection() {
   return (
-    <section id="faq" className="bg-background py-16 md:py-24">
+    <section id="faq" className="scroll-mt-16 bg-background py-14 md:py-24">
       <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">Common Questions</span>
-          <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
+        <div className="max-w-2xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Common Questions</span>
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
             Quick answers for students and parents
           </h2>
         </div>
 
-        <div className="mt-10 space-y-3">
+        <div className="mt-8 space-y-2.5 sm:space-y-3">
           {siteConfig.faqs.map((faq) => (
-            <details key={faq.question} className="group rounded-2xl border border-border bg-card px-5 shadow-sm open:border-accent/40 open:shadow-md">
-              <summary className="flex min-h-16 cursor-pointer list-none items-center justify-between gap-4 py-4 font-heading font-semibold text-foreground marker:content-none">
+            <details key={faq.question} className="group rounded-xl border border-border bg-card px-4 shadow-sm open:border-accent/40 open:shadow-md sm:rounded-2xl sm:px-5">
+              <summary className="flex min-h-14 cursor-pointer list-none items-center justify-between gap-4 py-3.5 font-heading text-sm font-semibold text-foreground marker:content-none sm:min-h-16 sm:py-4 sm:text-base">
                 {faq.question}
                 <ChevronDown className="size-5 shrink-0 text-accent transition-transform group-open:rotate-180" />
               </summary>

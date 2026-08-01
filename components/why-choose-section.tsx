@@ -29,30 +29,30 @@ const reasons = [
 
 export function WhyChooseSection() {
   return (
-    <section className="relative overflow-hidden bg-primary py-16 text-primary-foreground md:py-24">
+    <section className="relative overflow-hidden bg-primary py-14 text-primary-foreground md:py-24">
       <div className="pointer-events-none absolute inset-0 bg-dot-grid text-primary-foreground/8" aria-hidden="true" />
       <div className="pointer-events-none absolute -right-16 top-10 size-72 rounded-full bg-accent/15 blur-3xl" aria-hidden="true" />
 
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">
+        <div className="max-w-2xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">
             For Parents
           </span>
-          <h2 className="mt-2 text-balance font-heading text-2xl font-bold sm:text-3xl">
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight sm:text-3xl">
             Why parents prefer Prince Deluxe PG
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-8 grid grid-cols-2 gap-3 lg:grid-cols-3 lg:gap-4">
           {reasons.map((reason) => (
             <div
               key={reason.text}
-              className="flex items-start gap-3 rounded-2xl border border-primary-foreground/10 bg-primary-foreground/10 p-5 shadow-sm backdrop-blur transition-transform hover:-translate-y-1"
+              className="flex min-h-40 flex-col items-start gap-3 rounded-xl border border-primary-foreground/10 bg-primary-foreground/10 p-4 shadow-sm backdrop-blur sm:min-h-0 sm:flex-row sm:rounded-2xl sm:p-5"
             >
               <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-lg bg-accent text-accent-foreground">
                 <reason.icon className="size-5" />
               </span>
-              <p className="text-sm leading-relaxed text-primary-foreground/90">
+              <p className="text-xs leading-5 text-primary-foreground/90 sm:text-sm sm:leading-relaxed">
                 {reason.text}
               </p>
             </div>

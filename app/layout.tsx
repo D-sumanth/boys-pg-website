@@ -1,19 +1,8 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
-import { Poppins, Inter } from "next/font/google"
 import Script from "next/script"
 import { siteConfig } from "@/lib/site-config"
 import "./globals.css"
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  subsets: ["latin"],
-  weight: ["500", "600", "700"],
-})
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-})
 
 export const viewport: Viewport = {
   themeColor: "#17315f",
@@ -22,6 +11,7 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://boys-pg-website.vercel.app"),
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
   keywords: [...siteConfig.seo.keywords],
@@ -29,6 +19,20 @@ export const metadata: Metadata = {
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
     type: "website",
+    images: [
+      {
+        url: siteConfig.images.hero,
+        width: 941,
+        height: 1672,
+        alt: "Prince Deluxe PG for Boys entrance in Shamshabad",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteConfig.seo.title,
+    description: siteConfig.seo.description,
+    images: [siteConfig.images.hero],
   },
   generator: "v0.app",
   icons: {
@@ -56,7 +60,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${poppins.variable} ${inter.variable}`}>
+    <html lang="en">
       <head>
         <Script async src="https://www.googletagmanager.com/gtag/js?id=G-RGY6GRM9ZY" />
         <Script id="google-analytics">

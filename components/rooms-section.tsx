@@ -6,30 +6,30 @@ import { siteConfig } from "@/lib/site-config"
 
 export function RoomsSection() {
   return (
-    <section id="rooms" className="relative overflow-hidden bg-background py-16 md:py-24">
+    <section id="rooms" className="relative scroll-mt-16 overflow-hidden bg-background py-14 md:py-24">
       <div className="pointer-events-none absolute inset-x-0 top-0 h-36 bg-gradient-to-b from-secondary to-transparent" aria-hidden="true" />
       <div className="relative mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="inline-flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-accent">
+        <div className="max-w-3xl sm:mx-auto sm:text-center">
+          <span className="inline-flex items-center gap-2 text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">
             <span className="h-px w-6 bg-accent" />
             Monthly Fees
             <span className="h-px w-6 bg-accent" />
           </span>
-          <h2 className="mt-3 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
+          <h2 className="mt-3 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
             Room fee structure
           </h2>
-          <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Clear per-person monthly pricing for students, airport staff and
             working professionals. Food and essential daily facilities are included.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-3">
+        <div className="mt-8 grid gap-4 lg:grid-cols-3 lg:gap-5">
           {siteConfig.pricingPlans.map((plan) => (
             <article
               key={plan.title}
               className={cn(
-                "relative flex flex-col overflow-hidden rounded-3xl border bg-card p-6 shadow-lg",
+                "relative flex flex-col overflow-hidden rounded-2xl border bg-card p-5 shadow-lg sm:p-6",
                 plan.featured
                   ? "border-accent shadow-accent/15 ring-2 ring-accent/20"
                   : "border-border",
@@ -78,7 +78,7 @@ export function RoomsSection() {
           ))}
         </div>
 
-        <div className="mt-8 grid gap-6 rounded-3xl border border-primary/15 bg-secondary p-5 shadow-sm lg:grid-cols-[1fr_auto] lg:items-center lg:p-7">
+        <div className="mt-6 grid gap-6 rounded-2xl border border-primary/15 bg-secondary p-5 shadow-sm lg:grid-cols-[1fr_auto] lg:items-center lg:p-7">
           <div>
             <div className="flex items-center gap-2">
               <Info className="size-5 text-accent" />
@@ -105,17 +105,17 @@ export function RoomsSection() {
           </div>
         </div>
 
-        <div className="mt-16">
-          <div className="mx-auto max-w-2xl text-center">
-            <span className="text-sm font-semibold uppercase tracking-wide text-accent">Room Options</span>
-            <h3 className="mt-2 text-balance font-heading text-2xl font-bold text-primary sm:text-3xl">
+        <div className="mt-12 md:mt-16">
+          <div className="max-w-2xl sm:mx-auto sm:text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Room Options</span>
+            <h3 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-3xl">
               Choose the room setup that suits you
             </h3>
           </div>
 
-          <div className="mt-8 grid gap-5 lg:grid-cols-3">
+          <div className="mt-7 grid gap-4 lg:grid-cols-3 lg:gap-5">
             {siteConfig.roomCategories.map((room) => (
-              <article key={room.name} className="overflow-hidden rounded-3xl border border-border bg-card shadow-md">
+              <article key={room.name} className="overflow-hidden rounded-2xl border border-border bg-card shadow-md">
                 <div className="relative aspect-[4/3] overflow-hidden bg-muted">
                   <Image
                     src={room.image}

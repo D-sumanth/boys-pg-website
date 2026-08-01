@@ -1,5 +1,6 @@
 import { BriefcaseBusiness, BusFront, ExternalLink, GraduationCap, MessageCircle, Plane } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { cn } from "@/lib/utils"
 import { siteConfig } from "@/lib/site-config"
 
 const locationIcons = {
@@ -10,37 +11,37 @@ const locationIcons = {
 
 export function NearbySection() {
   return (
-    <section id="nearby" className="bg-secondary py-16 md:py-24">
+    <section id="nearby" className="scroll-mt-16 bg-secondary py-14 md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-3xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">Nearby Places</span>
-          <h2 className="mt-2 text-balance font-heading text-3xl font-bold text-primary sm:text-4xl">
+        <div className="max-w-3xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Nearby Places</span>
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
             Convenient stay near colleges, airport and work locations
           </h2>
-          <p className="mt-3 text-pretty leading-relaxed text-muted-foreground">
+          <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Located in Shamshabad with convenient access to nearby colleges,
             the airport area and major work locations.
           </p>
         </div>
 
-        <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
-          {siteConfig.nearbyLocations.map((place) => {
+        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-2 lg:grid-cols-5 lg:gap-4">
+          {siteConfig.nearbyLocations.map((place, index) => {
             const Icon = locationIcons[place.type]
             return (
-              <article key={place.name} className="flex min-h-48 flex-col rounded-2xl border border-border bg-card p-5 shadow-sm">
-                <span className="inline-flex size-11 items-center justify-center rounded-2xl bg-primary/10 text-primary">
-                  <Icon className="size-5" />
+              <article key={place.name} className={cn("flex min-h-40 flex-col rounded-xl border border-border bg-card p-4 shadow-sm sm:min-h-44", index === siteConfig.nearbyLocations.length - 1 && "col-span-2 sm:col-span-1")}>
+                <span className="inline-flex size-9 items-center justify-center rounded-xl bg-primary/10 text-primary sm:size-11">
+                  <Icon className="size-4 sm:size-5" />
                 </span>
-                <p className="mt-4 text-xs font-bold uppercase tracking-wide text-accent">{place.type}</p>
-                <h3 className="mt-1 flex-1 font-heading text-base font-bold leading-snug text-foreground">{place.name}</h3>
-                <p className="mt-4 font-heading text-2xl font-bold text-primary">{place.distance}</p>
+                <p className="mt-3 text-[10px] font-bold uppercase tracking-wide text-accent sm:text-xs">{place.type}</p>
+                <h3 className="mt-1 flex-1 font-heading text-sm font-bold leading-snug text-foreground sm:text-base">{place.name}</h3>
+                <p className="mt-3 font-heading text-xl font-bold text-primary sm:text-2xl">{place.distance}</p>
                 <p className="text-xs text-muted-foreground">from the hostel</p>
               </article>
             )
           })}
         </div>
 
-        <div className="mt-8 grid gap-5 rounded-3xl bg-brand-gradient p-6 text-primary-foreground shadow-xl md:grid-cols-[1fr_auto] md:items-center md:p-8">
+        <div className="mt-6 grid gap-5 rounded-2xl bg-brand-gradient p-5 text-primary-foreground shadow-xl md:grid-cols-[1fr_auto] md:items-center md:p-8">
           <div className="flex items-start gap-3">
             <BusFront className="mt-1 size-6 shrink-0 text-accent" />
             <div>

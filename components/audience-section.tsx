@@ -39,23 +39,23 @@ const audienceGroups = [
 
 export function AudienceSection() {
   return (
-    <section className="bg-primary py-16 text-primary-foreground md:py-24">
+    <section className="bg-primary py-14 text-primary-foreground md:py-24">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-2xl text-center">
-          <span className="text-sm font-semibold uppercase tracking-wide text-accent">Who We Welcome</span>
-          <h2 className="mt-2 text-balance font-heading text-3xl font-bold sm:text-4xl">
+        <div className="max-w-2xl sm:mx-auto sm:text-center">
+          <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Who We Welcome</span>
+          <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight sm:text-4xl">
             A comfortable stay for study and work
           </h2>
         </div>
 
-        <div className="mt-10 grid gap-5 lg:grid-cols-2">
+        <div className="mt-8 grid gap-4 lg:grid-cols-2 lg:gap-5">
           {audienceGroups.map((group) => (
-            <article key={group.eyebrow} className="rounded-3xl border border-primary-foreground/15 bg-primary-foreground/10 p-6 shadow-lg backdrop-blur sm:p-8">
+            <article key={group.eyebrow} className="rounded-2xl border border-primary-foreground/15 bg-primary-foreground/10 p-5 shadow-lg backdrop-blur sm:p-8">
               <span className="inline-flex size-12 items-center justify-center rounded-2xl bg-accent text-accent-foreground">
                 <group.icon className="size-6" />
               </span>
               <p className="mt-5 text-sm font-bold uppercase tracking-wide text-accent">{group.eyebrow}</p>
-              <h3 className="mt-2 font-heading text-2xl font-bold">{group.title}</h3>
+              <h3 className="mt-2 font-heading text-xl font-bold leading-snug sm:text-2xl">{group.title}</h3>
               <p className="mt-3 text-sm leading-relaxed text-primary-foreground/75">{group.description}</p>
               <ul className="mt-5 grid gap-2 sm:grid-cols-2">
                 {group.benefits.map((benefit) => (

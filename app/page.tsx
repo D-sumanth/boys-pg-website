@@ -17,16 +17,22 @@ import { FloatingActions } from "@/components/floating-actions"
 export default function Page() {
   return (
     <>
+      <a
+        href="#main-content"
+        className="fixed left-3 top-3 z-[60] -translate-y-20 rounded-lg bg-primary px-4 py-3 text-sm font-bold text-primary-foreground shadow-lg transition-transform focus:translate-y-0"
+      >
+        Skip to main content
+      </a>
       <SiteHeader />
-      <main>
+      <main id="main-content">
         <HeroSection />
         <HighlightsSection />
         <AboutSection />
         <RoomsSection />
-        <AudienceSection />
-        <FacilitiesSection />
-        <NearbySection />
         <GallerySection />
+        <FacilitiesSection />
+        <AudienceSection />
+        <NearbySection />
         <WhyChooseSection />
         <FaqSection />
         <LocationSection />

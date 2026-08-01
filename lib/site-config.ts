@@ -9,7 +9,9 @@ export const siteConfig = {
   city: "Shamshabad, Hyderabad",
   location: "Shamshabad",
   positioning:
-    "Safe, clean and comfortable boys PG accommodation for students, airport staff and working professionals in Shamshabad.",
+    "Hotel-style comfort with practical PG living for students, airport staff and working professionals in Shamshabad.",
+  premiumPositioning:
+    "A hotel-style property adapted for comfortable, secure and homely PG living.",
   tagline: "Safe • Clean • Comfortable • Like Home",
   audience: "students, airport staff and working professionals",
   ownerName: "D Kiran Kumar",
@@ -46,8 +48,8 @@ export const siteConfig = {
     cctv: hostelImage("cc-camera-1.png"),
   },
   roomPlan: {
-    rooms: 20,
-    capacity: 78,
+    rooms: 23,
+    capacity: 90,
     brokerage: "No brokerage",
   },
   roomCategories: [
@@ -148,7 +150,7 @@ export const siteConfig = {
   seo: {
     title: "Prince Deluxe PG for Boys | Boys PG in Shamshabad",
     description:
-      "Prince Deluxe PG for Boys is a clean boys hostel in Shamshabad with student rooms from ₹7,500/month, food, Wi-Fi, attached washrooms, CCTV and transport support near colleges and the airport.",
+      "Hotel-style boys PG in Shamshabad with 23 rooms, capacity for 90 residents, student rooms from ₹7,500/month, food, Wi-Fi, attached washrooms, CCTV and transport support.",
     keywords: [
       "Boys PG in Shamshabad",
       "Boys hostel in Shamshabad",
@@ -164,6 +166,8 @@ export const siteConfig = {
       "hostel near Vardhaman College of Engineering",
       "hostel near Amity University Shamshabad",
       "PG for airport staff in Shamshabad",
+      "luxury boys PG in Shamshabad",
+      "hotel style boys hostel in Shamshabad",
     ],
   },
   facilities: [
