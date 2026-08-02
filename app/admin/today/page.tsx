@@ -1,9 +1,12 @@
 import { AdminCard, EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getDashboardData } from "@/lib/admin/data"
 
 export default async function TodayPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const data = await getDashboardData()
   const availableBeds = data.beds.filter((bed) => bed.status === "Available")
   const availableRoomIds = new Set(availableBeds.map((bed) => bed.room_id))
@@ -11,17 +14,19 @@ export default async function TodayPage() {
   const newEnquiries = data.enquiries.filter((enquiry) => enquiry.status === "New")
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Today</p>
           <h1 className="font-heading text-3xl font-bold text-primary">Daily work screen</h1>
         </div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className={`grid gap-3 sm:grid-cols-2 ${canEdit ? "lg:grid-cols-4" : "lg:grid-cols-2"}`}>
+          {canEdit ? <>
           <Button render={<a href="/admin/payments" />} nativeButton={false} size="lg" className="h-14">Quick Add Payment</Button>
           <Button render={<a href="/admin/enquiries" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Quick Add Enquiry</Button>
           <Button render={<a href="/admin/residents" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Add Resident</Button>
+          </> : null}
           <Button render={<a href="/admin/rooms" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">View Rooms</Button>
         </div>
 

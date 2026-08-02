@@ -1,14 +1,17 @@
 import { AdminCard, EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getDashboardData } from "@/lib/admin/data"
 
 export default async function DashboardPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const data = await getDashboardData()
   const pendingEnquiries = data.enquiries.filter((enquiry) => enquiry.status === "New" || enquiry.status === "Follow Up Later")
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Dashboard</p>
@@ -19,10 +22,10 @@ export default async function DashboardPage() {
         <section className="rounded-2xl border border-border bg-card p-4 shadow-sm">
           <div className="grid gap-3 sm:grid-cols-3">
             <Button render={<a href="/admin/rooms" />} nativeButton={false} size="lg" className="h-12">
-              Manage Rooms
+              {canEdit ? "Manage Rooms" : "View Rooms"}
             </Button>
             <Button render={<a href="/admin/residents" />} nativeButton={false} size="lg" className="h-12 bg-accent text-accent-foreground hover:bg-accent/90">
-              Add / View Residents
+              {canEdit ? "Add / View Residents" : "View Residents"}
             </Button>
             <Button render={<a href="/admin/today" />} nativeButton={false} size="lg" variant="outline" className="h-12">
               Today Tasks

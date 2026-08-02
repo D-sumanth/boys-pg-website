@@ -50,7 +50,7 @@ export function FacilitiesSection() {
             Facilities
           </span>
           <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
-            Daily essentials with hotel-style convenience
+            Food, dining and daily facilities
           </h2>
           <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Food, safety, storage, water, transport and practical daily support

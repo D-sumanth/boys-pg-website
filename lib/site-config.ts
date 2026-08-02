@@ -1,9 +1,184 @@
-// Edit this file to update the hostel details across the website.
+// Edit this file to update public hostel details across the website.
 
 const hostelImage = (fileName: string) => `/images/hostel/${fileName}`
 
+function normalizeSiteUrl(value: string) {
+  const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`
+  return new URL(withProtocol).origin
+}
+
+function resolveSiteUrl() {
+  const configuredUrl = process.env.NEXT_PUBLIC_SITE_URL
+
+  if (process.env.VERCEL_ENV === "production" && !configuredUrl) {
+    throw new Error("NEXT_PUBLIC_SITE_URL is required for production deployments.")
+  }
+
+  if (configuredUrl) {
+    return normalizeSiteUrl(configuredUrl)
+  }
+
+  if (process.env.VERCEL_URL) {
+    return normalizeSiteUrl(process.env.VERCEL_URL)
+  }
+
+  return "http://localhost:3000"
+}
+
+export type AnalyticsEventName =
+  | "click_call"
+  | "click_whatsapp"
+  | "click_google_maps"
+  | "submit_enquiry"
+
+export type RoomInventoryItem = {
+  name: string
+  shortName: string
+  badge: string
+  setup: string
+  image: string
+  count: number
+  bedsPerRoom: number
+  description: string
+  features: readonly string[]
+  pricingLabel?: string
+}
+
+type PricingPlan = {
+  title: string
+  badge: string
+  description: string
+  featured: boolean
+  options: readonly { room: string; price: string }[]
+}
+
+type SiteConfig = {
+  siteUrl: string
+  name: string
+  shortName: string
+  businessType: string
+  city: string
+  location: string
+  positioning: string
+  premiumPositioning: string
+  tagline: string
+  audience: string
+  ownerName: string
+  phoneDisplay: string
+  phoneNumber: string
+  phoneLink: string
+  whatsappLink: string
+  email: string
+  emailLink: string
+  googleMapsLink: string
+  enquiryHours: string
+  address: {
+    line1: string
+    line2: string
+    line3: string
+    country: string
+    countryCode: string
+    streetAddress: string
+    addressLocality: string
+    addressRegion: string
+    postalCode: string
+    landmark: string
+  }
+  pricingTeaser: string
+  startingPriceShort: string
+  pricingNote: string
+  transportNote: string
+  images: Record<string, string>
+  roomPlan: { rooms: number; capacity: number; brokerage: string }
+  roomCategories: readonly RoomInventoryItem[]
+  roomEnquiryOptions: readonly string[]
+  pricingPlans: readonly PricingPlan[]
+  pricingNotes: readonly string[]
+  nearbyLocations: readonly {
+    name: string
+    distance: string
+    type: "College" | "Airport" | "Work Location"
+  }[]
+  seo: { title: string; description: string; keywords: readonly string[] }
+  facilities: readonly { label: string }[]
+  faqs: readonly { question: string; answer: string }[]
+  gallery: readonly { src: string; title: string }[]
+}
+
+const roomCategories: readonly RoomInventoryItem[] = [
+  {
+    name: "Premium 4-Sharing Room",
+    shortName: "Premium 4-Sharing",
+    badge: "Extra Comfort",
+    setup: "4 Sharing",
+    image: hostelImage("extra-space-with-chairs.png"),
+    count: 10,
+    bedsPerRoom: 4,
+    description:
+      "A spacious 4-sharing room with extra usable space for seating, study or everyday comfort.",
+    features: [
+      "4-sharing setup",
+      "Extra usable space",
+      "Individual bed for each resident",
+      "Personal locker for each bed",
+      "4-door almirah storage",
+      "Attached washroom",
+    ],
+  },
+  {
+    name: "Standard 4-Sharing Room",
+    shortName: "Standard 4-Sharing",
+    badge: "Popular Choice",
+    setup: "4 Sharing",
+    image: hostelImage("4-bed-standard-1.png"),
+    count: 12,
+    bedsPerRoom: 4,
+    description:
+      "A comfortable shared room with an individual bed, personal storage and an attached washroom.",
+    features: [
+      "4-sharing setup",
+      "Individual bed for each resident",
+      "Personal locker for each bed",
+      "4-door almirah storage",
+      "Attached washroom",
+      "Lights and fan",
+    ],
+  },
+  {
+    name: "Special Partitioned 2-Bed Room",
+    shortName: "Special Partitioned 2-Bed",
+    badge: "One Available",
+    setup: "2 Beds",
+    image: hostelImage("2-bed-partition.png"),
+    count: 1,
+    bedsPerRoom: 2,
+    description:
+      "A special partitioned room with two beds, personal storage and an attached washroom.",
+    features: [
+      "Partitioned 2-bed setup",
+      "Individual bed for each resident",
+      "Personal storage",
+      "Attached washroom",
+    ],
+    pricingLabel: "Contact for current pricing and availability",
+  },
+]
+
+const inventoryTotals = roomCategories.reduce(
+  (totals, room) => ({
+    rooms: totals.rooms + room.count,
+    capacity: totals.capacity + room.count * room.bedsPerRoom,
+  }),
+  { rooms: 0, capacity: 0 },
+)
+
+if (inventoryTotals.rooms !== 23 || inventoryTotals.capacity !== 90) {
+  throw new Error("Public room inventory must total 23 rooms and 90 nominal beds.")
+}
+
 export const siteConfig = {
-  name: "Prince Deluxe PG for Boys",
+  siteUrl: resolveSiteUrl(),
+  name: "Prince Deluxe PG For Boys",
   shortName: "Prince Deluxe PG",
   businessType: "Boys PG hostel / paying guest accommodation",
   city: "Shamshabad, Hyderabad",
@@ -22,13 +197,21 @@ export const siteConfig = {
   email: "princedeluxepg@gmail.com",
   emailLink: "mailto:princedeluxepg@gmail.com",
   googleMapsLink: "https://maps.app.goo.gl/ECLgK4Q983rYKFPT9",
+  enquiryHours: "6:00 AM–11:00 PM every day",
   address: {
-    line1: "Plot No. 80M, SY No. 748, 749",
-    line2: "Rangareddy Nagar, Brindavan Colony",
+    line1: "H.No. 21-49/5/A/1",
+    line2: "Ranga Reddy Nagar, Brindavan Colony",
     line3: "Shamshabad, Hyderabad, Telangana 501218",
-    landmark: "Near Commissioner of Police, Shamshabad Zone",
+    country: "India",
+    countryCode: "IN",
+    streetAddress: "H.No. 21-49/5/A/1, Ranga Reddy Nagar, Brindavan Colony",
+    addressLocality: "Shamshabad, Hyderabad",
+    addressRegion: "Telangana",
+    postalCode: "501218",
+    landmark: "",
   },
   pricingTeaser: "Student rooms starting from ₹7,500/month",
+  startingPriceShort: "₹7,500+",
   pricingNote: "Fees are per person per month. Please enquire for current availability.",
   transportNote: "Transport facility available at reasonable prices.",
   images: {
@@ -48,61 +231,14 @@ export const siteConfig = {
     cctv: hostelImage("cc-camera-1.png"),
   },
   roomPlan: {
-    rooms: 23,
-    capacity: 90,
+    rooms: inventoryTotals.rooms,
+    capacity: inventoryTotals.capacity,
     brokerage: "No brokerage",
   },
-  roomCategories: [
-    {
-      name: "Standard 4-Sharing Room",
-      shortName: "Standard 4-Sharing",
-      badge: "Popular Choice",
-      setup: "4 Sharing",
-      image: hostelImage("4-bed-standard-1.png"),
-      description:
-        "A comfortable shared room with an individual bed, personal storage and an attached washroom.",
-      features: [
-        "4-sharing setup",
-        "Individual bed for each resident",
-        "Personal locker for each bed",
-        "4-door almirah storage",
-        "Attached washroom",
-        "Lights and fan",
-      ],
-    },
-    {
-      name: "Room with Extra Space",
-      shortName: "Room with Extra Space",
-      badge: "Extra Comfort",
-      setup: "4 Sharing",
-      image: hostelImage("extra-space-with-chairs.png"),
-      description:
-        "A spacious 4-sharing room with extra usable space for seating, study or everyday comfort.",
-      features: [
-        "4-sharing setup",
-        "Extra usable space",
-        "Individual bed for each resident",
-        "Personal locker for each bed",
-        "4-door almirah storage",
-        "Attached washroom",
-      ],
-    },
-    {
-      name: "Optional 3-Sharing Arrangement",
-      shortName: "3-Sharing (Subject to Availability)",
-      badge: "Limited Availability",
-      setup: "3 Sharing",
-      image: hostelImage("4-bed-standard-2.png"),
-      description:
-        "A 3-sharing arrangement may be provided when required, subject to availability and management confirmation.",
-      features: [
-        "3-sharing arrangement",
-        "Subject to availability",
-        "Management confirmation required",
-        "Personal storage",
-        "Attached washroom",
-      ],
-    },
+  roomCategories,
+  roomEnquiryOptions: [
+    ...roomCategories.map((room) => room.shortName),
+    "3-Sharing (Subject to Availability)",
   ],
   pricingPlans: [
     {
@@ -126,9 +262,9 @@ export const siteConfig = {
       ],
     },
     {
-      title: "3-Sharing Option",
+      title: "Optional 3-Sharing Arrangement",
       badge: "Subject to Availability",
-      description: "Available only after management confirmation.",
+      description: "A flexible arrangement, not a fixed physical room category.",
       featured: false,
       options: [{ room: "3-Sharing Arrangement", price: "₹9,500" }],
     },
@@ -148,26 +284,23 @@ export const siteConfig = {
     { name: "Financial District", distance: "20 km", type: "Work Location" },
   ],
   seo: {
-    title: "Prince Deluxe PG for Boys | Boys PG in Shamshabad",
+    title: "Boys PG in Shamshabad | Prince Deluxe PG For Boys",
     description:
-      "Hotel-style boys PG in Shamshabad with 23 rooms, capacity for 90 residents, student rooms from ₹7,500/month, food, Wi-Fi, attached washrooms, CCTV and transport support.",
+      "Prince Deluxe PG For Boys offers furnished rooms, homely food, Wi-Fi, CCTV, lift access and attached washrooms in Shamshabad. Call +91 7093945019 for availability.",
     keywords: [
       "Boys PG in Shamshabad",
       "Boys hostel in Shamshabad",
       "PG hostel in Shamshabad",
       "PG near Shamshabad Airport",
+      "Accommodation near Hyderabad Airport",
       "Boys accommodation in Shamshabad",
       "Student hostel in Shamshabad",
       "PG for working professionals in Shamshabad",
       "4 sharing PG in Shamshabad",
-      "Prince Deluxe PG for Boys",
+      "Prince Deluxe PG For Boys",
       "PG with food in Shamshabad",
       "hostel near GMR School of Aviation",
-      "hostel near Vardhaman College of Engineering",
-      "hostel near Amity University Shamshabad",
       "PG for airport staff in Shamshabad",
-      "luxury boys PG in Shamshabad",
-      "hotel style boys hostel in Shamshabad",
     ],
   },
   facilities: [
@@ -239,7 +372,11 @@ export const siteConfig = {
     { src: hostelImage("water-filter.png"), title: "Water Filter" },
     { src: hostelImage("cc-camera-1.png"), title: "CCTV Security" },
   ],
-} as const
+} as const satisfies SiteConfig
+
+export function absoluteSiteUrl(path = "/") {
+  return new URL(path, `${siteConfig.siteUrl}/`).toString()
+}
 
 export const OWNER_NAME = siteConfig.ownerName
 export const PHONE_DISPLAY = siteConfig.phoneDisplay

@@ -1,6 +1,7 @@
 import Image from "next/image"
 import { BedDouble, CheckCircle2, Info, MessageCircle, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/lib/site-config"
 
@@ -16,7 +17,7 @@ export function RoomsSection() {
             <span className="h-px w-6 bg-accent" />
           </span>
           <h2 className="mt-3 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
-            Room fee structure
+            Rooms and monthly fee structure
           </h2>
           <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Clear per-person monthly pricing for students, airport staff and
@@ -67,7 +68,7 @@ export function RoomsSection() {
               </div>
 
               <Button
-                render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
+                render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
                 className="mt-6 h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
               >
@@ -94,11 +95,11 @@ export function RoomsSection() {
             </ul>
           </div>
           <div className="grid gap-3 sm:grid-cols-2 lg:min-w-80 lg:grid-cols-1">
-            <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 bg-card">
+            <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 bg-card">
               <Phone className="size-5" />
               Call Now
             </Button>
-            <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
               <MessageCircle className="size-5" />
               WhatsApp Enquiry
             </Button>
@@ -131,6 +132,9 @@ export function RoomsSection() {
                 </div>
                 <div className="p-5">
                   <h4 className="font-heading text-xl font-bold text-primary">{room.name}</h4>
+                  <p className="mt-1 text-xs font-bold uppercase tracking-wide text-accent">
+                    {room.count} {room.count === 1 ? "room" : "rooms"} • {room.setup}
+                  </p>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{room.description}</p>
                   <ul className="mt-4 space-y-2">
                     {room.features.slice(0, 4).map((feature) => (
@@ -140,6 +144,11 @@ export function RoomsSection() {
                       </li>
                     ))}
                   </ul>
+                  {room.pricingLabel && (
+                    <p className="mt-4 rounded-lg bg-secondary px-3 py-2 text-sm font-semibold text-primary">
+                      {room.pricingLabel}
+                    </p>
+                  )}
                 </div>
               </article>
             ))}

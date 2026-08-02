@@ -22,7 +22,7 @@ const highlights = [
   {
     icon: BadgeIndianRupee,
     title: "Student pricing",
-    text: "Eligible student rooms start from ₹7,500 per month.",
+    text: `${siteConfig.pricingTeaser}.`,
   },
   {
     icon: UtensilsCrossed,

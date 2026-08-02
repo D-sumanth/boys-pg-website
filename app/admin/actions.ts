@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
-import { requireAdmin, signInWithPassword, signOutAdmin } from "@/lib/admin/auth"
+import { requireAdminEditor, signInWithPassword, signOutAdmin } from "@/lib/admin/auth"
 import { getHostel } from "@/lib/admin/data"
 import { insertRow, selectRows, updateRows } from "@/lib/admin/supabase-rest"
 import type { Bed } from "@/lib/admin/types"
@@ -27,7 +27,7 @@ function boolValue(formData: FormData, key: string) {
 }
 
 async function logActivity(entityType: string, entityId: string | null, action: "Create" | "Update", newValue: unknown) {
-  const admin = await requireAdmin()
+  const admin = await requireAdminEditor()
   await insertRow("activity_logs", {
     user_id: admin.id,
     entity_type: entityType,
@@ -60,7 +60,7 @@ export async function logoutAction() {
 }
 
 export async function createRoomAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const hostel = await getHostel()
 
   if (!hostel) {
@@ -88,7 +88,7 @@ export async function createRoomAction(formData: FormData) {
 }
 
 export async function updateRoomAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const roomId = text(formData, "room_id")
   const body = {
     floor_number: optionalText(formData, "floor_number"),
@@ -103,7 +103,7 @@ export async function updateRoomAction(formData: FormData) {
 }
 
 export async function createResidentAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const body = {
     resident_code: optionalText(formData, "resident_code"),
     full_name: text(formData, "full_name"),
@@ -127,7 +127,7 @@ export async function createResidentAction(formData: FormData) {
 }
 
 export async function updateResidentAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const residentId = text(formData, "resident_id")
   const body = {
     full_name: text(formData, "full_name"),
@@ -147,7 +147,7 @@ export async function updateResidentAction(formData: FormData) {
 }
 
 export async function assignBedAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const residentId = text(formData, "resident_id")
   const roomId = text(formData, "room_id")
   const availableBeds = await selectRows<Bed>("beds", {
@@ -183,7 +183,7 @@ export async function assignBedAction(formData: FormData) {
 }
 
 export async function vacateResidentAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const occupancyId = text(formData, "occupancy_id")
   const bedId = text(formData, "bed_id")
   const residentId = text(formData, "resident_id")
@@ -199,7 +199,7 @@ export async function vacateResidentAction(formData: FormData) {
 }
 
 export async function createEnquiryAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const hostel = await getHostel()
   const body = {
     hostel_id: hostel?.hostel_id,
@@ -224,7 +224,7 @@ export async function createEnquiryAction(formData: FormData) {
 }
 
 export async function updateEnquiryStatusAction(formData: FormData) {
-  await requireAdmin()
+  await requireAdminEditor()
   const enquiryId = text(formData, "enquiry_id")
   const status = text(formData, "status")
   await updateRows("enquiries", `enquiry_id=eq.${enquiryId}`, { status })
@@ -233,7 +233,7 @@ export async function updateEnquiryStatusAction(formData: FormData) {
 }
 
 export async function createPaymentAction(formData: FormData) {
-  const admin = await requireAdmin()
+  const admin = await requireAdminEditor()
   const amount = numberValue(formData, "amount")
   const rentInvoiceId = optionalText(formData, "rent_invoice_id")
   const body = {

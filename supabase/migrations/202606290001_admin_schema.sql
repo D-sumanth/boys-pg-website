@@ -277,16 +277,37 @@ returns boolean
 language sql
 stable
 security definer
-set search_path = public
+set search_path = ''
 as $$
   select exists (
     select 1
     from public.profiles
-    where id = auth.uid()
+    where id = (select auth.uid())
       and is_active = true
       and role in ('Owner', 'Manager', 'Viewer')
   );
 $$;
+
+create or replace function public.is_admin_editor()
+returns boolean
+language sql
+stable
+security definer
+set search_path = ''
+as $$
+  select exists (
+    select 1
+    from public.profiles
+    where id = (select auth.uid())
+      and is_active = true
+      and role in ('Owner', 'Manager')
+  );
+$$;
+
+revoke all on function public.is_admin_user() from public, anon;
+revoke all on function public.is_admin_editor() from public, anon;
+grant execute on function public.is_admin_user() to authenticated;
+grant execute on function public.is_admin_editor() to authenticated;
 
 alter table public.profiles enable row level security;
 alter table public.hostels enable row level security;
@@ -315,9 +336,9 @@ begin
     execute format('drop policy if exists admin_select_%s on public.%I', table_name, table_name);
     execute format('drop policy if exists admin_insert_%s on public.%I', table_name, table_name);
     execute format('drop policy if exists admin_update_%s on public.%I', table_name, table_name);
-    execute format('create policy admin_select_%s on public.%I for select to authenticated using (public.is_admin_user())', table_name, table_name);
-    execute format('create policy admin_insert_%s on public.%I for insert to authenticated with check (public.is_admin_user())', table_name, table_name);
-    execute format('create policy admin_update_%s on public.%I for update to authenticated using (public.is_admin_user()) with check (public.is_admin_user())', table_name, table_name);
+    execute format('create policy admin_select_%s on public.%I for select to authenticated using ((select public.is_admin_user()))', table_name, table_name);
+    execute format('create policy admin_insert_%s on public.%I for insert to authenticated with check ((select public.is_admin_editor()))', table_name, table_name);
+    execute format('create policy admin_update_%s on public.%I for update to authenticated using ((select public.is_admin_editor())) with check ((select public.is_admin_editor()))', table_name, table_name);
   end loop;
 end;
 $$;
@@ -326,17 +347,17 @@ insert into public.hostels (
   hostel_name, business_type, contact_person, phone, email, address_line_1,
   address_line_2, city, state, pincode, landmark, total_rooms, total_capacity
 ) values (
-  'Prince Deluxe PG for Boys',
+  'Prince Deluxe PG For Boys',
   'Boys PG / Hostel',
   'D Kiran Kumar',
   '+91 7093945019',
   'princedeluxepg@gmail.com',
-  'Plot No. 80M, SY No. 748, 749',
-  'Rangareddy Nagar, Brindavan Colony',
+  'H.No. 21-49/5/A/1',
+  'Ranga Reddy Nagar, Brindavan Colony',
   'Hyderabad',
   'Telangana',
   '501218',
-  'Near Commissioner of Police, Shamshabad Zone',
+  null,
   23,
   90
 ) on conflict do nothing;
@@ -354,7 +375,7 @@ cross join (
     ('Standard 4-Sharing Rooms', 4, false, false, 8000, 10000, 8500),
     ('Special Partitioned 2-Bed Room', 2, false, true, 9000, 11000, 8500)
 ) as x(room_type_name, sharing_capacity, has_extra_space, has_partition, internal_non_ac_price, internal_ac_price, public_starting_price)
-where h.hostel_name = 'Prince Deluxe PG for Boys'
+where h.hostel_name = 'Prince Deluxe PG For Boys'
   and not exists (
     select 1 from public.room_types rt
     where rt.hostel_id = h.hostel_id and rt.room_type_name = x.room_type_name

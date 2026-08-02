@@ -1,5 +1,6 @@
 import { BriefcaseBusiness, BusFront, ExternalLink, GraduationCap, MessageCircle, Plane } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { cn } from "@/lib/utils"
 import { siteConfig } from "@/lib/site-config"
 
@@ -16,7 +17,7 @@ export function NearbySection() {
         <div className="max-w-3xl sm:mx-auto sm:text-center">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Nearby Places</span>
           <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
-            Convenient stay near colleges, airport and work locations
+            Accommodation near Hyderabad Airport and colleges
           </h2>
           <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
             Located in Shamshabad with convenient access to nearby colleges,
@@ -52,11 +53,11 @@ export function NearbySection() {
             </div>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
-            <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
               <MessageCircle className="size-5" />
               Ask About Transport
             </Button>
-            <Button render={<a href={siteConfig.googleMapsLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground">
+            <Button render={<TrackedLink href={siteConfig.googleMapsLink} eventName="click_google_maps" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 border-primary-foreground/30 bg-primary-foreground/10 text-primary-foreground hover:bg-primary-foreground/15 hover:text-primary-foreground">
               <ExternalLink className="size-5" />
               View Location
             </Button>

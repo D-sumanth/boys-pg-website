@@ -37,3 +37,10 @@ To learn more, take a look at the following resources:
 - [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
 - [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 - [v0 Documentation](https://v0.app/docs) - learn about v0 and how to use it.
+# Prince Deluxe PG For Boys
+
+## Environment
+
+Set `NEXT_PUBLIC_SITE_URL` to the canonical origin for production, without a trailing path. Vercel Preview deployments fall back to their generated `VERCEL_URL`, and local development falls back to `http://localhost:3000`.
+
+Supabase variables and admin setup instructions are documented in `ADMIN_SETUP.md`.

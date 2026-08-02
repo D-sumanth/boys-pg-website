@@ -1,3 +1,5 @@
+-- LEGACY RESET: do not run until the approved 23-room number/category mapping is supplied.
+-- This script still represents the earlier 20-room, 78-bed admin setup.
 begin;
 
 truncate table
@@ -17,12 +19,12 @@ update public.hostels
    set total_rooms = 20,
        total_capacity = 78,
        updated_at = now()
- where hostel_name = 'Prince Deluxe PG for Boys';
+ where hostel_name = 'Prince Deluxe PG For Boys';
 
 with hostel as (
   select hostel_id
   from public.hostels
-  where hostel_name = 'Prince Deluxe PG for Boys'
+  where hostel_name = 'Prince Deluxe PG For Boys'
   limit 1
 ),
 standard_type as (

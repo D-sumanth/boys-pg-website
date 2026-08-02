@@ -1,5 +1,6 @@
 import { ChevronDown, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 export function FaqSection() {
@@ -30,7 +31,7 @@ export function FaqSection() {
             <h3 className="font-heading text-lg font-bold text-primary">Still have a question?</h3>
             <p className="mt-1 text-sm text-muted-foreground">WhatsApp us for room availability, fees, visits or transport.</p>
           </div>
-          <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 shrink-0 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
+          <Button render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 shrink-0 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
             <MessageCircle className="size-5" />
             WhatsApp Enquiry
           </Button>

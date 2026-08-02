@@ -3,6 +3,7 @@
 import { useState } from "react"
 import { Mail, MessageCircle, Menu, Phone, X } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 const navLinks = [
@@ -43,12 +44,12 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-2 md:flex">
-          <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="gap-2">
+          <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} variant="outline" size="sm" className="gap-2">
             <Phone className="size-4" />
             Call Now
           </Button>
           <Button
-            render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
+            render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />}
             nativeButton={false}
             size="sm"
             className="gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
@@ -84,12 +85,12 @@ export function SiteHeader() {
               </a>
             ))}
             <div className="mt-2 grid grid-cols-3 gap-2">
-              <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} variant="outline" size="sm" className="h-11 gap-2">
+              <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} variant="outline" size="sm" className="h-11 gap-2">
                 <Phone className="size-4" />
                 Call
               </Button>
               <Button
-                render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
+                render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
                 size="sm"
                 className="h-11 gap-2 bg-accent text-accent-foreground hover:bg-accent/90"

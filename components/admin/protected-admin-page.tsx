@@ -1,8 +1,14 @@
 import { AdminShell } from "@/components/admin/admin-shell"
-import { requireAdmin } from "@/lib/admin/auth"
+import { requireAdmin, type AdminUser } from "@/lib/admin/auth"
 
-export async function ProtectedAdminPage({ children }: { children: React.ReactNode }) {
-  const admin = await requireAdmin()
+export async function ProtectedAdminPage({
+  children,
+  admin: providedAdmin,
+}: {
+  children: React.ReactNode
+  admin?: AdminUser
+}) {
+  const admin = providedAdmin ?? (await requireAdmin())
 
   return <AdminShell admin={admin}>{children}</AdminShell>
 }

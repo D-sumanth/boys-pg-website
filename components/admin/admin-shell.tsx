@@ -110,7 +110,14 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
           </nav>
         </header>
 
-        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">{children}</main>
+        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          {admin.role === "Viewer" ? (
+            <div className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900">
+              Read-only access: you can view hostel records, but only an Owner or Manager can make changes.
+            </div>
+          ) : null}
+          {children}
+        </main>
       </div>
     </div>
   )

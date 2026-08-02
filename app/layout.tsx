@@ -1,7 +1,7 @@
 import { Analytics } from "@vercel/analytics/next"
 import type { Metadata, Viewport } from "next"
 import Script from "next/script"
-import { siteConfig } from "@/lib/site-config"
+import { absoluteSiteUrl, siteConfig } from "@/lib/site-config"
 import "./globals.css"
 
 export const viewport: Viewport = {
@@ -10,21 +10,36 @@ export const viewport: Viewport = {
   initialScale: 1,
 }
 
+const isPreviewDeployment = Boolean(
+  process.env.VERCEL_ENV && process.env.VERCEL_ENV !== "production",
+)
+
 export const metadata: Metadata = {
-  metadataBase: new URL("https://boys-pg-website.vercel.app"),
+  metadataBase: new URL(siteConfig.siteUrl),
   title: siteConfig.seo.title,
   description: siteConfig.seo.description,
   keywords: [...siteConfig.seo.keywords],
+  robots: isPreviewDeployment
+    ? {
+        index: false,
+        follow: false,
+      }
+    : undefined,
+  alternates: {
+    canonical: absoluteSiteUrl("/"),
+  },
   openGraph: {
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
     type: "website",
+    url: absoluteSiteUrl("/"),
+    siteName: siteConfig.name,
     images: [
       {
-        url: siteConfig.images.hero,
+        url: absoluteSiteUrl(siteConfig.images.hero),
         width: 941,
         height: 1672,
-        alt: "Prince Deluxe PG for Boys entrance in Shamshabad",
+        alt: `${siteConfig.name} entrance in Shamshabad`,
       },
     ],
   },
@@ -32,7 +47,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: siteConfig.seo.title,
     description: siteConfig.seo.description,
-    images: [siteConfig.images.hero],
+    images: [absoluteSiteUrl(siteConfig.images.hero)],
   },
   generator: "v0.app",
   icons: {

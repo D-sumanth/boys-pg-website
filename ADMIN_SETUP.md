@@ -1,6 +1,6 @@
 # Prince Deluxe PG Admin Setup
 
-This project includes a private admin MVP under `/admin` for Prince Deluxe PG for Boys.
+This project includes a private admin MVP under `/admin` for Prince Deluxe PG For Boys.
 
 ## 1. Create Supabase Project
 
@@ -42,7 +42,7 @@ You can apply it through the Supabase SQL editor or Supabase CLI. It creates:
 
 It also enables RLS, adds admin policies, and seeds:
 
-- Prince Deluxe PG for Boys hostel details
+- Prince Deluxe PG For Boys hostel details
 - Premium 4-Sharing Rooms
 - Standard 4-Sharing Rooms
 - Special Partitioned 2-Bed Room
@@ -50,7 +50,7 @@ It also enables RLS, adds admin policies, and seeds:
 
 Room numbers are seeded from `101-104` through `501-504` using `supabase/reset_admin_rooms_seed.sql`.
 Admin users do not enter bed codes. Room capacity slots are created automatically in the hidden `beds` table.
-The current reset script treats room `504` as the special partitioned 2-bed room; update that one row if the partition room changes.
+The current reset script is a legacy 20-room/78-bed setup and must not be run. A separate follow-up will replace it after all 23 room numbers and their Premium/Standard/Partitioned assignments are confirmed.
 
 ## 3. Create First Admin User
 

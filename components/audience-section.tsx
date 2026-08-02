@@ -1,5 +1,6 @@
 import { BriefcaseBusiness, BusFront, CheckCircle2, GraduationCap, MessageCircle } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 const audienceGroups = [
@@ -44,7 +45,7 @@ export function AudienceSection() {
         <div className="max-w-2xl sm:mx-auto sm:text-center">
           <span className="text-xs font-bold uppercase tracking-[0.16em] text-accent sm:text-sm">Who We Welcome</span>
           <h2 className="mt-2 text-balance font-heading text-2xl font-bold leading-tight sm:text-4xl">
-            A comfortable stay for study and work
+            PG for students and working professionals
           </h2>
         </div>
 
@@ -66,7 +67,7 @@ export function AudienceSection() {
                 ))}
               </ul>
               <Button
-                render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
+                render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />}
                 nativeButton={false}
                 size="lg"
                 className="mt-6 h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90"
@@ -88,9 +89,9 @@ export function AudienceSection() {
               </p>
             </div>
           </div>
-          <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" className="shrink-0 text-sm font-bold text-accent underline underline-offset-4">
+          <TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" className="shrink-0 text-sm font-bold text-accent underline underline-offset-4">
             Ask About Transport
-          </a>
+          </TrackedLink>
         </div>
       </div>
     </section>

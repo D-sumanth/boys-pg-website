@@ -2,14 +2,14 @@ import Image from "next/image"
 import { Building2, CheckCircle2 } from "lucide-react"
 import { siteConfig } from "@/lib/site-config"
 
-const points = [
-  "23 rooms for up to 90 residents",
-  "Food included every day",
-  "Personal locker and almirah space",
-  "Transport support available",
-]
-
 export function AboutSection() {
+  const points = [
+    `${siteConfig.roomPlan.rooms} rooms for up to ${siteConfig.roomPlan.capacity} residents`,
+    "Food included every day",
+    "Personal locker and almirah space",
+    "Transport support available",
+  ]
+
   return (
     <section id="about" className="scroll-mt-16 bg-secondary py-14 md:py-24">
       <div className="mx-auto grid max-w-7xl items-center gap-8 px-4 sm:px-6 lg:grid-cols-2 lg:gap-12 lg:px-8">
@@ -18,7 +18,7 @@ export function AboutSection() {
           <figure className="relative overflow-hidden rounded-2xl border border-border bg-card shadow-xl">
             <Image
               src={siteConfig.images.buildingDay}
-              alt="Prince Deluxe PG for Boys building exterior in daylight"
+              alt={`${siteConfig.name} building exterior in daylight`}
               width={640}
               height={460}
               className="aspect-[4/3] h-full w-full object-cover"

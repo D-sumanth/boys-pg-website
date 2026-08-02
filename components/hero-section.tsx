@@ -10,6 +10,7 @@ import {
   UtensilsCrossed,
 } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 const trustChips = [
@@ -29,7 +30,7 @@ export function HeroSection() {
     >
       <Image
         src={siteConfig.images.hero}
-        alt="Illuminated entrance of Prince Deluxe PG for Boys in Shamshabad"
+        alt={`Illuminated entrance of ${siteConfig.name} in Shamshabad`}
         fill
         priority
         loading="eager"
@@ -57,8 +58,8 @@ export function HeroSection() {
           <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
             Boys PG • Hotel-style comfort
           </p>
-          <h1 className="mt-2 max-w-2xl text-balance font-heading text-3xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
-            {siteConfig.name}
+          <h1 className="mt-2 max-w-3xl text-balance font-heading text-3xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
+            Comfortable Boys PG in Shamshabad, Hyderabad
           </h1>
           <p className="mt-3 max-w-xl text-pretty text-[15px] leading-6 text-primary-foreground/88 sm:text-lg sm:leading-7">
             {siteConfig.premiumPositioning} Food, attached washrooms, personal
@@ -80,7 +81,7 @@ export function HeroSection() {
             </div>
             <div className="rounded-xl border border-primary-foreground/20 bg-primary/40 p-3 backdrop-blur-md">
               <dt className="text-[11px] leading-tight text-primary-foreground/68">Student fee</dt>
-              <dd className="mt-1 font-heading text-xl font-bold sm:text-2xl">₹7,500+</dd>
+              <dd className="mt-1 font-heading text-xl font-bold sm:text-2xl">{siteConfig.startingPriceShort}</dd>
             </div>
           </dl>
 
@@ -98,7 +99,7 @@ export function HeroSection() {
 
           <div className="mt-5 grid grid-cols-2 gap-2.5 sm:flex sm:flex-wrap">
             <Button
-              render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />}
+              render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />}
               nativeButton={false}
               size="lg"
               className="h-12 gap-2 bg-accent px-4 text-accent-foreground shadow-lg shadow-black/15 hover:bg-accent/90"

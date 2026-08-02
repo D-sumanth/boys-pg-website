@@ -3,9 +3,12 @@ import { EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { Field, SelectField, TextAreaField } from "@/components/admin/form-fields"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getBeds, getRooms, getRoomTypes } from "@/lib/admin/data"
 
 export default async function RoomsPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const [rooms, beds, roomTypes] = await Promise.all([getRooms(), getBeds(), getRoomTypes()])
   const roomTypeById = new Map(roomTypes.map((roomType) => [roomType.room_type_id, roomType]))
   const bedsByRoom = new Map<string, typeof beds>()
@@ -15,7 +18,7 @@ export default async function RoomsPage() {
   }
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Rooms &amp; Beds</p>
@@ -23,7 +26,7 @@ export default async function RoomsPage() {
           <p className="mt-1 text-sm text-muted-foreground">Add rooms once, then tap a room card whenever you need to update it.</p>
         </div>
 
-        <div className="grid gap-4">
+        {canEdit ? <div className="grid gap-4">
           <details open className="rounded-2xl border border-border bg-card shadow-sm">
             <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
               Add room
@@ -59,7 +62,7 @@ export default async function RoomsPage() {
             </form>
           </details>
 
-        </div>
+        </div> : null}
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {rooms.map((room) => {
@@ -101,12 +104,12 @@ export default async function RoomsPage() {
                     </div>
                   </div>
 
-                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to manage room</p>
+                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to {canEdit ? "manage" : "view"} room</p>
                   <p className="mt-3 hidden text-xs font-semibold text-accent group-open:block">Room controls are open</p>
                 </summary>
 
                 <div className="border-t border-border p-4">
-                  <form action={updateRoomAction} className="grid gap-3 rounded-xl bg-secondary p-3">
+                  {canEdit ? <form action={updateRoomAction} className="grid gap-3 rounded-xl bg-secondary p-3">
                     <input type="hidden" name="room_id" value={room.room_id} />
                     <div className="grid gap-3 sm:grid-cols-2">
                       <Field label="Floor" name="floor_number" defaultValue={room.floor_number || ""} />
@@ -120,7 +123,7 @@ export default async function RoomsPage() {
                       <Field label="Notes" name="notes" defaultValue={room.notes || ""} />
                     </div>
                     <Button type="submit" size="sm" className="h-10">Update Room</Button>
-                  </form>
+                  </form> : null}
 
                   <p className="mt-4 rounded-xl bg-secondary p-3 text-sm text-muted-foreground">
                     Room capacity slots are created automatically. Admin users only need to manage the room.

@@ -3,9 +3,12 @@ import { EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { Field, SelectField } from "@/components/admin/form-fields"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getActiveOccupancies, getBeds, getResidents, getRooms } from "@/lib/admin/data"
 
 export default async function ResidentsPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const [residents, beds, rooms, occupancies] = await Promise.all([
     getResidents(),
     getBeds(),
@@ -19,7 +22,7 @@ export default async function ResidentsPage() {
   const occupancyByResident = new Map(occupancies.map((occupancy) => [occupancy.resident_id, occupancy]))
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Residents</p>
@@ -27,7 +30,7 @@ export default async function ResidentsPage() {
           <p className="mt-1 text-sm text-muted-foreground">Add residents, assign beds, and tap a resident card to update details.</p>
         </div>
 
-        <div className="grid gap-4 xl:grid-cols-2">
+        {canEdit ? <div className="grid gap-4 xl:grid-cols-2">
           <details open className="rounded-2xl border border-border bg-card shadow-sm">
             <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
               Add resident
@@ -84,7 +87,7 @@ export default async function ResidentsPage() {
               <Button type="submit" className="h-12">Assign Bed</Button>
             </form>
           </details>
-        </div>
+        </div> : null}
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {residents.map((resident) => {
@@ -108,7 +111,7 @@ export default async function ResidentsPage() {
                     <p className="text-muted-foreground">{resident.resident_type}</p>
                   </div>
 
-                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to view and edit details</p>
+                  <p className="mt-3 text-xs font-semibold text-accent group-open:hidden">Tap to view{canEdit ? " and edit" : ""} details</p>
                   <p className="mt-3 hidden text-xs font-semibold text-accent group-open:block">Resident controls are open</p>
                 </summary>
 
@@ -119,7 +122,7 @@ export default async function ResidentsPage() {
                     <p>ID: {resident.id_proof_number_masked || "Not set"}</p>
                   </div>
 
-                  <form action={updateResidentAction} className="mt-4 grid gap-3 rounded-xl bg-secondary p-3">
+                  {canEdit ? <form action={updateResidentAction} className="mt-4 grid gap-3 rounded-xl bg-secondary p-3">
                     <input type="hidden" name="resident_id" value={resident.resident_id} />
                     <div className="grid gap-3 sm:grid-cols-2">
                       <Field label="Name" name="full_name" defaultValue={resident.full_name} />
@@ -138,9 +141,9 @@ export default async function ResidentsPage() {
                       </SelectField>
                     </div>
                     <Button type="submit" size="sm" className="h-10">Update Resident</Button>
-                  </form>
+                  </form> : null}
 
-                  {occupancy ? (
+                  {canEdit && occupancy ? (
                     <form action={vacateResidentAction} className="mt-4">
                       <input type="hidden" name="occupancy_id" value={occupancy.occupancy_id} />
                       <input type="hidden" name="bed_id" value={occupancy.bed_id} />

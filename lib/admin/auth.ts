@@ -167,3 +167,17 @@ export async function requireAdmin() {
 
   return admin
 }
+
+export function canEditAdmin(admin: AdminUser) {
+  return admin.role === "Owner" || admin.role === "Manager"
+}
+
+export async function requireAdminEditor() {
+  const admin = await requireAdmin()
+
+  if (!canEditAdmin(admin)) {
+    redirect("/admin/dashboard?error=read-only")
+  }
+
+  return admin
+}

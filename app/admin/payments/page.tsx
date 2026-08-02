@@ -3,17 +3,20 @@ import { EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { Field, SelectField, TextAreaField } from "@/components/admin/form-fields"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getPayments, getResidents } from "@/lib/admin/data"
 
 const purposes = ["Rent", "Deposit", "Refund", "Advance", "Fine", "Food Extra", "AC Charges", "Maintenance", "Other"]
 const modes = ["Cash", "UPI", "Bank Transfer", "Card", "Cheque", "Other"]
 
 export default async function PaymentsPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const [payments, residents] = await Promise.all([getPayments(), getResidents()])
   const residentById = new Map(residents.map((resident) => [resident.resident_id, resident]))
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Payments</p>
@@ -21,7 +24,7 @@ export default async function PaymentsPage() {
           <p className="mt-1 text-sm text-muted-foreground">Payments are not deleted in the MVP. Use adjustments later if needed.</p>
         </div>
 
-        <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        {canEdit ? <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
           <h2 className="font-heading text-xl font-bold text-primary">Add payment</h2>
           <form action={createPaymentAction} className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <SelectField label="Resident" name="resident_id">
@@ -48,7 +51,7 @@ export default async function PaymentsPage() {
             </div>
             <Button type="submit" className="h-12 lg:col-span-3">Save Payment</Button>
           </form>
-        </section>
+        </section> : null}
 
         <section className="grid gap-3">
           {payments.map((payment) => {

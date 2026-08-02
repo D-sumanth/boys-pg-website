@@ -6,7 +6,9 @@ import { BusFront, Check, ExternalLink, Mail, MapPin, MessageCircle, Phone, User
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
+import { TrackedLink } from "@/components/tracked-link"
 import { Textarea } from "@/components/ui/textarea"
+import { trackAnalyticsEvent } from "@/lib/analytics"
 import { siteConfig } from "@/lib/site-config"
 
 export function ContactSection() {
@@ -25,6 +27,7 @@ export function ContactSection() {
       `Message: ${String(formData.get("message") || "Not provided")}`,
     ].join("\n")
 
+    trackAnalyticsEvent("submit_enquiry")
     window.open(
       `${siteConfig.whatsappLink}?text=${encodeURIComponent(enquiryMessage)}`,
       "_blank",
@@ -53,11 +56,11 @@ export function ContactSection() {
           <div className="flex flex-col gap-4 lg:col-span-2">
             <div className="rounded-2xl border border-border bg-secondary p-5 shadow-lg">
               <div className="grid gap-3">
-                <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} size="lg" className="h-12 gap-2">
+                <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} size="lg" className="h-12 gap-2">
                   <Phone className="size-5" />
                   Call {siteConfig.phoneDisplay}
                 </Button>
-                <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
+                <Button render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
                   <MessageCircle className="size-5" />
                   WhatsApp Enquiry
                 </Button>
@@ -65,7 +68,7 @@ export function ContactSection() {
                   <Mail className="size-5" />
                   Email Us
                 </Button>
-                <Button render={<a href={siteConfig.googleMapsLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 bg-card">
+                <Button render={<TrackedLink href={siteConfig.googleMapsLink} eventName="click_google_maps" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2 bg-card">
                   <ExternalLink className="size-5" />
                   View Location
                 </Button>
@@ -95,7 +98,8 @@ export function ContactSection() {
               <address className="not-italic leading-relaxed text-muted-foreground">
                 {siteConfig.address.line1},<br />
                 {siteConfig.address.line2},<br />
-                {siteConfig.address.line3}
+                {siteConfig.address.line3},<br />
+                {siteConfig.address.country}
                 {siteConfig.address.landmark && (
                   <>
                     <br />
@@ -103,6 +107,13 @@ export function ContactSection() {
                   </>
                 )}
               </address>
+            </div>
+
+            <div className="rounded-2xl border border-border bg-card p-5 shadow-sm sm:p-6">
+              <p className="text-sm text-muted-foreground">Enquiry hours</p>
+              <p className="mt-1 font-heading font-semibold text-foreground">
+                {siteConfig.enquiryHours}
+              </p>
             </div>
           </div>
 
@@ -165,9 +176,9 @@ export function ContactSection() {
                       required
                       className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
-                      {siteConfig.roomCategories.map((room) => (
-                        <option key={room.name} value={room.shortName}>
-                          {room.shortName}
+                      {siteConfig.roomEnquiryOptions.map((room) => (
+                        <option key={room} value={room}>
+                          {room}
                         </option>
                       ))}
                     </select>

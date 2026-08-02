@@ -1,4 +1,5 @@
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 export function SiteFooter() {
@@ -11,7 +12,7 @@ export function SiteFooter() {
             {siteConfig.businessType} in {siteConfig.location}
           </p>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-primary-foreground/70">
-            {siteConfig.positioning} Student rooms start from ₹7,500 per month.
+            {siteConfig.positioning} {siteConfig.pricingTeaser}.
             Transport support is available at reasonable prices.
           </p>
         </div>
@@ -25,7 +26,8 @@ export function SiteFooter() {
             <address className="not-italic leading-relaxed">
               {siteConfig.address.line1},<br />
               {siteConfig.address.line2},<br />
-              {siteConfig.address.line3}
+              {siteConfig.address.line3},<br />
+              {siteConfig.address.country}
               {siteConfig.address.landmark && (
                 <>
                   <br />
@@ -41,14 +43,14 @@ export function SiteFooter() {
             Contact
           </h3>
           <div className="mt-3 flex flex-col gap-3 text-sm">
-            <a href={siteConfig.phoneLink} className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
+            <TrackedLink href={siteConfig.phoneLink} eventName="click_call" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
               <Phone className="size-4 text-accent" />
               {siteConfig.phoneDisplay}
-            </a>
-            <a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
+            </TrackedLink>
+            <TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
               <MessageCircle className="size-4 text-accent" />
               WhatsApp Enquiry
-            </a>
+            </TrackedLink>
             <a href={siteConfig.emailLink} className="inline-flex items-center gap-2 text-primary-foreground/80 hover:text-accent">
               <Mail className="size-4 text-accent" />
               {siteConfig.email}

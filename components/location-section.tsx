@@ -1,5 +1,6 @@
 import { BusFront, ExternalLink, GraduationCap, Mail, MapPin, MessageCircle, Phone, Plane } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
 
 export function LocationSection() {
@@ -14,8 +15,8 @@ export function LocationSection() {
             Easy to find in Shamshabad
           </h2>
           <p className="mt-3 text-pretty text-sm leading-6 text-muted-foreground sm:text-base sm:leading-relaxed">
-            Located in Rangareddy Nagar, Brindavan Colony, with convenient
-            access to nearby colleges, the airport area and work locations.
+            Located at {siteConfig.address.line2}, with convenient access to
+            nearby colleges, the airport area and work locations.
           </p>
         </div>
 
@@ -32,7 +33,8 @@ export function LocationSection() {
                 <address className="mt-1 not-italic leading-relaxed text-muted-foreground">
                   {siteConfig.address.line1},<br />
                   {siteConfig.address.line2},<br />
-                  {siteConfig.address.line3}
+                  {siteConfig.address.line3},<br />
+                  {siteConfig.address.country}
                 </address>
                 {siteConfig.address.landmark && (
                   <p className="mt-2 text-sm font-semibold text-accent">
@@ -43,15 +45,15 @@ export function LocationSection() {
             </div>
 
             <div className="grid gap-3 sm:grid-cols-2">
-              <Button render={<a href={siteConfig.googleMapsLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2">
+              <Button render={<TrackedLink href={siteConfig.googleMapsLink} eventName="click_google_maps" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2">
                 <ExternalLink className="size-5" />
                 View Location
               </Button>
-              <Button render={<a href={siteConfig.phoneLink} />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2">
+              <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} size="lg" variant="outline" className="h-12 gap-2">
                 <Phone className="size-5" />
                 Call Now
               </Button>
-              <Button render={<a href={siteConfig.whatsappLink} target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
+              <Button render={<TrackedLink href={siteConfig.whatsappLink} eventName="click_whatsapp" target="_blank" rel="noopener noreferrer" />} nativeButton={false} size="lg" className="h-12 gap-2 bg-accent text-accent-foreground hover:bg-accent/90">
                 <MessageCircle className="size-5" />
                 WhatsApp
               </Button>

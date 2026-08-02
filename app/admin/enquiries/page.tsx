@@ -3,23 +3,26 @@ import { EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { Field, SelectField, TextAreaField } from "@/components/admin/form-fields"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
+import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getEnquiries, getRoomTypes } from "@/lib/admin/data"
 
 const statuses = ["New", "Contacted", "Visit Scheduled", "Visited", "Joined", "Lost", "Follow Up Later"]
 const sources = ["WhatsApp", "Call", "Instagram", "Google Maps", "Referral", "College", "Walk-in", "Website", "Other"]
 
 export default async function EnquiriesPage() {
+  const admin = await requireAdmin()
+  const canEdit = canEditAdmin(admin)
   const [enquiries, roomTypes] = await Promise.all([getEnquiries(), getRoomTypes()])
 
   return (
-    <ProtectedAdminPage>
+    <ProtectedAdminPage admin={admin}>
       <div className="grid gap-6">
         <div>
           <p className="text-sm font-semibold uppercase tracking-wide text-accent">Enquiries</p>
           <h1 className="font-heading text-3xl font-bold text-primary">Lead register</h1>
         </div>
 
-        <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
+        {canEdit ? <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
           <h2 className="font-heading text-xl font-bold text-primary">Add enquiry</h2>
           <form action={createEnquiryAction} className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             <Field label="Name" name="name" required />
@@ -53,7 +56,7 @@ export default async function EnquiriesPage() {
             </div>
             <Button type="submit" className="h-12 lg:col-span-3">Add Enquiry</Button>
           </form>
-        </section>
+        </section> : null}
 
         <section className="grid gap-3">
           {enquiries.map((enquiry) => (
@@ -66,13 +69,13 @@ export default async function EnquiriesPage() {
                 </div>
                 <StatusBadge status={enquiry.status} />
               </div>
-              <form action={updateEnquiryStatusAction} className="mt-4 flex flex-wrap gap-2">
+              {canEdit ? <form action={updateEnquiryStatusAction} className="mt-4 flex flex-wrap gap-2">
                 <input type="hidden" name="enquiry_id" value={enquiry.enquiry_id} />
                 <select name="status" defaultValue={enquiry.status} className="h-10 rounded-lg border border-input bg-background px-3 text-sm">
                   {statuses.map((status) => <option key={status}>{status}</option>)}
                 </select>
                 <Button type="submit" size="sm">Update Status</Button>
-              </form>
+              </form> : null}
             </article>
           ))}
           {enquiries.length === 0 ? <EmptyState title="No enquiries yet" text="Website, call and WhatsApp leads can be added here." /> : null}
