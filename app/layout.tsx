@@ -49,6 +49,9 @@ export const metadata: Metadata = {
     description: siteConfig.seo.description,
     images: [absoluteSiteUrl(siteConfig.images.hero)],
   },
+  verification: {
+    google: "omL7IaCneNOQehj_XKkiKodunBKJH9_wVxRfD0rBBDM",
+  },
   generator: "v0.app",
   icons: {
     icon: [
