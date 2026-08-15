@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     images: [absoluteSiteUrl(siteConfig.images.hero)],
   },
   verification: {
-    google: "omL7IaCneNOQehj_XKkiKodunBKJH9_wVxRfD0rBBDM",
+    google: "iI7066bKx2NXE9PIdhi_1N2swAVR9QwrtbSzllNjCnc",
   },
   generator: "v0.app",
   icons: {
