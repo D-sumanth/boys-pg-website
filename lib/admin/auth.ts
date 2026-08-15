@@ -2,8 +2,14 @@ import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
 import { getSupabaseConfig } from "@/lib/admin/config"
 
-export const ADMIN_ACCESS_TOKEN_COOKIE = "pdpg_admin_access_token"
-export const ADMIN_REFRESH_TOKEN_COOKIE = "pdpg_admin_refresh_token"
+export const ADMIN_ACCESS_TOKEN_COOKIE =
+  process.env.NODE_ENV === "production"
+    ? "__Secure-pdpg_admin_access_token"
+    : "pdpg_admin_access_token"
+
+const LEGACY_ADMIN_ACCESS_TOKEN_COOKIE = "pdpg_admin_access_token"
+const LEGACY_ADMIN_REFRESH_TOKEN_COOKIE = "pdpg_admin_refresh_token"
+const AUTH_REQUEST_TIMEOUT_MS = 15_000
 
 export type AdminRole = "Owner" | "Manager" | "Viewer"
 
@@ -28,14 +34,11 @@ type ProfileRow = {
 
 type TokenResponse = {
   access_token?: string
-  refresh_token?: string
   expires_in?: number
   user?: {
     id: string
     email?: string
   }
-  error_description?: string
-  msg?: string
 }
 
 export async function signInWithPassword(email: string, password: string) {
@@ -45,22 +48,36 @@ export async function signInWithPassword(email: string, password: string) {
     return { ok: false, error: "Supabase is not configured yet." }
   }
 
-  const response = await fetch(`${config.url}/auth/v1/token?grant_type=password`, {
-    method: "POST",
-    headers: {
-      apikey: config.anonKey,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({ email, password }),
-    cache: "no-store",
-  })
+  let response: Response
+
+  try {
+    response = await fetch(`${config.url}/auth/v1/token?grant_type=password`, {
+      method: "POST",
+      headers: {
+        apikey: config.anonKey,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ email, password }),
+      cache: "no-store",
+      signal: AbortSignal.timeout(AUTH_REQUEST_TIMEOUT_MS),
+    })
+  } catch {
+    return { ok: false, error: "The admin service is temporarily unavailable." }
+  }
 
   const result = (await response.json().catch(() => ({}))) as TokenResponse
 
-  if (!response.ok || !result.access_token || !result.refresh_token) {
+  if (response.status === 429) {
     return {
       ok: false,
-      error: result.error_description || result.msg || "Invalid email or password.",
+      error: "Too many login attempts. Wait a few minutes and try again.",
+    }
+  }
+
+  if (!response.ok || !result.access_token) {
+    return {
+      ok: false,
+      error: "Invalid email or password.",
     }
   }
 
@@ -69,26 +86,41 @@ export async function signInWithPassword(email: string, password: string) {
 
   cookieStore.set(ADMIN_ACCESS_TOKEN_COOKIE, result.access_token, {
     httpOnly: true,
-    sameSite: "lax",
+    sameSite: "strict",
     secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge,
+    path: "/admin",
+    maxAge: Math.min(maxAge, 60 * 60),
+    priority: "high",
   })
-  cookieStore.set(ADMIN_REFRESH_TOKEN_COOKIE, result.refresh_token, {
-    httpOnly: true,
-    sameSite: "lax",
-    secure: process.env.NODE_ENV === "production",
-    path: "/",
-    maxAge: 60 * 60 * 24 * 30,
-  })
+
+  if (ADMIN_ACCESS_TOKEN_COOKIE !== LEGACY_ADMIN_ACCESS_TOKEN_COOKIE) {
+    cookieStore.delete(LEGACY_ADMIN_ACCESS_TOKEN_COOKIE)
+  }
+  cookieStore.delete(LEGACY_ADMIN_REFRESH_TOKEN_COOKIE)
 
   return { ok: true }
 }
 
 export async function signOutAdmin() {
+  const config = getSupabaseConfig()
   const cookieStore = await cookies()
+  const accessToken = cookieStore.get(ADMIN_ACCESS_TOKEN_COOKIE)?.value
+
+  if (config && accessToken) {
+    await fetch(`${config.url}/auth/v1/logout?scope=local`, {
+      method: "POST",
+      headers: {
+        apikey: config.anonKey,
+        Authorization: `Bearer ${accessToken}`,
+      },
+      cache: "no-store",
+      signal: AbortSignal.timeout(AUTH_REQUEST_TIMEOUT_MS),
+    }).catch(() => null)
+  }
+
   cookieStore.delete(ADMIN_ACCESS_TOKEN_COOKIE)
-  cookieStore.delete(ADMIN_REFRESH_TOKEN_COOKIE)
+  cookieStore.delete(LEGACY_ADMIN_ACCESS_TOKEN_COOKIE)
+  cookieStore.delete(LEGACY_ADMIN_REFRESH_TOKEN_COOKIE)
 }
 
 export async function getAccessToken() {
@@ -110,9 +142,10 @@ export async function getCurrentAuthUser(): Promise<AuthUserResponse | null> {
       Authorization: `Bearer ${token}`,
     },
     cache: "no-store",
-  })
+    signal: AbortSignal.timeout(AUTH_REQUEST_TIMEOUT_MS),
+  }).catch(() => null)
 
-  if (!response.ok) {
+  if (!response?.ok) {
     return null
   }
 
@@ -128,18 +161,24 @@ export async function getCurrentAdmin(): Promise<AdminUser | null> {
   }
 
   const token = await getAccessToken()
+  const profileQuery = new URLSearchParams({
+    id: `eq.${authUser.id}`,
+    is_active: "eq.true",
+    select: "id,full_name,role,is_active",
+  })
   const response = await fetch(
-    `${config.url}/rest/v1/profiles?id=eq.${authUser.id}&is_active=eq.true&select=id,full_name,role,is_active`,
+    `${config.url}/rest/v1/profiles?${profileQuery.toString()}`,
     {
       headers: {
         apikey: config.anonKey,
         Authorization: `Bearer ${token}`,
       },
       cache: "no-store",
+      signal: AbortSignal.timeout(AUTH_REQUEST_TIMEOUT_MS),
     },
-  )
+  ).catch(() => null)
 
-  if (!response.ok) {
+  if (!response?.ok) {
     return null
   }
 

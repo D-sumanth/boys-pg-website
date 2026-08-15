@@ -1,7 +1,6 @@
 export type SupabaseConfig = {
   url: string
   anonKey: string
-  serviceRoleKey?: string
 }
 
 export function getSupabaseConfig(): SupabaseConfig | null {
@@ -12,13 +11,27 @@ export function getSupabaseConfig(): SupabaseConfig | null {
     return null
   }
 
-  return {
-    url: url.replace(/\/$/, ""),
-    anonKey,
-    serviceRoleKey: process.env.SUPABASE_SERVICE_ROLE_KEY,
+  try {
+    const parsedUrl = new URL(url)
+    const isSecureRemote = parsedUrl.protocol === "https:"
+    const isLocalDevelopment =
+      process.env.NODE_ENV !== "production" &&
+      parsedUrl.protocol === "http:" &&
+      ["localhost", "127.0.0.1"].includes(parsedUrl.hostname)
+
+    if (!isSecureRemote && !isLocalDevelopment) {
+      return null
+    }
+
+    return {
+      url: parsedUrl.origin,
+      anonKey,
+    }
+  } catch {
+    return null
   }
 }
 
 export function getSupabaseSetupError() {
-  return "Supabase is not configured yet. Add NEXT_PUBLIC_SUPABASE_URL and NEXT_PUBLIC_SUPABASE_ANON_KEY to .env.local and Vercel."
+  return "The private admin service is temporarily unavailable."
 }

@@ -52,7 +52,6 @@ export const metadata: Metadata = {
   verification: {
     google: "iI7066bKx2NXE9PIdhi_1N2swAVR9QwrtbSzllNjCnc",
   },
-  generator: "v0.app",
   icons: {
     icon: [
       {

@@ -10,17 +10,16 @@ This project includes a private admin MVP under `/admin` for Prince Deluxe PG Fo
 ```txt
 NEXT_PUBLIC_SUPABASE_URL=
 NEXT_PUBLIC_SUPABASE_ANON_KEY=
-SUPABASE_SERVICE_ROLE_KEY=
 ```
 
-Do not commit `.env.local`. The service role key must never be exposed to browser code.
+Do not commit `.env.local`. This application deliberately does not use a service-role key; all admin database access uses the signed-in user's JWT and RLS policies.
 
 ## 2. Apply Database Migration
 
-Apply the SQL file in:
+Apply the SQL migrations in timestamp order from:
 
 ```txt
-supabase/migrations/202606290001_admin_schema.sql
+supabase/migrations/
 ```
 
 You can apply it through the Supabase SQL editor or Supabase CLI. It creates:
@@ -71,6 +70,17 @@ Roles supported for future use:
 
 The MVP requires a valid Supabase Auth session and an active `profiles` row to access protected admin pages.
 
+Use a unique password of at least 14 characters for every admin. Disable a profile immediately when that person should no longer have access. `Manager` can edit hostel records but cannot promote accounts; only `Owner` can insert or update profiles.
+
+In Supabase Authentication settings:
+
+- Disable public user signups because admin accounts are created manually.
+- Enable leaked-password protection when the project plan supports it.
+- Keep the built-in Auth rate limits enabled.
+- Enable MFA for Owner accounts before adding more administrators.
+
+In Vercel, remove any old `SUPABASE_SERVICE_ROLE_KEY` environment variable. The application does not need it, and production should retain only the public Supabase URL and publishable/anon key.
+
 ## 4. Run Locally
 
 ```bash
@@ -99,6 +109,8 @@ http://localhost:3000/admin/login
 - Store ID proof numbers only in masked format such as `XXXX-XXXX-1234`.
 - Keep future document uploads private.
 - Do not expose internal room pricing on the public website.
+- Review Supabase Security Advisors and Vercel runtime logs monthly.
+- Keep Auth rate limits enabled and use Vercel Attack Challenge Mode only during an active attack.
 
 ## 7. Current MVP Limits
 
