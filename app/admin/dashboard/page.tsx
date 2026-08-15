@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { AdminCard, EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
@@ -21,13 +22,13 @@ export default async function DashboardPage() {
 
         <section className="rounded-2xl border border-border bg-card p-4 shadow-sm">
           <div className="grid gap-3 sm:grid-cols-3">
-            <Button render={<a href="/admin/rooms" />} nativeButton={false} size="lg" className="h-12">
+            <Button render={<Link href="/admin/rooms" />} nativeButton={false} size="lg" className="h-12">
               {canEdit ? "Manage Rooms" : "View Rooms"}
             </Button>
-            <Button render={<a href="/admin/residents" />} nativeButton={false} size="lg" className="h-12 bg-accent text-accent-foreground hover:bg-accent/90">
+            <Button render={<Link href="/admin/residents" />} nativeButton={false} size="lg" className="h-12 bg-accent text-accent-foreground hover:bg-accent/90">
               {canEdit ? "Add / View Residents" : "View Residents"}
             </Button>
-            <Button render={<a href="/admin/today" />} nativeButton={false} size="lg" variant="outline" className="h-12">
+            <Button render={<Link href="/admin/today" />} nativeButton={false} size="lg" variant="outline" className="h-12">
               Today Tasks
             </Button>
           </div>

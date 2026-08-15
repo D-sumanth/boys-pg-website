@@ -1,3 +1,4 @@
+import Link from "next/link"
 import {
   BarChart3,
   BedDouble,
@@ -37,7 +38,7 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
   return (
     <div className="min-h-screen bg-secondary">
       <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-border bg-background p-4 lg:block">
-        <a href="/admin/dashboard" className="flex items-center gap-3 rounded-2xl bg-primary p-4 text-primary-foreground">
+        <Link href="/admin/dashboard" className="flex items-center gap-3 rounded-2xl bg-primary p-4 text-primary-foreground">
           <span className="inline-flex size-11 items-center justify-center rounded-xl bg-primary-foreground/15">
             <Home className="size-6" />
           </span>
@@ -45,11 +46,11 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
             <span className="block font-heading text-lg font-bold">Prince Deluxe PG</span>
             <span className="text-xs text-primary-foreground/70">Admin System</span>
           </span>
-        </a>
+        </Link>
 
         <nav className="mt-5 grid gap-1">
           {navItems.map((item) => (
-            <a
+            <Link
               key={item.href}
               href={item.href}
               className={`flex items-center gap-3 rounded-xl px-3 py-2.5 text-sm font-medium transition-colors hover:bg-secondary hover:text-primary ${
@@ -60,7 +61,7 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
             >
               <item.icon className="size-4 text-accent" />
               {item.label}
-            </a>
+            </Link>
           ))}
         </nav>
       </aside>
@@ -85,26 +86,26 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
           <nav className="mt-3 grid gap-2 lg:hidden" aria-label="Admin mobile navigation">
             <div className="grid grid-cols-3 gap-2">
               {primaryNavItems.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   className="inline-flex min-h-12 items-center justify-center gap-2 rounded-2xl border border-primary/10 bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground shadow-sm"
                 >
                   <item.icon className="size-4 text-accent" />
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
             <div className="flex gap-2 overflow-x-auto pb-1">
               {secondaryNavItems.map((item) => (
-              <a
+              <Link
                 key={item.href}
                 href={item.href}
                 className="inline-flex shrink-0 items-center gap-2 rounded-full border border-border bg-card px-3 py-2 text-xs font-semibold text-foreground shadow-sm"
               >
                 <item.icon className="size-4 text-accent" />
                 {item.label}
-              </a>
+              </Link>
               ))}
             </div>
           </nav>

@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { AdminCard, EmptyState, StatusBadge } from "@/components/admin/admin-card"
 import { ProtectedAdminPage } from "@/components/admin/protected-admin-page"
 import { Button } from "@/components/ui/button"
@@ -23,11 +24,11 @@ export default async function TodayPage() {
 
         <div className={`grid gap-3 sm:grid-cols-2 ${canEdit ? "lg:grid-cols-4" : "lg:grid-cols-2"}`}>
           {canEdit ? <>
-          <Button render={<a href="/admin/payments" />} nativeButton={false} size="lg" className="h-14">Quick Add Payment</Button>
-          <Button render={<a href="/admin/enquiries" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Quick Add Enquiry</Button>
-          <Button render={<a href="/admin/residents" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Add Resident</Button>
+          <Button render={<Link href="/admin/payments" />} nativeButton={false} size="lg" className="h-14">Quick Add Payment</Button>
+          <Button render={<Link href="/admin/enquiries" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Quick Add Enquiry</Button>
+          <Button render={<Link href="/admin/residents" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Add Resident</Button>
           </> : null}
-          <Button render={<a href="/admin/rooms" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">View Rooms</Button>
+          <Button render={<Link href="/admin/rooms" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">View Rooms</Button>
         </div>
 
         <div className="grid gap-3 sm:grid-cols-3">

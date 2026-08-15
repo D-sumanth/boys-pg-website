@@ -180,11 +180,11 @@ export const siteConfig = {
   siteUrl: resolveSiteUrl(),
   name: "Prince Deluxe PG For Boys",
   shortName: "Prince Deluxe PG",
-  businessType: "Boys PG hostel / paying guest accommodation",
+  businessType: "Boys and men's PG hostel / paying guest accommodation",
   city: "Shamshabad, Hyderabad",
   location: "Shamshabad",
   positioning:
-    "Hotel-style comfort with practical PG living for students, airport staff and working professionals in Shamshabad.",
+    "Hotel-style boys and men's PG accommodation for students, airport staff and working professionals in Shamshabad.",
   premiumPositioning:
     "A hotel-style property adapted for comfortable, secure and homely PG living.",
   tagline: "Safe • Clean • Comfortable • Like Home",
@@ -284,11 +284,13 @@ export const siteConfig = {
     { name: "Financial District", distance: "20 km", type: "Work Location" },
   ],
   seo: {
-    title: "Boys PG in Shamshabad | Prince Deluxe PG For Boys",
+    title: "Boys & Men's PG in Shamshabad | Prince Deluxe PG",
     description:
-      "Prince Deluxe PG For Boys offers furnished rooms, homely food, Wi-Fi, CCTV, lift access and attached washrooms in Shamshabad. Call +91 7093945019 for availability.",
+      "Prince Deluxe PG For Boys offers men's accommodation with furnished rooms, homely food, Wi-Fi, CCTV, lift access and attached washrooms in Shamshabad. Call +91 7093945019.",
     keywords: [
       "Boys PG in Shamshabad",
+      "Mens PG in Shamshabad",
+      "Men's PG in Shamshabad",
       "Boys hostel in Shamshabad",
       "PG hostel in Shamshabad",
       "PG near Shamshabad Airport",

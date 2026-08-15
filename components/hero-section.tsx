@@ -56,7 +56,7 @@ export function HeroSection() {
           </span>
 
           <p className="mt-5 text-xs font-bold uppercase tracking-[0.2em] text-accent sm:text-sm">
-            Boys PG • Hotel-style comfort
+            Boys and men&apos;s PG - Hotel-style comfort
           </p>
           <h1 className="mt-2 max-w-3xl text-balance font-heading text-3xl font-bold leading-[1.08] sm:text-5xl lg:text-6xl">
             Comfortable Boys PG in Shamshabad, Hyderabad
@@ -126,7 +126,7 @@ export function HeroSection() {
             </a>
             <span className="inline-flex items-center gap-2">
               <MapPin className="size-4 shrink-0 text-accent" />
-              {siteConfig.address.landmark}
+              Brindavan Colony, Shamshabad
             </span>
           </div>
         </div>

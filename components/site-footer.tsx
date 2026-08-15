@@ -1,3 +1,4 @@
+import Link from "next/link"
 import { Mail, MapPin, MessageCircle, Phone } from "lucide-react"
 import { TrackedLink } from "@/components/tracked-link"
 import { siteConfig } from "@/lib/site-config"
@@ -5,7 +6,7 @@ import { siteConfig } from "@/lib/site-config"
 export function SiteFooter() {
   return (
     <footer className="bg-primary pb-20 text-primary-foreground md:pb-0">
-      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-3 lg:px-8">
+      <div className="mx-auto grid max-w-7xl gap-8 px-4 py-12 sm:px-6 md:grid-cols-2 lg:grid-cols-4 lg:px-8">
         <div>
           <p className="font-heading text-xl font-bold">{siteConfig.name}</p>
           <p className="mt-2 text-sm text-primary-foreground/70">
@@ -36,6 +37,23 @@ export function SiteFooter() {
               )}
             </address>
           </div>
+        </div>
+
+        <div>
+          <h3 className="font-heading text-sm font-semibold uppercase tracking-wide text-accent">
+            Explore
+          </h3>
+          <nav className="mt-3 flex flex-col gap-3 text-sm" aria-label="Local accommodation guides">
+            <Link href="/boys-pg-shamshabad" className="text-primary-foreground/80 hover:text-accent">
+              Boys &amp; Men&apos;s PG in Shamshabad
+            </Link>
+            <Link href="/hostel-near-hyderabad-airport" className="text-primary-foreground/80 hover:text-accent">
+              PG near Hyderabad Airport
+            </Link>
+            <Link href="/hostel-near-gmr-school-of-aviation" className="text-primary-foreground/80 hover:text-accent">
+              Hostel near GMR Aviation
+            </Link>
+          </nav>
         </div>
 
         <div>

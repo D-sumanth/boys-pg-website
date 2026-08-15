@@ -6,6 +6,7 @@ import { RoomsSection } from "@/components/rooms-section"
 import { AudienceSection } from "@/components/audience-section"
 import { FacilitiesSection } from "@/components/facilities-section"
 import { NearbySection } from "@/components/nearby-section"
+import { LocalGuidesSection } from "@/components/local-guides-section"
 import { GallerySection } from "@/components/gallery-section"
 import { WhyChooseSection } from "@/components/why-choose-section"
 import { FaqSection } from "@/components/faq-section"
@@ -38,6 +39,7 @@ export default function Page() {
         <FacilitiesSection />
         <AudienceSection />
         <NearbySection />
+        <LocalGuidesSection />
         <WhyChooseSection />
         <FaqSection />
         <LocationSection />

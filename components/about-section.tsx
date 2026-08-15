@@ -35,7 +35,7 @@ export function AboutSection() {
             About Us
           </span>
           <h2 className="text-balance font-heading text-2xl font-bold leading-tight text-primary sm:text-4xl">
-            Hotel-style comfort with the warmth of PG living
+            Boys and men&apos;s PG accommodation in Shamshabad
           </h2>
           <p className="text-pretty leading-relaxed text-muted-foreground">
             {siteConfig.name} is a hotel-style building now offering clean,
