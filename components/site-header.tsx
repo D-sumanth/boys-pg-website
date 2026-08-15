@@ -9,6 +9,7 @@ import { siteConfig } from "@/lib/site-config"
 
 const navLinks = [
   { label: "Fees", href: "/#rooms" },
+  { label: "Food", href: "/#food" },
   { label: "Photos", href: "/#gallery" },
   { label: "Facilities", href: "/#facilities" },
   { label: "PG Guide", href: "/#local-guides" },

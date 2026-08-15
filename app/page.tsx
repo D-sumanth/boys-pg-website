@@ -3,6 +3,7 @@ import { HeroSection } from "@/components/hero-section"
 import { HighlightsSection } from "@/components/highlights-section"
 import { AboutSection } from "@/components/about-section"
 import { RoomsSection } from "@/components/rooms-section"
+import { FoodSection } from "@/components/food-section"
 import { AudienceSection } from "@/components/audience-section"
 import { FacilitiesSection } from "@/components/facilities-section"
 import { NearbySection } from "@/components/nearby-section"
@@ -35,6 +36,7 @@ export default function Page() {
         <HighlightsSection />
         <AboutSection />
         <RoomsSection />
+        <FoodSection />
         <GallerySection />
         <FacilitiesSection />
         <AudienceSection />

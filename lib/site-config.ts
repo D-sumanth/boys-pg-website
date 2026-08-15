@@ -1,6 +1,7 @@
 // Edit this file to update public hostel details across the website.
 
 const hostelImage = (fileName: string) => `/images/hostel/${fileName}`
+const foodImage = (fileName: string) => `/images/food/${fileName}`
 
 function normalizeSiteUrl(value: string) {
   const withProtocol = /^https?:\/\//i.test(value) ? value : `https://${value}`
@@ -102,6 +103,7 @@ type SiteConfig = {
   seo: { title: string; description: string; keywords: readonly string[] }
   facilities: readonly { label: string }[]
   faqs: readonly { question: string; answer: string }[]
+  foodGallery: readonly { src: string; title: string }[]
   gallery: readonly { src: string; title: string }[]
 }
 
@@ -358,6 +360,14 @@ export const siteConfig = {
       question: "How can I check availability?",
       answer: "Please call or WhatsApp the hostel directly to check current room availability.",
     },
+  ],
+  foodGallery: [
+    { src: foodImage("breakfast-idli.jpeg"), title: "Soft idlis" },
+    { src: foodImage("fresh-bonda.jpeg"), title: "Fresh bondas" },
+    { src: foodImage("vegetable-upma.jpeg"), title: "Vegetable upma" },
+    { src: foodImage("breakfast-dosa.jpeg"), title: "Breakfast dosa" },
+    { src: foodImage("homely-curry.jpeg"), title: "Homely curry" },
+    { src: foodImage("fresh-poori.jpeg"), title: "Fresh pooris" },
   ],
   gallery: [
     { src: hostelImage("entrance-night-2.png"), title: "Entrance & Signage" },
