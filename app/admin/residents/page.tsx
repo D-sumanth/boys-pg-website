@@ -6,9 +6,14 @@ import { Button } from "@/components/ui/button"
 import { canEditAdmin, requireAdmin } from "@/lib/admin/auth"
 import { getActiveOccupancies, getBeds, getResidents, getRooms } from "@/lib/admin/data"
 
-export default async function ResidentsPage() {
+export default async function ResidentsPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ room?: string; resident?: string }>
+}) {
   const admin = await requireAdmin()
   const canEdit = canEditAdmin(admin)
+  const { room: requestedRoomId, resident: requestedResidentId } = await searchParams
   const [residents, beds, rooms, occupancies] = await Promise.all([
     getResidents(),
     getBeds(),
@@ -18,6 +23,8 @@ export default async function ResidentsPage() {
   const availableBeds = beds.filter((bed) => bed.status === "Available")
   const availableRoomIds = new Set(availableBeds.map((bed) => bed.room_id))
   const availableRooms = rooms.filter((room) => availableRoomIds.has(room.room_id) && room.status !== "Inactive")
+  const selectedRoomId = availableRooms.some((room) => room.room_id === requestedRoomId) ? requestedRoomId : undefined
+  const selectedResidentId = residents.some((resident) => resident.resident_id === requestedResidentId) ? requestedResidentId : undefined
   const roomById = new Map(rooms.map((room) => [room.room_id, room]))
   const occupancyByResident = new Map(occupancies.map((occupancy) => [occupancy.resident_id, occupancy]))
 
@@ -62,7 +69,7 @@ export default async function ResidentsPage() {
             </form>
           </details>
 
-          <details className="rounded-2xl border border-border bg-card shadow-sm">
+          <details id="assign-resident" open={Boolean(selectedRoomId)} className="scroll-mt-24 rounded-2xl border border-border bg-card shadow-sm">
             <summary className="cursor-pointer list-none p-5 font-heading text-xl font-bold text-primary marker:hidden [&::-webkit-details-marker]:hidden">
               Assign bed
             </summary>
@@ -73,7 +80,7 @@ export default async function ResidentsPage() {
                   <option key={resident.resident_id} value={resident.resident_id}>{resident.full_name}</option>
                 ))}
               </SelectField>
-              <SelectField label="Room" name="room_id">
+              <SelectField label="Room" name="room_id" defaultValue={selectedRoomId}>
                 <option value="">Select available room</option>
                 {availableRooms.map((room) => <option key={room.room_id} value={room.room_id}>Room {room.room_number}</option>)}
               </SelectField>
@@ -96,7 +103,12 @@ export default async function ResidentsPage() {
             const roomText = room ? `Room ${room.room_number}` : "No room assigned"
 
             return (
-              <details key={resident.resident_id} className="group rounded-2xl border border-border bg-card shadow-sm transition-shadow open:shadow-lg">
+              <details
+                key={resident.resident_id}
+                id={`resident-${resident.resident_id}`}
+                open={selectedResidentId === resident.resident_id}
+                className="group scroll-mt-24 rounded-2xl border border-border bg-card shadow-sm transition-shadow open:shadow-lg"
+              >
                 <summary className="cursor-pointer list-none p-4 marker:hidden [&::-webkit-details-marker]:hidden">
                   <div className="flex items-start justify-between gap-3">
                     <div className="min-w-0">
