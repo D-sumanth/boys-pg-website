@@ -1,5 +1,6 @@
 "use server"
 
+import { randomUUID } from "node:crypto"
 import { revalidatePath } from "next/cache"
 import { redirect } from "next/navigation"
 import { requireAdminEditor, signInWithPassword, signOutAdmin } from "@/lib/admin/auth"
@@ -376,22 +377,29 @@ export async function createPaymentAction(formData: FormData) {
   const admin = await requireAdminEditor()
   const amount = numberValue(formData, "amount", { min: 0.01, max: 10_000_000 })
   const rentInvoiceId = optionalUuid(formData, "rent_invoice_id")
+  const paymentDate = requiredDate(formData, "payment_date", new Date().toISOString().slice(0, 10))
+  const receiptNumber = `PDPG-${paymentDate.replaceAll("-", "")}-${randomUUID().slice(0, 8).toUpperCase()}`
   const body = {
-    resident_id: optionalUuid(formData, "resident_id"),
+    resident_id: uuidValue(formData, "resident_id"),
     rent_invoice_id: rentInvoiceId,
-    payment_date: requiredDate(formData, "payment_date", new Date().toISOString().slice(0, 10)),
+    payment_date: paymentDate,
     amount,
     payment_direction: enumValue(formData, "payment_direction", ["In", "Out"] as const, "In"),
     payment_purpose: enumValue(formData, "payment_purpose", ["Rent", "Deposit", "Refund", "Advance", "Fine", "Food Extra", "AC Charges", "Maintenance", "Other"] as const, "Rent"),
     payment_mode: enumValue(formData, "payment_mode", ["Cash", "UPI", "Bank Transfer", "Card", "Cheque", "Other"] as const, "UPI"),
     transaction_reference: optionalText(formData, "transaction_reference", 120),
-    receipt_number: optionalText(formData, "receipt_number", 80),
+    receipt_number: receiptNumber,
     collected_by_user_id: admin.id,
     notes: optionalText(formData, "notes", 1000),
   }
 
   const result = await insertRow<{ payment_id: string }>("payments", body)
   const payments = requireMutation(result)
+  const paymentId = payments[0]?.payment_id
+
+  if (!paymentId) {
+    throw new Error("The receipt could not be created.")
+  }
 
   if (rentInvoiceId && body.payment_direction === "In") {
     requireMutation(await updateRows("rent_invoices", { rent_invoice_id: `eq.${rentInvoiceId}` }, {
@@ -401,8 +409,8 @@ export async function createPaymentAction(formData: FormData) {
     }))
   }
 
-  await logActivity("payments", payments[0]?.payment_id ?? null, "Create", body)
+  await logActivity("payments", paymentId, "Create", body)
   revalidatePath("/admin/payments")
   revalidatePath("/admin/dashboard")
-  redirect("/admin/payments")
+  redirect(`/admin/payments/${paymentId}/receipt`)
 }

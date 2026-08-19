@@ -9,6 +9,10 @@ export function Field({
   required,
   placeholder,
   defaultValue,
+  min,
+  max,
+  step,
+  inputMode,
 }: {
   label: string
   name: string
@@ -16,11 +20,26 @@ export function Field({
   required?: boolean
   placeholder?: string
   defaultValue?: string | number
+  min?: string | number
+  max?: string | number
+  step?: string | number
+  inputMode?: React.HTMLAttributes<HTMLInputElement>["inputMode"]
 }) {
   return (
     <div className="grid gap-2">
       <Label htmlFor={name}>{label}</Label>
-      <Input id={name} name={name} type={type} required={required} placeholder={placeholder} defaultValue={defaultValue} />
+      <Input
+        id={name}
+        name={name}
+        type={type}
+        required={required}
+        placeholder={placeholder}
+        defaultValue={defaultValue}
+        min={min}
+        max={max}
+        step={step}
+        inputMode={inputMode}
+      />
     </div>
   )
 }
@@ -39,11 +58,13 @@ export function SelectField({
   name,
   children,
   defaultValue,
+  required,
 }: {
   label: string
   name: string
   children: React.ReactNode
   defaultValue?: string
+  required?: boolean
 }) {
   return (
     <div className="grid gap-2">
@@ -52,6 +73,7 @@ export function SelectField({
         id={name}
         name={name}
         defaultValue={defaultValue}
+        required={required}
         className="h-11 rounded-lg border border-input bg-background px-3 py-2 text-sm shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50"
       >
         {children}

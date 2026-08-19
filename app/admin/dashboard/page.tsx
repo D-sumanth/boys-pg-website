@@ -21,12 +21,15 @@ export default async function DashboardPage() {
         </div>
 
         <section className="rounded-2xl border border-border bg-card p-4 shadow-sm">
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
             <Button render={<Link href="/admin/rooms" />} nativeButton={false} size="lg" className="h-12">
               {canEdit ? "Manage Rooms" : "View Rooms"}
             </Button>
             <Button render={<Link href="/admin/residents" />} nativeButton={false} size="lg" className="h-12 bg-accent text-accent-foreground hover:bg-accent/90">
               {canEdit ? "Add / View Residents" : "View Residents"}
+            </Button>
+            <Button render={<Link href="/admin/payments" />} nativeButton={false} size="lg" className="h-12">
+              {canEdit ? "Create Fee Receipt" : "View Receipts"}
             </Button>
             <Button render={<Link href="/admin/today" />} nativeButton={false} size="lg" variant="outline" className="h-12">
               Today Tasks
@@ -61,16 +64,19 @@ export default async function DashboardPage() {
           </section>
 
           <section className="rounded-2xl border border-border bg-card p-5 shadow-sm">
-            <h2 className="font-heading text-xl font-bold text-primary">Recent payments</h2>
+            <div className="flex items-center justify-between gap-3">
+              <h2 className="font-heading text-xl font-bold text-primary">Recent receipts</h2>
+              <Link href="/admin/payments" className="text-sm font-semibold text-primary hover:underline">View all</Link>
+            </div>
             <div className="mt-4 grid gap-3">
               {data.payments.slice(0, 5).map((payment) => (
-                <div key={payment.payment_id} className="flex items-center justify-between gap-3 rounded-xl bg-secondary p-3">
+                <Link key={payment.payment_id} href={`/admin/payments/${payment.payment_id}/receipt`} className="flex items-center justify-between gap-3 rounded-xl bg-secondary p-3 transition-colors hover:bg-secondary/70">
                   <div>
                     <p className="font-semibold text-foreground">₹{Number(payment.amount).toLocaleString("en-IN")}</p>
                     <p className="text-sm text-muted-foreground">{payment.payment_purpose} • {payment.payment_mode}</p>
                   </div>
                   <StatusBadge status={payment.payment_direction === "In" ? "Paid" : "Refund"} />
-                </div>
+                </Link>
               ))}
               {data.payments.length === 0 ? <EmptyState title="No payments yet" text="Collected rent and deposits will appear here." /> : null}
             </div>

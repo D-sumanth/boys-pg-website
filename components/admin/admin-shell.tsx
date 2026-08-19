@@ -3,7 +3,6 @@ import {
   BarChart3,
   BedDouble,
   CalendarDays,
-  CreditCard,
   FileText,
   Home,
   Inbox,
@@ -21,9 +20,9 @@ const navItems = [
   { href: "/admin/dashboard", label: "Dashboard", icon: BarChart3 },
   { href: "/admin/rooms", label: "Rooms", icon: BedDouble },
   { href: "/admin/residents", label: "Residents", icon: UserRound },
+  { href: "/admin/payments", label: "Receipts", icon: ReceiptIndianRupee },
   { href: "/admin/today", label: "Today", icon: CalendarDays },
   { href: "/admin/enquiries", label: "Enquiries", icon: Inbox },
-  { href: "/admin/payments", label: "Payments", icon: CreditCard },
   { href: "/admin/rent", label: "Rent", icon: ReceiptIndianRupee },
   { href: "/admin/deposits", label: "Deposits", icon: WalletCards },
   { href: "/admin/expenses", label: "Expenses", icon: FileText },
@@ -37,7 +36,7 @@ const secondaryNavItems = navItems.slice(3)
 export function AdminShell({ admin, children }: { admin: AdminUser; children: React.ReactNode }) {
   return (
     <div className="min-h-screen bg-secondary">
-      <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-border bg-background p-4 lg:block">
+      <aside className="fixed inset-y-0 left-0 z-40 hidden w-72 border-r border-border bg-background p-4 print:hidden lg:block">
         <Link href="/admin/dashboard" className="flex items-center gap-3 rounded-2xl bg-primary p-4 text-primary-foreground">
           <span className="inline-flex size-11 items-center justify-center rounded-xl bg-primary-foreground/15">
             <Home className="size-6" />
@@ -66,8 +65,8 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
         </nav>
       </aside>
 
-      <div className="lg:pl-72">
-        <header className="sticky top-0 z-30 border-b border-border bg-background/95 px-4 py-3 backdrop-blur sm:px-6">
+      <div className="print:pl-0 lg:pl-72">
+        <header className="sticky top-0 z-30 border-b border-border bg-background/95 px-4 py-3 backdrop-blur print:hidden sm:px-6">
           <div className="flex items-center justify-between gap-3">
             <div>
               <p className="font-heading text-base font-bold text-primary sm:text-lg">Admin Dashboard</p>
@@ -111,9 +110,9 @@ export function AdminShell({ admin, children }: { admin: AdminUser; children: Re
           </nav>
         </header>
 
-        <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+        <main className="mx-auto max-w-7xl px-4 py-6 print:max-w-none print:p-0 sm:px-6 lg:px-8">
           {admin.role === "Viewer" ? (
-            <div className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900">
+            <div className="mb-5 rounded-2xl border border-amber-200 bg-amber-50 p-4 text-sm font-medium text-amber-900 print:hidden">
               Read-only access: you can view hostel records, but only an Owner or Manager can make changes.
             </div>
           ) : null}

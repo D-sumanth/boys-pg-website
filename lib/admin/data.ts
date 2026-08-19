@@ -75,6 +75,47 @@ export async function getPayments() {
   return result.data ?? []
 }
 
+export async function getPaymentById(paymentId: string) {
+  const result = await selectRows<Payment>("payments", {
+    select: "*",
+    payment_id: `eq.${paymentId}`,
+    limit: 1,
+  })
+
+  return result.data?.[0] ?? null
+}
+
+export async function getResidentById(residentId: string) {
+  const result = await selectRows<Resident>("residents", {
+    select: "*",
+    resident_id: `eq.${residentId}`,
+    limit: 1,
+  })
+
+  return result.data?.[0] ?? null
+}
+
+export async function getActiveOccupancyForResident(residentId: string) {
+  const result = await selectRows<Occupancy>("resident_occupancy", {
+    select: "*",
+    resident_id: `eq.${residentId}`,
+    status: "eq.Active",
+    limit: 1,
+  })
+
+  return result.data?.[0] ?? null
+}
+
+export async function getRoomById(roomId: string) {
+  const result = await selectRows<Room>("rooms", {
+    select: "*",
+    room_id: `eq.${roomId}`,
+    limit: 1,
+  })
+
+  return result.data?.[0] ?? null
+}
+
 export async function getDashboardData() {
   const [hostel, rooms, beds, residents, occupancies, enquiries, payments] = await Promise.all([
     getHostel(),

@@ -24,7 +24,7 @@ export default async function TodayPage() {
 
         <div className={`grid gap-3 sm:grid-cols-2 ${canEdit ? "lg:grid-cols-4" : "lg:grid-cols-2"}`}>
           {canEdit ? <>
-          <Button render={<Link href="/admin/payments" />} nativeButton={false} size="lg" className="h-14">Quick Add Payment</Button>
+          <Button render={<Link href="/admin/payments" />} nativeButton={false} size="lg" className="h-14">Create Fee Receipt</Button>
           <Button render={<Link href="/admin/enquiries" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Quick Add Enquiry</Button>
           <Button render={<Link href="/admin/residents" />} nativeButton={false} size="lg" variant="outline" className="h-14 bg-card">Add Resident</Button>
           </> : null}
