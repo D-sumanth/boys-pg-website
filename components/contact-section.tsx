@@ -52,8 +52,8 @@ export function ContactSection() {
           </p>
         </div>
 
-        <div className="mt-8 grid gap-5 lg:grid-cols-5 lg:gap-6">
-          <div className="flex flex-col gap-4 lg:col-span-2">
+        <div className="mt-8 grid grid-cols-1 gap-5 lg:grid-cols-5 lg:gap-6">
+          <div className="flex min-w-0 flex-col gap-4 lg:col-span-2">
             <div className="rounded-2xl border border-border bg-secondary p-5 shadow-lg">
               <div className="grid gap-3">
                 <Button render={<TrackedLink href={siteConfig.phoneLink} eventName="click_call" />} nativeButton={false} size="lg" className="h-12 gap-2">
@@ -117,7 +117,7 @@ export function ContactSection() {
             </div>
           </div>
 
-          <div className="rounded-2xl border border-border bg-card p-5 shadow-xl sm:p-8 lg:col-span-3">
+          <div className="min-w-0 rounded-2xl border border-border bg-card p-5 shadow-xl sm:p-8 lg:col-span-3">
             {submitted ? (
               <div className="flex h-full flex-col items-center justify-center gap-3 py-10 text-center">
                 <span className="inline-flex size-14 items-center justify-center rounded-full bg-accent/15 text-accent">
@@ -155,7 +155,7 @@ export function ContactSection() {
                       name="type"
                       defaultValue=""
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
+                      className="h-11 w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       <option value="" disabled>
                         Select an option
@@ -174,7 +174,7 @@ export function ContactSection() {
                       name="room"
                       defaultValue="Standard 4-Sharing"
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
+                      className="h-11 w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       {siteConfig.roomEnquiryOptions.map((room) => (
                         <option key={room} value={room}>
@@ -190,7 +190,7 @@ export function ContactSection() {
                       name="transport"
                       defaultValue="not-sure"
                       required
-                      className="h-11 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
+                      className="h-11 w-full min-w-0 rounded-lg border border-input bg-transparent px-3 py-2 text-base shadow-xs outline-none focus-visible:ring-[3px] focus-visible:ring-ring/50 md:text-sm"
                     >
                       <option value="yes">Yes</option>
                       <option value="no">No</option>

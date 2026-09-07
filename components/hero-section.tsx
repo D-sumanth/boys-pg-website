@@ -62,8 +62,9 @@ export function HeroSection() {
             Comfortable Boys PG in Shamshabad, Hyderabad
           </h1>
           <p className="mt-3 max-w-xl text-pretty text-[15px] leading-6 text-primary-foreground/88 sm:text-lg sm:leading-7">
-            {siteConfig.premiumPositioning} Food, attached washrooms, personal
-            storage and daily essentials are included.
+            {siteConfig.name} offers furnished boys hostel accommodation in
+            Brindavan Colony, Shamshabad, for {siteConfig.audience}. Homely food,
+            attached washrooms and Wi-Fi are included.
           </p>
 
           <div className="mt-4 inline-flex rounded-xl border border-accent/40 bg-accent/18 px-3.5 py-2 font-heading text-base font-bold text-accent shadow-sm backdrop-blur sm:text-xl">

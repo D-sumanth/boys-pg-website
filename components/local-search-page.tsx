@@ -16,6 +16,7 @@ import { Button } from "@/components/ui/button"
 import { FloatingActions } from "@/components/floating-actions"
 import { SiteFooter } from "@/components/site-footer"
 import { SiteHeader } from "@/components/site-header"
+import { RoomsSection } from "@/components/rooms-section"
 import { TrackedLink } from "@/components/tracked-link"
 import type { LocalSearchPageContent } from "@/lib/local-search-pages"
 import { localSearchPages } from "@/lib/local-search-pages"
@@ -122,7 +123,7 @@ export function LocalSearchPage({ page }: { page: LocalSearchPageContent }) {
                   ))}
                 </div>
                 <div className="mt-7 flex flex-wrap gap-3">
-                  <Button render={<Link href="/#rooms" />} nativeButton={false} size="lg" className="h-12 gap-2">
+                  <Button render={<Link href={page.showRooms ? "#rooms" : "/boys-pg-shamshabad#rooms"} />} nativeButton={false} size="lg" className="h-12 gap-2">
                     <BedDouble className="size-5" />
                     View rooms and fees
                   </Button>
@@ -155,6 +156,8 @@ export function LocalSearchPage({ page }: { page: LocalSearchPageContent }) {
             </div>
           </div>
         </section>
+
+        {page.showRooms && <RoomsSection />}
 
         <section className="bg-secondary py-14 md:py-24">
           <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
@@ -196,7 +199,7 @@ export function LocalSearchPage({ page }: { page: LocalSearchPageContent }) {
           <div className="mx-auto grid max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[1fr_auto] lg:items-center lg:px-8">
             <div>
               <p className="text-xs font-bold uppercase tracking-[0.16em] text-accent">Visit or enquire directly</p>
-              <h2 className="mt-2 font-heading text-2xl font-bold sm:text-3xl">Prince Deluxe PG For Boys</h2>
+              <h2 className="mt-2 font-heading text-2xl font-bold sm:text-3xl">{siteConfig.name}</h2>
               <address className="mt-3 max-w-xl not-italic text-sm leading-7 text-primary-foreground/75 sm:text-base">
                 {siteConfig.address.line1}, {siteConfig.address.line2}, {siteConfig.address.line3}, {siteConfig.address.country}
               </address>

@@ -61,5 +61,27 @@ export default async function LocalPage({ params }: PageProps) {
     notFound()
   }
 
-  return <LocalSearchPage page={page} />
+  const breadcrumbs = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Home", item: absoluteSiteUrl("/") },
+      {
+        "@type": "ListItem",
+        position: 2,
+        name: page.eyebrow,
+        item: absoluteSiteUrl(`/${page.slug}`),
+      },
+    ],
+  }
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbs).replace(/</g, "\\u003c") }}
+      />
+      <LocalSearchPage page={page} />
+    </>
+  )
 }

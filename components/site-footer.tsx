@@ -45,7 +45,7 @@ export function SiteFooter() {
           </h3>
           <nav className="mt-3 flex flex-col gap-3 text-sm" aria-label="Local accommodation guides">
             <Link href="/boys-pg-shamshabad" className="text-primary-foreground/80 hover:text-accent">
-              Boys &amp; Men&apos;s PG in Shamshabad
+              PG rooms and fees in Shamshabad
             </Link>
             <Link href="/hostel-near-hyderabad-airport" className="text-primary-foreground/80 hover:text-accent">
               PG near Hyderabad Airport

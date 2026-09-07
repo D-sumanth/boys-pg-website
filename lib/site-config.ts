@@ -286,9 +286,9 @@ export const siteConfig = {
     { name: "Financial District", distance: "20 km", type: "Work Location" },
   ],
   seo: {
-    title: "Boys & Men's PG in Shamshabad | Prince Deluxe PG",
+    title: "Boys Hostel & Men's PG in Shamshabad | Prince Deluxe PG",
     description:
-      "Prince Deluxe PG For Boys offers men's accommodation with furnished rooms, homely food, Wi-Fi, CCTV, lift access and attached washrooms in Shamshabad. Call +91 7093945019.",
+      "Boys hostel and men's PG in Shamshabad with food, Wi-Fi and attached washrooms. Student rooms from ₹7,500/month at Prince Deluxe PG. Call +91 7093945019.",
     keywords: [
       "Boys PG in Shamshabad",
       "Mens PG in Shamshabad",
